@@ -137,4 +137,8 @@ src/user_account/migrations
 src/user_account/__init__.py
 src/user_account/apps.py
 src/user_account/tests.py
-
+src/user_account/static/user_account/bootstrap
+src/user_account/static/user_account/css
+src/user_account/static/user_account/images
+src/user_account/static/user_account/vendor
+src/user_account/static/user_account/bootstrap
