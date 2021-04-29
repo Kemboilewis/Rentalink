@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+#addititonal files
+src/rentalink_project/settings.py
+src/rentalink_project/__init__.py
+src/rentalink_project/asgi.py
+src/rentalink_project/wsgi.py
+src/manage.py 
+
+
