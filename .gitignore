@@ -133,5 +133,8 @@ src/rentalink_project/__init__.py
 src/rentalink_project/asgi.py
 src/rentalink_project/wsgi.py
 src/manage.py 
-
+src/user_account/migrations
+src/user_account/__init__.py
+src/user_account/apps.py
+src/user_account/tests.py
 
