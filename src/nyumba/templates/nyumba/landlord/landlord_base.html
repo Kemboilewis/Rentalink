@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{% static 'nyumba/bootstrap/css/bootstrap.min.css' %}" id="bootstrap-css">
+        <link rel="stylesheet" href="{% static 'nyumba/bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'nyumba/css/css/all.css' %}">
+<!--<link rel="stylesheet" href="{% static 'User_account/css/font-awesome.css' %}">-->
+        <!--<link rel="stylesheet" href="{% static 'User_account/main.css' %}">-->
+		<link rel="stylesheet" href="{% static 'nyumba/landlord_home_styles.css' %}">
+        <link rel="stylesheet" href="{% static 'nyumba/vendor/boxicons/css/boxicons.min.css' %}" > 
+        <title>rentalink_systems</title>
+        {% block css %}
+		      
+        {% endblock %}
+    </head>
+    
+    <body  >
+		<div class="container-fluid p-0 m-0" style="background-color:rgb(255, 255, 255);" >
+		
+		
+		<div class="nav-side-menu sticky-top">
+			<div class="brand">
+				<img src="{% static 'nyumba/images/rentalink1.png' %}" width="50px" alt="Rentalink Systems" 
+				style="width: 50px; height: 50px;">rentalink systems
+			</div>
+			<i class="fa fa-bars fa-2x toggle-btn " data-toggle="collapse" data-target="#menu-content"></i>
+		
+				<div class="menu-list">
+		
+					<ul id="menu-content" class="menu-content collapse out">
+						<li class="active">
+						<a href="{% url 'nyumba:landlord_home' %}">
+						<i class="fas fa-tachometer-alt fa-lg "></i> Dashboard
+						</a>
+						</li>
+
+						<li  data-toggle="collapse" data-target="#products" class="collapsed ">
+						<a href="#"><i class="fa fa-home"></i> Properties <span class="arrow"></span></a>
+						</li>
+						<ul class="sub-menu collapse" id="products">
+							<li><a href="{% url 'nyumba:add_property' %}">Add property</a></li>
+							<li><a href="{% url 'nyumba:properties' %}"> Properties</a></li>
+							<li><a href="{% url 'nyumba:units' %}">Units</a></li>
+	
+						</ul>
+
+
+						<li data-toggle="collapse" data-target="#service" class="collapsed">
+						<a href="#"><i class="fa fa-dollar-sign"></i> Accounting<span class="arrow"></span></a>
+						</li>  
+						<ul class="sub-menu collapse" id="service">
+							<li><a href="{% url 'nyumba:accounting' %}">Transactions</a></li>
+							<li><a href="#">Balances</a></li>
+							<li><a href="#">Recurring</a></li>
+						</ul>
+
+
+						<li data-toggle="collapse" data-target="#maintenace" class="collapsed">
+						<a href="#"><i class="fa fa-tools "></i> Maintenance <span class="arrow"></span></a>
+						</li>
+						<ul class="sub-menu collapse" id="maintenace">
+						<li><a href="{% url 'nyumba:maintenace' %}">requests</a></li>
+						<li><a href="#">equipments</a></li>
+						<li><a href="{% url 'nyumba:reminders' %}">reminders</a></li>
+
+						</ul>
+
+						<li data-toggle="collapse" data-target="#store" class="collapsed">
+							<a href="#"><i class="fa fa-store"></i> Store<span class="arrow"></span></a>
+						</li>
+							<ul class="sub-menu collapse" id="store">
+							<li><a href="{% url 'nyumba:stores' %}">mystores</a></li>
+							<li><a href="{% url 'nyumba:store_applications' %}">stores applications</a> </li>
+	
+							</ul>
+							<li data-toggle="collapse" data-target="#tenants" class="collapsed">
+								<a href="#"><i class="fa fa-house-user"></i> Tenants<span class="arrow"></span></a>
+								</li>
+								<ul class="sub-menu collapse" id="tenants">
+									<li><a href="{% url 'nyumba:tenants' %}">all tenants</a></li>
+									<li><a href="{% url 'nyumba:rental_applications' %}">rental applications</a></li>
+								
+		
+							</ul>
+						<li>
+							<a href="#">
+							<i class="fa fa-file-pdf"></i> Reports
+							</a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="fas fa-upload"></i> Notices
+							</a>
+						</li>
+
+
+						<li>
+							<a href="{% url 'nyumba:profile' %}"><i class="fas fa-user-tie fa-lg"></i> Profile</a>
+						
+						</li>
+
+						
+					</ul>
+			</div>
+		</div>
+		<div class="main_section  ">
+			<!--cross navigation -->
+			<div class="d-flex  my_navigation  sticky-top">
+				<div class="p-2 mr-5 ml-3 ">
+					<i class="fa fa-bell fa-2x text-primary"></i>
+				</div>
+				<div class="p-2 ">
+					<div class="input-group ">
+						<div class="input-group-prepend">
+						  <span class="input-group-text">
+							<i class="fa fa-search  text-primary"></i>
+						  </span>
+						</div>
+						<input type="text" class="form-control" placeholder="search">
+					</div>
+				</div>
+				<div class="p-2 ml-auto ">
+					<i class="fa fa-comment-alt fa-2x text-primary"></i>
+				</div>
+			</div>
+			<!--dashboard section-->
+            {% block content %}
+            {% endblock %}
+
+            <!--end of dashboard-->
+			  
+		</div>
+
+		</div>
+		
+        
+        <script src="{% static 'nyumba/vendor/jquery/jquery-2.2.4.min.js' %}"></script>
+        <script src="{% static 'nyumba/vendor/jquery/jquery-2.2.4.js' %}"></script>
+        <script src="{% static 'nyumba/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'nyumba/bootstrap/js/bootstrap.bundle.js' %}"></script>
+        <script src="{% static 'nyumba/bootstrap/js/bootstrap.js' %}"></script>
+		{% block js %}
+        {% endblock %}
+
+</body>
+</html>
+
+
