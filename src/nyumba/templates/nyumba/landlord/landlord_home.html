@@ -1,0 +1,462 @@
+{% extends 'nyumba/landlord/landlord_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="content_section">
+	<div class="container mt-2">
+		
+		  <div class="row mt-3 p-3" >
+			<div class="col-md-4 col-sm-6">
+			  <div class="card card-block"style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Quick buttons</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+					
+					
+				</div>
+				<div class="card-body">
+					<div class="row pt-2">
+						<div class="col-4 text-center ">
+							<i class="fa fa-home fa-2x text-primary border"></i>
+							<div class="text-secondary small">ADD NEW PROPERTY</div>
+							
+						</div>
+						<div class="col-4 text-center ">
+							<i class="fa fa-user-plus fa-2x text-primary border"></i>
+							<div class="text-secondary small ">ADD NEW TENANT</div>
+							
+						</div>
+						<div class="col-4 text-center ">
+							<i class="fa fa-file-alt fa-2x text-primary border"></i>
+							<div class="text-secondary small">ADD NEW RENTAL APPLICATION</div>
+							
+						</div>
+					</div>
+					<div class="row mt-5 pb-2">
+						<div class="col-4 text-center ">
+							<i class="fa fa-store fa-2x text-primary border"></i>
+							<div class="text-secondary small">MANAGE STORE</div>
+							
+						</div>
+						<div class="col-4 text-center ">
+							<i class="fa fa-tools fa-2x text-primary border"></i>
+							<div class="text-secondary small ">MAINTENANCE REQUESTS </div>
+							
+						</div>
+						<div class="col-4 text-center ">
+							<i class="fa fa-clock fa-2x text-primary border"></i>
+							<div class="text-secondary small">ADD NEW REMINDER </div>
+							
+						</div>
+				</div>
+				</div>
+			  
+		
+		  </div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				
+			  <div class="card card-block"style="height: 320px;">
+				  <div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">properties</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+				  </div>
+				  <div class="card-body">
+					<div class="row d-flex justify-content-center ">
+						<div class="col-6">
+							<div class="progress blue">
+								 <span class="progress-left"> 
+									   <span class="progress-bar"></span> 
+								 </span> 
+								<span class="progress-right"> 
+									<span class="progress-bar"></span> 
+							   </span>
+								<div class="progress-value">90%</div>
+							</div>
+							<div class="text-primary text-center"> view all</div>
+							
+							
+						</div>
+						<div class="col-6 pt-5 pl-2">
+							<div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">vacant</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">occupied</label>
+							  </div>
+						</div>
+					</div>
+				</div>
+				
+			  
+			 </div>
+			</div>
+			<div class="col-md-4 col-sm-6" >
+			  <div class="card card-block" style="height: 320px; background-image: url({% static 'User_account/images/index.svg' %});
+			  background-size: cover;background-repeat: no-repeat;opacity: 1;">
+				  <div class="card-body pt-5" style="background-color: rgba(211, 211, 211,0.2);">
+					  <h4 class="text-primary">manage your properties at the comfort of your house with 
+						  <span class="btn btn-danger">rentalink systems</span>
+					  </h4>
+					<!--<img src="{% static 'User_account/images/index.svg' %}" width="100%" class="mx-auto d-block"  alt="Photo of sunset">-->
+				  </div>
+			   
+			</div>
+			</div>
+			   
+		  </div>
+
+
+
+
+		  <div class="row mt-3 p-3" >
+			<div class="col-md-4 col-sm-6">
+			  <div class="card card-block"style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Tenants</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+					
+					
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6 ">
+							<div class="circle-drop mx-auto">
+								<div class="text-drop"><i class="fa fa-plus mr-2 "></i>add tenant</div>
+							</div>
+						</div>
+						<div class="col-6 ">
+							<div class="text-center pt-4">
+								<span><i class="fa fa-users fa-2x"></i></span><br>
+								<span>Number of tenants</span><br>
+								<span >30</span>
+								<span></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			  
+		
+		  </div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				
+			  <div class="card card-block"style="height: 320px;">
+				  <div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Financials</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+				  </div>
+				  <div class="card-body">
+					  <div class="mx-auto">
+						  <span class="btn btn-success mx-auto ">balance ksh. 20,000</span>
+						  <span class="btn btn-secondary mt-3  mx-auto">My recent transactions10</span>
+						  <span class=" btn btn-primary mt-3 mx-auto">make a withdrawal requests</span>
+						  
+					  </div>
+					
+				</div>
+				
+			  
+			 </div>
+			</div>
+			<div class="col-md-4 col-sm-6" >
+			  <div class="card card-block" style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Rental applications</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+						</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6">
+							<div class="circle">
+								<div class="text-center mt-5 text-success"><i class="fa fa-plus mr-2 ">
+
+								</i>add rental application</div>
+							</div>
+						</div>
+						<div class="col-6 pt-4 pl-2">
+							<div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">new</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">pending</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">accepted</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">declined</label>
+							  </div>
+						</div>
+					</div>
+				</div>
+				  
+			   
+			</div>
+			</div>
+			   
+		  </div>
+
+
+
+
+
+
+
+
+		  <div class="row mt-3 p-3" >
+			<div class="col-md-4 col-sm-6">
+			  <div class="card card-block"style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">maintenance requests</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+					
+					
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6">
+							<div class="semi_circle">
+								<div class="text-center">
+									<div class="fa fa-tools maintenance_icon text-primary"></div>
+									<div class=""></div>
+									<div class="text-center mt-1 text-success"><i class="fa fa-plus mr-2 ">
+									
+									</i>add a maintenance request</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-6 pl-4 mt-5">
+							<div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">new</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">in progress</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">completed</label>
+							  </div>
+							  <div class="custom-control custom-checkbox ">
+								<input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+								<label class="custom-control-label" for="customCheck">pending</label>
+							  </div>
+						</div>
+					</div>
+					
+				</div>
+			  
+		
+		  </div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				
+			  <div class="card card-block"style="height: 320px;">
+				  <div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">store</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+				  </div>
+				  <div class="card-body">
+					<div class="row d-flex justify-content-center ">
+						<div class="col-6">
+							<div class="circle border-top-0 border-dark bg-white">
+								<div class="pt-4 text-center">
+									<div class="fa fa-store fa-3x text-primary"></div>
+									<div class="text-success"><i class="fa fa-plus mr-2">add a store request</i></div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-6 pt-2">
+							<div class="">
+								<span>total stores <span class="text-success pl-3">3</span></span><br>
+								<span class="pt-3">space <span class="text-success">available</span><br>
+								<span class="pt-3 ">mzigo stored<span class="text-success">100</span></span><br>
+								<span class="pt-3">applications <span class="text-success">5</span>
+							</div>
+
+							
+						</div>
+					</div>
+				</div>
+				
+			  
+			 </div>
+			</div>
+			<div class="col-md-4 col-sm-6" >
+			  <div class="card card-block" style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Rentalink Messenger</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+				  </div>	
+				<div class="card-body">
+					<div class="row d-flex justify-content-center ">
+						<div class="number_messages">0</div><span class="mt-5">new messages</span>
+
+					</div> 
+				</div> 
+			   
+			</div>
+			</div>
+			   
+		  </div>
+
+
+
+
+
+		  <div class="row mt-3 p-3" >
+			<div class="col-md-4 col-sm-6">
+			  <div class="card card-block"style="height: 320px;">
+				<div class="card-header">
+					<div class="d-flex ">
+						<div class="p-2 mr-auto ">
+							<h5 class="card-title">Notices</h5>
+						</div>
+						<div class="p-2 ">
+							<i class="fa fa-cogs "></i>
+						</div>
+						
+					  </div>
+					
+					
+				</div>
+				<div class="card-body">
+					<div class="row pt-2">
+					</div>
+					</div>
+			  
+		
+		  </div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				
+				<div class="card card-block"style="height: 320px;">
+					<div class="card-header">
+						<div class="d-flex ">
+							<div class="p-2 mr-auto ">
+								<h5 class="card-title">calendar</h5>
+							</div>
+							<div class="p-2 ">
+								<i class="fa fa-cogs "></i>
+							</div>
+							
+						  </div>
+						
+						
+					</div>
+					<div class="card-body">
+						<div class="row pt-2">
+						</div>
+						</div>
+				  
+			
+			  </div>
+			</div>
+			<div class="col-md-4 col-sm-6" >
+				<div class="card card-block"style="height: 320px;">
+					<div class="card-header">
+						<div class="d-flex ">
+							<div class="p-2 mr-auto ">
+								<h5 class="card-title">tips and tricks</h5>
+							</div>
+							<div class="p-2 ">
+								<i class="fa fa-cogs "></i>
+							</div>
+							
+						  </div>
+						
+						
+					</div>
+					<div class="card-body">
+						<div class="row pt-2">
+						</div>
+						</div>
+				  
+			
+			  </div>
+			</div>
+			   
+		  </div>
+
+
+
+
+
+
+		  
+		</div>
+		
+	
+
+
+
+
+</div>
+{% endblock %}
+
