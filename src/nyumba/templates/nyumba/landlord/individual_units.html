@@ -1,0 +1,430 @@
+{% extends 'nyumba/landlord/landlord_base.html' %}
+{% load static %}
+{% block css %}
+<style>
+
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.unit_circle{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid lightblue;
+}
+.occupancy_circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+@media (max-width: 767px) {
+    #extra_info{
+        display: none;
+    }
+}
+
+ 
+
+</style>
+{% endblock %}
+{% block content %} 
+<div class="container mt-4 ml-2 mr-4 pr-3 ">
+    <div class="d-flex pr-5 bg-secondary mr-3">
+        <div class="p-2 mr-4 align-self-center">
+            <i class="fa fa-arrow-left"></i>
+        </div>
+        <div class="p-2 align-self-center">Unit## Name</div>
+        <div class="dropdown p-2 pr-3 ml-auto align-self-center">
+            <button class="dropbtn">actions<i class="fa fa-ellipsis-h  ml-3"></i></button>
+            <div class="dropdown-content">
+                <a class="d-flex justify-content-between text-success" href="#">
+                    <div class="p-1">edit property</div>
+                    <div class="p-1">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                </a>
+                <a class="d-flex justify-content-between text-secondary" href="#">
+                    <div class="p-1">archive property</div>
+                    <div class="p-1">
+                        <i class="fa fa-home"></i>
+                    </div>
+                </a>
+                <a class="d-flex justify-content-between text-danger" href="#">
+                    <div class="p-1">delete property</div>
+                    <div class="p-1">
+                        <i class="fa fa-trash-alt"></i>
+                    </div>
+                </a>
+            </div>
+          </div>
+        
+        
+    </div> 
+    <div class="row mt-4 mr-3 pl-1 ml-0 ">
+        <div class="col-sm-3 bg-secondary pl-0 ml-0">
+            <div class="row p-0 m-0">
+                <div class="card" style="object-fit:cover;">
+                    <img class="card-img-top" src="{% static 'User_account/images/rentalink1.png' %}" alt="Card image cap" 
+                    >
+                    <div class="card-body">
+                      <h4 class="card-title text-center">Nature Springs</h4>
+                      <div class="mx-auto text-center"><i class="fa fa-map-marker-alt text-center"></i></div>
+                      <p class="card-text text-center">Moi University Kesses</p>
+                    </div>
+                  </div>
+            </div>
+            <div class="mt-3" id="extra_info" >
+                <div class="row p-0 m-0"> 
+                    <div class="col-6 bg-info ">
+                        <div class="text-center">0</div>
+                        <div class="text-center">equipments</div>
+
+                    </div>
+                    <div class="col-6 bg-white pl-1">
+                        <div class="text-center">0</div>
+                        <div class="text-center">Reminders</div>
+                    </div>
+                </div>
+                <div class="row p-0 m-0">
+                    <div class="occupancy_circle mx-auto mt-3 text-center pt-4">0%</div>
+                    <div class="text-center mx-auto col-12">occupancy</div>
+                </div>
+                <div class="row p-0 m-0">
+                    <div class="col-6 bg-info ">
+                        <div class="text-center">0</div>
+                        <div class="text-center">tenants</div>
+
+                    </div>
+                    <div class="col-6 bg-white pl-1">
+                        <div class="text-center">0</div>
+                        <div class="text-center">maintenance</div>
+                    </div>
+                     </div>
+
+            </div>
+            
+            
+            
+        </div>
+        <div class="col-sm-9 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between ">
+                        <a href="{% url 'nyumba:individual_property' %}">
+                            <div class="p-2 bg-info w-100 text-center text-white" id="unit_profile">profile</div></a>
+                        <div class="p-2 bg-warning w-100 text-center" id="unit_financials">financials</div>
+                        <div class="p-2 bg-danger w-100 text-center" id="unit_specs">specs</div>
+                        <div class="p-2 bg-primary w-100 text-center" id="unit_utilities">utilities</div>
+                    </div>
+                </div>
+                <div class="col-12" id="unit_profile_div">
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="d-flex w-100 justify-content-around">
+                                <div class="p-2 "><i class="fa fa-home"></i>units</div>
+                                <div class="p-2  pr-5">view all units</div>
+                            </div>
+                            <div class="col-12">
+                                <div class="unit_circle mx-auto  text-center">
+                                    <div class="align-self-center pt-5">
+                                        2  in <br>total
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-12 text-center pt-2">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx">
+                                    <label class="custom-control-label" for="customRadio">occupied</label>
+                                  </div>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
+                                    <label class="custom-control-label" for="customRadio2">vacant</label>
+                                  </div>
+                            </div>
+                            <div class="col-12 text-center pt-3">
+                                <div class="btn btn-danger mx-auto"><i class="fa fa-plus"></i> Add unit</div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12 mx-auto text-left"><i class="fa fa-home mr-4"></i>General Information</div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <div class="col-12 text-center">Property Name</div>
+                                        <div class="col-12 text-center">Nature Springs</div>
+                                    </div>
+                                    <div class="col=6">
+                                        <div class="col-12 text-center">Year built</div>
+                                        <div class="col-12 text-center">2015</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12 text-center">Year built</div>
+                                        <div class="col-12 text-center">2015</div>
+                                    </div>
+                                    <div class="col=6">
+                                        <div class="col-12 text-center">property status</div>
+                                        <div class="col-12 text-center">good</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12"><i class="fa fa-home mr-4"></i>Property Amenities</div>
+                            <div class="col-12">
+                                <ul>
+                                    <li>fitness center</li>
+                                    <li>swimming pool</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12"><i class="fa fa-file mr-4"></i>Property attachents</div>
+                            <div class="col-12 text-center">no attachments yet</div>
+                        </div>
+                        
+
+
+
+                    </div>
+                </div>
+                <div class="col-12" id="unit_financials_div" style="display: none;">
+                    <div class="container">
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent transactions</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >This are the most recent transactions</div>
+                            
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent purchases</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >This are the most recent transactions</div>
+                            
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent loans</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >This are the most recent transactions</div>
+                            
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="col-12" id="unit_specs_div" style="display: none;">
+                    <div class="container">
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>keys</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>assign</div>
+                            </div>
+                            <div class="col-12 text-center" >no keys assigned</div>
+                            
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>paint</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >No paint added</div>
+                            
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Doors</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >No door added</div>
+                            
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Flooring</div>
+                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+                            <div class="col-12 text-center" >No floors added</div>
+                    
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-12" id="unit_utilities_div" style="display: none;">
+                    <div class="container">
+                        <div class="row mt-3 p-2">
+                            <div class="col-12 d-flex justify-content-between text-success ">
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Utility providers</div>
+                                <div type="button" class="mr-5" data-toggle="modal" data-target="#utility_modal1">
+                                    <i class="fa fa-plus-circle mr-4 "></i>add</div>
+                            </div>
+
+                            
+                            <div class="modal fade " id="utility_modal1">
+                                <div class="modal-dialog ">
+                                <div class="modal-content">
+                            
+                                    
+                                    <div class="modal-header">
+                                    <h4 class="modal-title text-success">Add utility provider</h4>
+                                    <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+                                    </div>
+                            
+                                    
+                                    <div class="modal-body">
+                                        <p class="text_secondary mb-2"> This information would be shared with tenants</p>
+                                        <form action="/action_page.php">
+                                            <div class="form-group">
+                                              <label for="email">Utility Name:</label>
+                                              <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Utility Provider Type:</label>
+                                                <select name="cars" class="custom-select">
+                                                    <option selected>select provider Type</option>
+                                                    <option value="volvo">Volvo</option>
+                                                    <option value="fiat">Fiat</option>
+                                                    <option value="audi">Audi</option>
+                                                  </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Proffessional First Name:</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Proffessional Last Name:</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Proffessional company:</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Proffessional contact:</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="d-flex justify-content-between ">
+                                                <div class="btn btn-success">create</div>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+                                            </div>
+                                            
+                                            
+                                        </form>
+                                    </div>
+                        
+                                </div>
+                                </div>
+                            </div>
+                            
+
+
+
+                            <div class="col-12 text-center" >No utility provider added</div>
+                    
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+            </div>
+            
+            
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+   
+    $(document).ready(function(){
+     
+        $("#unit_financials").click(
+            function(){
+                $("#unit_profile_div").hide();
+                $("#unit_specs_div").hide();
+                $("#unit_utilities_div").hide();
+                $("#unit_financials_div").css("display","block");
+                return false;
+
+            });
+       
+        $("#unit_specs").click(
+            function(){
+                $("#unit_profile_div").hide();
+                $("#unit_financials_div").hide();
+                $("#unit_utilities_div").hide();
+                $("#unit_specs_div").css("display","block");
+                return false;
+
+        });
+        $("#unit_utilities").click(
+            function(){
+                $("#unit_profile_div").hide();
+                $("#unit_financials_div").hide();
+                $("#unit_specs_div").hide();
+                $("#unit_utilities_div").css("display","block");
+                return false;
+
+        });
+    });
+    </script>
+
+{% endblock %}
