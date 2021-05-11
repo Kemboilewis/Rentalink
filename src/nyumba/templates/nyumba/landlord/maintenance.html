@@ -1,0 +1,126 @@
+{% extends 'nyumba/landlord/landlord_base.html' %}
+{% load static %}
+{% block css %}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+      color: blue;
+      padding: 5px;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      color:goldenrod;
+    }
+
+    .property_image{
+        width:100px;
+        height: 100px;
+        background-color: #fff;
+        
+    }
+    .requests{
+      width: 80%;
+      border: dotted 2px green;
+      height: 400px;
+      background-color: gray;
+      border-radius: 24px;
+    }
+    
+
+    </style>
+{% endblock %}
+{% block content %} 
+<div class="container mt-5 ml-3 ">
+    <div class="row pl-4 pr-4">
+        <div class="col-md-4">  
+                <div class="dropdown">
+                  <button class="dropbtn ">Maintenace requests<i class="fa fa-caret-down pl-3"></i></button>
+                  <div class="dropdown-content">
+                    <a href="{% url 'nyumba:maintenace' %}">Maintenace requests</a>
+                    <a href="{% url 'nyumba:reminders' %}">Reminders</a>
+                    <a href="#">Equipments</a>
+                  </div>
+                </div>
+              
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-white" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              </div>
+              
+        </div>
+        <div class="col-md-4 ">
+            <a href="{% url 'nyumba:add_maintenace_request' %}"><button type="button" class="btn btn-success">
+                <i class="fa fa-plus pr-2"></i>Add maintenace requests</button>
+            </a>
+            
+        </div>
+    </div>
+    <div class="row m-3 p-0">
+        <div class="col-md-4 p-2">
+          <div class="requests">
+            <div class="">new(0)</div>
+          </div>
+        </div>
+        <div class="col-md-4 p-2">
+          <div class="requests">
+            <div class="">in progress(0)</div>
+          </div>
+        </div>
+        <div class="col-md-4 p-2" >
+          <div class="requests">
+            <div class="">resolved(0)</div>
+          </div>
+        </div>
+    </div>
+  
+
+</div>
+
+
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}
