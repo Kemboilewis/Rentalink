@@ -1,0 +1,277 @@
+{% extends 'nyumba/landlord/landlord_base.html' %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+{% block content %} 
+<div class="container">
+    <form action="#" method="POST">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="text-center text-success mt-3">add a property</h4>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header bg-primary">choose currency</div>
+                    <div class="card-body">
+                      <p class="card-text">
+                        You need to select the currency for this property accounting! 
+                        Please note, you will not be able to edit it !!!
+                      </p>
+                      <div class="form-group">
+                        <label for="email">currency:</label>
+                        <input type="text" class="form-control" id="currency">
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" w-100 mt-5">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">upload property photo</label>
+                    </div>
+                  </div>
+             
+            </div>
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 mt-3 m-2">
+                            <div class="row m-3 p-0">
+                                <div class="col-12">General information</div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">Property Name:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="email">Year built:</label>
+                                        <input type="number" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="email">mls#:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-3 p-0">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">street address:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="email">city:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="email">country:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-3 p-0">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">State/region:</label>
+                                        <input type="text" class="form-control" id="currency">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">zip:</label>
+                                        <input type="number" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2 p-0">
+                        <div class="col-12">PROPERTY TYPE</div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">single unit type</div>
+                                  <p class="card-text">
+                                    Single family rentals  are rentals in which there is only one rental 
+                                    associated to a specific address. 
+                                  </p>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx" checked>
+                                    <label class="custom-control-label" for="customRadio"id="single_button" >single unit type</label>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">multi unit type</div>
+                                  <p class="card-text">
+                                    Multi-unit property are for rentals in which there are multiple rental 
+                                    units per a single address 
+                                  </p>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="customRadio1" name="example" 
+                                    value="customEx1">
+                                    <label class="custom-control-label" for="customRadio1" id="multi_button">multi unit type</label>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-4 p-2 mt-5" id="singleunit">
+            <div class="col-12">ADDITIONAL INFORMATION</div>
+            <div class="col-sm-3 p-2">
+                <div class="form-group">
+                    <label for="email">beds:</label>
+                    <input type="number" class="form-control" id="currency">
+                </div>
+                
+                
+            </div>
+            <div class="col-sm-3 p-2">
+                <div class="form-group">
+                    <label for="email">bath:</label>
+                    <input type="number" class="form-control" id="currency">
+                </div>
+            </div>
+            <div class="col-sm-3 p-2">
+                <div class="form-group">
+                    <label for="email">size, sqt.ft:</label>
+                    <input type="number" class="form-control" id="currency">
+                </div>
+            </div>
+            <div class="col-sm-3 p-2">
+                <div class="form-group">
+                    <label for="email">parking:</label>
+                    <input type="number" class="form-control" id="currency">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row m-0 p-0" >
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">deposit:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">market rent:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-4 p-2 mt-5" id="multiunit" style="display: none;">
+            <div class="col-12">UNIT INFORMATION</div>
+            <div class="col-sm-12 bg-light">
+                <div class="row m-2 p-2">
+                    <div class="col-12">unit 1</div>
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">Unit#:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                 
+                    </div>
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">Unit type:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">size, sqt.ft:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-2">
+                        <div class="form-group">
+                            <label for="email">Beds:</label>
+                            <input type="number" class="form-control" id="currency">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row m-0 p-0" >
+                            <div class="col-sm-3 p-2">
+                                <div class="form-group">
+                                    <label for="email">Baths:</label>
+                                    <input type="number" class="form-control" id="currency">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-2">
+                                <div class="form-group">
+                                    <label for="email">market rent:</label>
+                                    <input type="number" class="form-control" id="currency">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="email">Deposit:</label>
+                                    <input type="number" class="form-control" id="currency">
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        <div class="row m-0 p-0">
+            <div class="col-12 pt-3">PROPERTY AMENITIES</div>
+
+        </div>
+        <div class="row m-0 p-0">
+            <div class="col-12 pt-3">PROPERTY ATTACHMENTS</div>
+        </div>
+
+    </form>
+</div>
+
+
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){
+    $("#multi_button").click(function(){
+      $("#singleunit").hide();
+      $("#multiunit").css("display","block");
+    });
+    $("#single_button").click(function(){
+      $("#multiunit").hide();
+      $("#singleunit").show();
+    });
+  });
+</script>
+
+{% endblock %}
