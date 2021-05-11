@@ -142,3 +142,12 @@ src/user_account/static/user_account/css
 src/user_account/static/user_account/images
 src/user_account/static/user_account/vendor
 src/user_account/static/user_account/bootstrap
+src/nyumba/migrations
+src/nyumba/__init__.py
+src/nyumba/tests.py
+src/nyumba/apps.py
+src/nyumba/static/nyumba/bootstrap
+src/nyumba/static/nyumba/css
+src/nyumba/static/nyumba/images
+src/nyumba/static/nyumba/vendor
+src/nyumba/static/nyumba/bootstrap
