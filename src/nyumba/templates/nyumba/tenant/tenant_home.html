@@ -1,548 +1,326 @@
-{% extends 'nyumba/tenant/tenant_base.html' %}
+{% extends 'nyumba/tenant/menu.html' %}
 {% load static %}
+{% block css %}
+<style>
+    /* body{
+background:#eee;    
+} */
+
+.card-box {
+    position: relative;
+    color: #fff;
+    padding: 20px 10px 40px;
+    margin: 20px 0px;
+}
+.card-box:hover {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+.card-box:hover .icon i {
+    font-size: 100px;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+.card-box .inner {
+    padding: 5px 10px 0 10px;
+}
+.card-box h3 {
+    font-size: 27px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    white-space: nowrap;
+    padding: 0;
+    text-align: left;
+}
+.card-box p {
+    font-size: 15px;
+}
+.card-box .icon {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+    z-index: 0;
+    font-size: 72px;
+    color: rgba(0, 0, 0, 0.15);
+}
+.card-box .card-box-footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-decoration: none;
+}
+.card-box:hover .card-box-footer {
+    background: rgba(0, 0, 0, 0.3);
+}
+.bg-blue {
+    background-color: #00c0ef !important;
+}
+.bg-green {
+    background-color: #00a65a !important;
+}
+.bg-orange {
+    background-color: #f39c12 !important;
+}
+.bg-red {
+    background-color: #d9534f !important;
+}
+.room_img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.space_btn{
+    background-color: rgb(27, 204, 51);
+    width: 150px;
+    border-radius: 20px;
+}
+.space_btn:hover{
+    background-color: rgb(35, 41, 136);
+    width:200px;
+    transition: 10ms;
+    color:white;
+}
+
+</style>
+{% endblock %}
 
 {% block content %}
 
-<section class="tenant_main_section">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="container-fluid py-5 mx-auto">
-            <div class="card py-4 px-4">
-                <div class="row justify-content-start px-3">
-                    <div class="image-bg mr-3"> <img class="user-img fit-image" src="https://i.imgur.com/RCwPA3O.jpg"> </div>
-                    <div class="text-left">
-                        <h2>Kiera Hill</h2>
-                        <h6>10 ITEMS - 21 SALE - 8 COMMENTS</h6> <span class="fa fa-star active"></span> <span class="fa fa-star active"></span> <span class="fa fa-star active"></span> <span class="fa fa-star active"></span> <span class="fa fa-star"></span>
-                    </div>
-                    <div class="btn btn-pink ml-auto">FOLLOW</div>
+
+<div class="container-fluid mt-5">
+    <div class="row mt-3 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+            <nav aria-label="breadcrumb " class="second bg-white">
+                <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                    <li class="breadcrumb-item font-weight-bold ">
+                        <a class="black-text text-uppercase active-2 " href="{% url 'nyumba:tenant_home' %}">
+                            <span class="mr-md-3 mr-2">Dashboard</span>
+                        </a>
+                        
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row m-0 p-0">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-blue" style="border-radius: 24px;">
+                <div class="inner">
+                    <h3>{{ count_units }}</h3>
+                    <p> Vacant Houses </p>
                 </div>
-                <div class="line"></div>
-                <div class="row d-flex justify-content-between px-3">
-                    <div class="prod-bg text-center py-1"><img class="prod-pic" src="https://i.imgur.com/6bdzZKE.png"></div>
-                    <div class="prod-bg text-center py-1"><img class="prod-pic" src="https://i.imgur.com/CGaJoDY.png"></div>
-                    <div class="prod-bg text-center py-1"><img class="prod-pic fat-img" src="https://i.imgur.com/8JVdjVT.png"></div>
-                    <div class="prod-bg text-center py-1"><img class="prod-pic" src="https://i.imgur.com/uJGwaIy.png"></div>
-                    <div class="more text-center pt-3">
-                        <h1 class="mb-0 dk-none dk-sm-block"><strong>+6</strong></h1>
-                        <h5>ITEMS</h5>
-                    </div>
+                <div class="icon">
+                    <i class="fa fa-home" aria-hidden="true"></i>
                 </div>
+                <a href="{% url 'nyumba:explore_rentals' %}" class="card-box-footer" style="border-radius: 0 0 24px 24px;">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-green" style="border-radius: 24px;">
+                <div class="inner">
+                    <h3> {{ count_tenants }} </h3>
+                    <p> New messages </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </div>
+                <a href="#" class="card-box-footer" style="border-radius: 0 0 24px 24px;">check inbox <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
         </div>
-        <div class="col-md-6 pt-5">
-          <h5 class=" card-title text-center">Rental applications</h5>
-          <div class="row">
-            
-            <div class="col-6" style="">
-              <div id="circle" class="mx-auto text-center" >
-                <i class="fa fa-plus text-success ">add </i>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-orange" style="border-radius: 24px;">
+                <div class="inner">
+                    <h3> {{ count_store }} </h3>
+                    <p> Stores </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-store" aria-hidden="true"></i>
+                </div>
+                <a href="{% url 'nyumba:explore_stores'%}" class="card-box-footer" style="border-radius: 0 0 24px 24px;">View More <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card-box bg-red" style="border-radius: 24px;">
+                <div class="inner">
+                    <h3> {{ count_landlords}} </h3>
+                    <p> Landlords </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="#" class="card-box-footer " style="border-radius: 0 0 24px 24px;">view houses <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+</div>
+<div class="row m-0 p-0 mt-5">
+    <div class="col-md-6">
+        <!-- <div class="container-fluid py-5 mx-auto"> -->
+          <div class="card bg-light py-4 px-4">
+              <div class="row justify-content-start px-3">
+                  <div class="image-bg mr-3"> <img class="user-img fit-image" src="{% static 'nyumba/images/house1.jpg' %}"> </div>
+                  <div class="text-left">
+                      <h2>Popular Rentals</h2>
+                      <h6>3 Bedrooms -Ksh.50,000 -parking - Gym</h6> 
+                      <span class="fa fa-star active "></span> 
+                      <span class="fa fa-star active "></span> 
+                      <span class="fa fa-star active "></span> 
+                      <span class="fa fa-star active "></span> 
+                      <span class="fa fa-star"></span>
+                  </div>
+                  <div class="btn btn-pink bg-info ml-auto">RENT</div>
               </div>
+              <div class="line"></div>
+              <div class="row d-flex justify-content-between px-3">
+                  <div class="prod-bg text-center py-1"><img class="prod-pic" src="{% static 'nyumba/images/house1.jpg' %}"></div>
+                  <div class="prod-bg text-center py-1"><img class="prod-pic" src="{% static 'nyumba/images/house1.jpg' %}"></div>
+                  <div class="prod-bg text-center py-1"><img class="prod-pic fat-img" src="{% static 'nyumba/images/house1.jpg' %}"></div>
+                  <div class="prod-bg text-center py-1"><img class="prod-pic" src="{% static 'nyumba/images/house1.jpg' %}"></div>
+                  <div class="more text-center pt-3">
+                      <h1 class="mb-0 dk-none dk-sm-block"><strong>+2</strong></h1>
+                      <h5>ITEMS</h5>
+                  </div>
               </div>
-              <div class="col-6" >
-                <div class="application_checkboxes">
+          </div>
+      </div>
+      <div class="col-md-6 mx-auto">
+        <h5 class=" card-title text-center text-secondary">Rental applications</h5>
+        <div class="row w-75 bg-light shadow-lg mx-auto">
+          
+          <div class="col-6" style="">
+            <div id="circle" class="mx-auto text-center border border-primary text-center pt-4" >
+                <div class="btn btn-info mx-auto mt-5 ">
+                    <i class="fa fa-plus text-white mr-2 "> </i>Add application
+
+                </div>
+              
+            </div>
+            </div>
+            <div class="col-6 " >
+              <div class="application_checkboxes w-75 ">
+                  <div class="custom-control custom-checkbox  ">
+                    <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+                    <label class="custom-control-label" for="customCheck"> <span class="text-primary pr-2">{{count_p}}</span>pending</label>
+                    </div>
+                    <div class="custom-control custom-checkbox ">
+                    <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
+                    <label class="custom-control-label" for="customCheck"> <span class="text-success pr-2">{{ count_s }}</span>succesful</label>
+                    </div>
                     <div class="custom-control custom-checkbox ">
                       <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
-                      <label class="custom-control-label" for="customCheck">new</label>
+                      <label class="custom-control-label" for="customCheck"> <span class="text-danger pr-2">{{ count_d }}</span>declined</label>
                       </div>
-                      <div class="custom-control custom-checkbox ">
-                      <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
-                      <label class="custom-control-label" for="customCheck">pending</label>
-                      </div>
-                      <div class="custom-control custom-checkbox ">
-                        <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
-                        <label class="custom-control-label" for="customCheck">approved</label>
-                        </div>
-                        <div class="custom-control custom-checkbox ">
-                          <input type="checkbox" class="custom-control-input " id="customCheck" name="example1">
-                          <label class="custom-control-label" for="customCheck">declined</label>
-                      </div>
-                      </div>
-                  </div>
-              </div>
-            
-          </div>
-        </div>
-        
-
-        
-
-
-      
-      <div class="row">
-
-
-
-
-
-
-
-              <div class="col-md-3 col-sm-6">
-                  <div class="product-grid">
-                      <div class="product-image">
-                          <a href="#" class="image">
-                              <img class="pic-1" src="{% static 'User_account/images/mpesa.png' %}">
-                              <img class="pic-2" src="{% static 'User_account/images/rentalink1.png' %}">
-                          </a>
-                           <span class="product-sale-label">sale!</span>
-                          <ul class="social">
-                              <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                              <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li>
-                          </ul>
-                          <div class="product-rating">
-                              <ul class="rating">
-                                  <li class="fas fa-star"></li>
-                                  <li class="fas fa-star"></li>
-                                  <li class="fas fa-star"></li>
-                                  <li class="far fa-star"></li>
-                                  <li class="far fa-star"></li>
-                              </ul>
-                              <a class="add-to-cart" href="#"> ADD TO CART </a>
-                          </div>
-                      </div>
-                      <div class="product-content">
-                          <h3 class="title"><a href="#">Men's Shirt</a></h3>
-                          <div class="price"><span>$28.00</span>$20.00</div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                  <div class="product-grid">
-                      <div class="product-image">
-                          <a href="#" class="image">
-                              <img class="pic-1" src="{% static 'User_account/images/mpesa.png' %}">
-                              <img class="pic-2" src="{% static 'User_account/images/mpesa.png' %}">
-                          </a>
-                          <ul class="social">
-                              <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                              <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li>
-                          </ul>
-                          <div class="product-rating">
-                              <ul class="rating">
-                                  <li class="fas fa-star"></li>
-                                  <li class="fas fa-star"></li>
-                                  <li class="fas fa-star"></li>
-                                  <li class="far fa-star"></li>
-                                  <li class="far fa-star"></li>
-                              </ul>
-                              <a class="add-to-cart" href="#"> ADD TO CART </a>
-                          </div>
-                      </div>
-                      <div class="product-content">
-                          <h3 class="title"><a href="#">Women's Tshirt</a></h3>
-                          <div class="price">$19.00</div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="#" class="image">
-                            <img class="pic-1" src="{% static 'User_account/images/mpesa.png' %}">
-                            <img class="pic-2" src="{% static 'User_account/images/rentalink1.png' %}">
-                        </a>
-                         <span class="product-sale-label">sale!</span>
-                        <ul class="social">
-                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li>
-                        </ul>
-                        <div class="product-rating">
-                            <ul class="rating">
-                                <li class="fas fa-star"></li>
-                                <li class="fas fa-star"></li>
-                                <li class="fas fa-star"></li>
-                                <li class="far fa-star"></li>
-                                <li class="far fa-star"></li>
-                            </ul>
-                            <a class="add-to-cart" href="#"> ADD TO CART </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">Men's Shirt</a></h3>
-                        <div class="price"><span>$28.00</span>$20.00</div>
+                      
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-              <div class="product-grid">
-                  <div class="product-image">
-                      <a href="#" class="image">
-                          <img class="pic-1" src="{% static 'User_account/images/mpesa.png' %}">
-                          <img class="pic-2" src="{% static 'User_account/images/rentalink1.png' %}">
-                      </a>
-                       <span class="product-sale-label">sale!</span>
-                      <ul class="social">
-                          <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                          <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li>
-                      </ul>
-                      <div class="product-rating">
-                          <ul class="rating">
-                              <li class="fas fa-star"></li>
-                              <li class="fas fa-star"></li>
-                              <li class="fas fa-star"></li>
-                              <li class="far fa-star"></li>
-                              <li class="far fa-star"></li>
-                          </ul>
-                          <a class="add-to-cart" href="#"> ADD TO CART </a>
-                      </div>
-                  </div>
-                  <div class="product-content">
-                      <h3 class="title"><a href="#">Men's Shirt</a></h3>
-                      <div class="price"><span>$28.00</span>$20.00</div>
-                  </div>
-              </div>
-          </div>
           
-
-
-
-
-
-
-
-
-
-        
-      </div>
-      <div class="row">
-
-
-
-
-
-
-
-
-        <section id="team" class="pb-5">
-          <div class="container">
-              <h5 class="section-title h1">available stores</h5>
-              <div class="row">
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" >
-                          <div class="mainflip flip-0">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                          <div class="mainflip">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_02.png" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                          <div class="mainflip">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_03.png" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                          <div class="mainflip">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_04.jpg" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                          <div class="mainflip">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_05.png" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-                  <!-- Team member -->
-                  <div class="col-xs-12 col-sm-6 col-md-4">
-                      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                          <div class="mainflip">
-                              <div class="frontside">
-                                  <div class="card">
-                                      <div class="card-body text-center">
-                                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_06.jpg" alt="card image"></p>
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                          <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="backside">
-                                  <div class="card">
-                                      <div class="card-body text-center mt-4">
-                                          <h4 class="card-title">Sunlimetech</h4>
-                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                          <ul class="list-inline">
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-facebook"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-twitter"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-skype"></i>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                      <i class="fa fa-google"></i>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- ./Team member -->
-      
-              </div>
-          </div>
-      </section>
-
-
-
-
-
-
-
-
-
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card" style="width: 300px; height: 300px;">Maintenance requests</div>
         </div>
-        <div class="col-md-4">
-          <div class="card" style="width: 300px; height: 300px;">Rentalink messenger</div>
-        </div>
-        <div class="col-md-4" style="width: 300px; height: 300px;">notices and information</div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-md-4">
-          <div class="card" style="width: 300px; height: 300px;">store applications</div>
-        </div>
-        <div class="col-md-4">
-          <div class="card" style="width: 300px; height: 300px;">tips and tricks</div>
-        </div>
-        <div class="col-md-4" style="width: 300px; height: 300px;">calendar</div>
-      </div>
-        
+      <!-- </div> -->
 
-      </div>
-      <div class="row">news and updates important for the tenant</div>
+</div>
+<div class="row m-0 p-0 mt-5">
+    <div class="col-12 text-secondary">
+        <h2 style="text-decoration: underline;" >EXPLORE AVAILABLE HOUSES</h2>
     </div>
-    
-  </section>
+    {% for l in vunits %}
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="product-grid border border-primary" style="border-radius: 0px 24px 0px 24px ;">
+            <div class="product-image " style="border-radius: 0px 24px 0px 0 ;"">
+                <div class="border border-primary" style="height: 150px;">
+                <a href="#" class="image">
+                    <img class="pic-1 " src="{{ l.room_image.url }}" style="height:200px; width:100%;object-fit: cover;">
+                    <img class="pic-2 " src="{{ l.room_image.url }}"  style="height:200px; width:100%;object-fit: cover;object-fit: cover;">
+                </a>
+                </div>
+                 <span class="product-sale-label small">vacant!</span>
+                <ul class="social">
+                    <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                    <!-- <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li> -->
+                </ul>
+                <div class="product-rating">
+                    <ul class="rating">
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star"></li>
+                        <li class="far fa-star"></li>
+                        <li class="far fa-star"></li>
+                    </ul>
+                    <a class="add-to-cart" href="#"> RENT HOUSE </a>
+                </div>
+            </div>
+            <div class="product-content" style="border-radius: 0px 0 0px 24px ;"">
+                <h3 class="title"><a href="#">{{ l.room_plot.property_name }}</a></h3>
+                <h3 class="title small"><a href="#">{{ l.room_name }}</a></h3>
+                <div class="price">market rent:{{ l.market_rent }}</div>
+                <div class="price"><i class="fa fa-map-marker-alt text-danger"></i> {{l.room_plot.location }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+  
+</div>
+<div class="row m-0 p-0 ">
+    <div class="container-fluid mt-5 mb-4">
+      <div class="row clearfix mx-auto">
+          <div class="col-12 text-center text-secondary">
+              <h2 style="text-decoration: underline;">EXPLORE AVAILABLE STORES</h2>
+          </div>
+          {% for k in a_stores %}
+          <div class="col-md-3 col-sm-3 text-center">
+            <div class="boxs project_widget bg-light border border-primary " style="border-radius: 15px;">
+                 <div class="pw_img">
+                    <img class="img-responsive" src="{{ k.store_image.url }}" alt="About the image" 
+                    style=" height: 200px; width: 100%; object-fit: cover; border-radius: 15px;">
+                </div>
+                <div class="pw_content">
+                    <div class="pw_header">
+                        <h6>{{ k.store_name }} </h6>
+                        <small class="text-muted">Available spaces: 
+                            {% if k.space_availability == True %}
+                            <span class="text-success">available</span>
+                            {% else %}
+                            {% endif %}
+                        </small><br>
+                        <small> monthly cost:{{ k.m_cost }}</small><br>
+                        <button class="btn mt-1 space_btn" id="">book for space</button>
+
+                    </div>
+                    <!-- <div class="pw_meta">
+
+                        
+                        
+                    </div> -->
+                   
+                    
+                </div>
+            </div>
+        </div>
+          {% endfor %}
+              
+              
+              
+              
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
   {% endblock %}

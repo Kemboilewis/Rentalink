@@ -1,0 +1,299 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style type="text/css">
+   
+        
+    .card {
+        max-width: 1000px;
+        /* margin: 2vh; */
+    }
+    
+    .card-top {
+        padding: 0.7rem 5rem;
+    }
+    
+    .card-top a {
+        float: left;
+        margin-top: 0.7rem;
+    }
+    
+    #logo {
+        font-family: 'Dancing Script';
+        font-weight: bold;
+        font-size: 1.6rem;
+        color:green;
+        text-align: center;
+    }
+    
+    .card-body {
+        padding: 0 2rem 2rem 2rem;
+        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    @media(max-width:768px) {
+        .card-body {
+            padding: 0 1rem 1rem 1rem;
+            background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    
+        .card-top {
+            padding: 0.7rem 1rem;
+        }
+    }
+    
+    .row {
+        margin: 0;
+    }
+    
+    .upper {
+        padding: 1rem 0;
+        justify-content: space-evenly;
+    }
+    
+    #three {
+        border-radius: 1rem;
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        border: 1px solid blue;
+        text-align: center;
+        display: inline-block;
+    }
+    
+    #payment {
+        margin: 0;
+        color: blue;
+    }
+    
+    .icons {
+        margin-left: auto;
+    }
+    
+    form span {
+        color: rgb(179, 179, 179);
+    }
+    
+    /*form {
+        padding: 2vh 0
+    }*/
+    
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+    
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    .header {
+        font-size: 1.5rem;
+    }
+    
+    .left {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+    
+    .left img {
+        width: 2rem;
+    }
+    
+    .left .col-4 {
+        padding-left: 0;
+    }
+    
+    .right .item {
+        padding: 0.3rem 0;
+    }
+    
+    .right {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+    
+    .col-8 {
+        padding: 0 1vh;
+    }
+    
+    .lower {
+        line-height: 2;
+    }
+    
+    
+        
+        </style>
+{% endblock %}
+{% block content %}
+<div class="row m-0 p-0 mt-5 mb-5 pt-2 ">
+    <!-- <div class="row mt-1 bg-white "> -->
+        <div class="col-md-12 col-auto  bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:explore_stores' %}">
+                <span class="mr-md-3 mr-2">explore stores</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span>{{ currentStore.store_name }} </span></a></li>
+            </ol>
+        </nav>
+        </div>
+    <!-- </div> -->
+    <div class="col-md-12 text-primary m-2 text-center">
+        <h4 style="text-decoration: underline;">Store booking form for :<span class="text-success pl-3">{{ currentStore.store_name }}</span></h4>
+    </div>
+  <form action="{% url 'nyumba:TenantbookingStore' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" value="{{ currentStore.id }}" name="unitstore">
+    <div class="row m-0 p-0 ">
+    <div class="col-12" id="storeinfo"> 
+        <div class="row w-100 mx-auto border border-primary bg-light p-4">
+            <div class="col-sm-12 mb-1"><span><i class="fa fa-check-circle text-primary">1</i>Store information</span> </div>
+            <div class="col-sm-12 text-center">
+                <h4 style="text-decoration: underline;">storage details</h4>
+            </div>
+            <div class="col-sm-6">
+                <img src="{{ currentStore.store_image.url }}" class=" img-thumbnail" style="width: 100%; height:100%; 
+                object-fit: cover;">
+                
+            
+            </div>
+            <div class="col-sm-6">
+                <div class="">store name:<span class="text-success">{{ currentStore.store_name }}</span></div>
+                <hr>
+                <div class="">Store owner:<span class="text-success">{{ currentStore.store_owner.first_name }}{{' '}}{{ currentStore.store_owner.last_name }}</span></div>
+                <hr>
+                <div class="">Location:<span class="text-success">{{ currentStore.store_location }}</span></div>
+                
+                <hr>
+                <div class="">street address: <span class="text-success">{{ currentStore.store_address }}</span></div>
+                <hr>
+                <div class="">monthly payment: <span class="text-success">{{ currentStore.m_cost }}</span></div>
+                 <hr>  
+                 <div class="col-sm-12 mt-4 d-flex justify-content-around ">
+                    <div class="btn border border-danger text-danger">cancel</div>
+                    <div class="btn btn-success text-white" id="next1">proceed</div>
+                </div>
+                        
+            </div>
+             
+            
+
+        </div>
+    </div>
+    <div class="col-12 " id="user_info" style="display: none;">
+        <div class="row w-75 mx-auto border border-primary bg-light p-4">
+            <div class="col-12 mb-1"><span><i class="fa fa-check-circle text-primary">2</i> User and mzigo information</span> </div>
+            <div class="col-sm-12 text-center">
+                <h4 style="text-decoration: underline;">Enter your details</h4>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="form-group w-100">
+                        <label for="plots">Choose unit to store your goods:</label>
+                        <div class="d-flex  flex-wrap bg-white shadow-lg border border-primary">
+                            {% for i in v_units %}
+                            <div class="p-2">
+                                <div class="custom-control custom-radio border border-success  m-1" style="border-radius: 5px;"> 
+                                    <input type="radio" class="custom-control-input" id="{{ i.id }}" name="unitid" value="{{ i.id }}">
+                                    <label class="custom-control-label pr-2 text-secondary" for="{{ i.id }}">{{ i.unit_number }}</label>
+                                </div>
+                            </div>
+                            
+                            {% endfor %}
+                          </div>
+                    </div>
+                    
+            </div>
+            <div class="row">
+                <div class="form-group w-100">
+                    <label for="goods">Your Goods:</label>
+                    <input type="text" name="goods" class="form-control" id="goods">
+                </div>
+
+            </div>
+            </div>
+            <div class="col-sm-6 mt-2">
+                <div class="row">
+                    <div class="form-group w-100">
+                        <label for="s_date">starting date:</label>
+                        <input type="date" name="s_date" class="form-control" id="s_date">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group w-100">
+                        <label for="e_date">Ending date:</label>
+                        <input type="date" name="e_date" class="form-control" id="e_date">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group w-100">
+                        <label for="goods">describe your goods:</label>
+                        <textarea  name="dgoods" class="form-control" rows="3" id="dgoods"></textarea>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col-sm-12 d-flex justify-content-around ">
+                <div class="btn border border-danger text-danger">cancel</div>
+                <button type="submit" class="btn btn-success text-white" >submit your application</button>
+            </div> 
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+      </form>  
+    </div>
+
+
+
+
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){
+        $("#next1").click(function(){
+            $("#storeinfo").hide();
+            $("#user_info").show();
+        });
+        $("#next2").click(function(){
+            $("#user_info").hide();
+            $("#storeinfo").hide();
+            $("#p_info").show();
+        });
+        $("#cash_button").click(function(){
+            $("#mpesa").hide();
+            $("#cashunit").css("display","block");
+        });
+        $("#mpesa_button").click(function(){
+            $("#cashunit").hide();
+            $("#mpesaunit").show();
+        });
+
+    });
+    
+</script>
+{% endblock %}

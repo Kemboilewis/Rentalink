@@ -1,0 +1,146 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style>
+  /* body{
+    background:#f2f3f7;
+    margin-top:20px;
+    } */
+.m-b-30 {
+    margin-bottom: 30px;
+}
+p{
+color: #8A98AC;    
+}
+.table-borderless td {
+    border: 0 !important;
+}
+.table td {
+    color: #8A98AC;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 0.6rem;
+}
+.btn-primary-rgba {
+    background-color: rgba(80, 111, 228, 0.1);
+    border: none;
+    color: #506fe4;
+}
+.btn-success-rgba {
+    background-color: rgba(67, 209, 135, 0.1);
+    border: none;
+    color: #43d187;
+}
+.card {
+    border: none;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-auto col-12 bg-white">
+            <nav aria-label="breadcrumb " class="second bg-white">
+                <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                <li class="breadcrumb-item font-weight-normal ">
+                    <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                    <span class="mr-md-3 mr-2">Dashboard</span>
+                    </a>
+                    <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item font-weight-normal">
+                    <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:myapplications' %}">
+                    <span class="mr-md-3 mr-2">applications</span>
+                    </a>
+                    </li>
+                <!-- <li class="breadcrumb-item font-weight-bold">
+                    <a class="black-text text-capitallize active-2" href="#">
+                    <span>units</span></a></li> -->
+                </ol>
+            </nav>
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-4  ">
+            <div class="col-12 text-primary m-2 text-center">
+                <h4 style="text-decoration: underline;">My Rental  applications</h4>
+            </div>
+            {% for i in app %}
+            <div class="col-md-4 mt-2 mb-2 p-3">
+                <div class="card bg-light border border-primary" style="min-height: 350px; border-radius: 20px;">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-lg-3 text-center">
+                                <img src="{{ i.booked_room.room_image.url }}" class="img-fluid mb-3" alt="user" />
+                            </div>
+                            <div class="col-lg-9">
+                                <h4><small class="text-muted">House Name:</small>{{ i.booked_room.room_name }}</h4>
+                                <p><small class="text-muted">Plot:</small>{{i.booked_plot.property_name }}</p>
+                                <div class="button-list mt-4 mb-3 ">landord response:
+                                    {% if i.landlords_response == 2 %}
+                                    <button type="button" class="btn border border-danger text-danger">
+                                        <i class="feather icon-message-square mr-2"></i>declined
+                                    </button>
+                                    {% elif i.landlords_response == 1 %}
+                                    <button type="button" class="btn btn-success-rgba">
+                                        <i class="feather icon-phone mr-2"></i>succesful
+                                    </button>
+                                    {% else %}
+                                    <button type="button" class="btn border border-warning text-warning">
+                                        <i class="feather icon-phone mr-2"></i>pending
+                                    </button>
+                                    {% endif %}
+
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" class="p-1">Application time :</th>
+                                                <td class="p-1">{{ i.book_time }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="p-1"> Payment:</th>
+                                                {% if i.payment_status == True %}
+                                                <td class="p-1 text-success">success</td>
+                                                {% elif i.disabled_status == True %}
+                                                <td class="p-1 text-danger">Failed</td>
+                                                {% else %}
+                                                <td class="p-1 text-warning">Pending</td>
+                                                {% endif %}
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="p-1">check in date:</th>
+                                                <td class="p-1">{{ i.check_in_date }}</td>
+                                            </tr>
+                                            
+                                                {% if i.landlords_response == 1 and i.payment_status == True %}
+                                                <a href="{% url 'nyumba:printreceipt' rid=i.id %}"><button class="btn border  border-success text-warning">
+                                                    <i class="fa fa-receipt mr-2 text-danger"></i>print receipt</button></a>
+                                                {% else %}
+                                                
+                                                {% endif %}
+                                            
+                                            <!-- <tr>
+                                                <th scope="row" class="p-1">Email ID :</th>
+                                                <td class="p-1">demo@mail.com</td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        {% endfor %}
+     
+</div>
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

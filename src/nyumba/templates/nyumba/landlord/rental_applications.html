@@ -1,4 +1,4 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
@@ -61,26 +61,152 @@
       background-color: gray;
       border-radius: 24px;
     }
+
+    /* new  */
+    /* body{
+    background: #f6f9fc;
+    margin-top:20px;} */
+/* booking */
+
+.bg-light-blue {
+    background-color: #e9f7fe !important;
+    color: #3184ae;
+    padding: 7px 18px;
+    border-radius: 4px;
+}
+
+.bg-light-green {
+    background-color: rgba(40, 167, 69, 0.2) !important;
+    padding: 7px 18px;
+    border-radius: 4px;
+    color: #28a745 !important;
+}
+
+.buttons-to-right {
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+
+.btn-gray {
+    color: #666;
+    background-color: #eee;
+    padding: 7px 18px;
+    border-radius: 4px;
+}
+
+.booking:hover .buttons-to-right .btn-gray {
+    opacity: 1;
+    transition: .3s;
+}
+
+.buttons-to-right .btn-gray {
+    opacity: 0;
+    transition: .3s;
+}
+
+.btn-gray:hover {
+    background-color: #36a3f5;
+    color: #fff;
+}
+
+.booking {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
+}
+
+.booking:last-child {
+    margin-bottom: 0px;
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+@media screen and (max-width: 575px) {
+    .buttons-to-right {
+        top: 10%;
+    }
+    .buttons-to-right a {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .buttons-to-right a:last-child {
+        margin-bottom: 0px;
+    }
+    .bg-light-blue,
+    .bg-light-green,
+    .btn-gray {
+        padding: 7px;
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    box-shadow: none;
+    border: none;
+    padding: 25px;
+}
+.mb-5, .my-5 {
+    margin-bottom: 3rem!important;
+}
+.msg-img {
+    margin-right: 20px;
+}
+.msg-img img {
+    width: 60px;
+    border-radius: 50%;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
     
 
     </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 ">
-    <div class="row pl-4 pr-4">
+<div class="containermt-4 pt-5 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white ">
+    <div class="row mt-1 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:rental_applications' %}">
+                <span class="mr-md-3 mr-2">rental applications</span>
+                </a>
+                </li>
+            <!-- <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span>units</span></a></li> -->
+            </ol>
+        </nav>
+        </div>
+    </div>
+    <div class="row m-0 p-0 mt-4">
         <div class="col-md-4">  
                 <div class="dropdown">
                   <button class="dropbtn ">rental applications<i class="fa fa-caret-down pl-3"></i></button>
                   <div class="dropdown-content">
-                    <a href="{% url 'nyumba:rental_applications' %}">rental applications</a>
+                    <!-- <a href="{% url 'nyumba:rental_applications' %}">rental applications</a> -->
                     <a href="{% url 'nyumba:tenants' %}">tenants</a>
-                    <a href="#">professionals</a>
+                    <!-- <a href="#">professionals</a> -->
                     
                   </div>
                 </div>
               
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 text-center">
             <div class="input-group">
                 <div class="input-group-prepend">
                   <button class="btn btn-white" type="button">
@@ -91,17 +217,104 @@
               </div>
               
         </div>
-        <div class="col-md-4 ">
-            <a href="{% url 'nyumba:store_application_form' %}"><button type="button" class="btn btn-success">
+        <div class="col-md-4 text-center">
+            <a href="{% url 'nyumba:rental_application_form' %}"><button type="button" class="btn btn-success">
                 <i class="fa fa-plus pr-2"></i>Add rental application</button>
             </a>
             
         </div>
     </div>
-    <div class="row m-3 p-0 ">
-        <div class="text-center mx-auto mt-5">no rental applications  yet</div>
+
+    <div class="row">
+        <!-- <div class="card-heading clearfix border-bottom mb-4">
+            <h4 class="card-title w-100 text-center">Rental applications</h4>
+        </div> -->
+        {% for a in all_applications %}
+        <div class="col-sm-6 ">
+            
+            <div class="card card-white mb-5 w-75 mx-auto">
+                <div class="card-body bg-light border border-primary">
+                    <div class="">
+                        <div class="position-relative booking">
+                            <div class="media">
+                                <div class="msg-img">
+                                    <img src="{% static 'nyumba/images/house2.jpeg' %}" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mb-4">{{ a.booked_plot.property_name }} <br>House:{{ a.booked_room.room_name}}<br>
+                                        {% if a.payment_status == True %}
+                                        <span class="badge badge-success">paid by mpesa</span>
+                                        {% else %}
+                                        <span class="badge badge-danger mx-3">not paid </span>
+                                        {% endif %}
+                                    </h5>
+                                    <div class="mb-3">
+                                        <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Landlord response:<br></span>
+                                        {% if a.landlords_response == 1 %}
+                                        <span class="badge badge-success">succesful</span>
+                                        {% elif a.landlords_response == 2 %}
+                                        <span class="badge badge-danger">Rejected</span>
+                                        {% else %}
+                                        <span class="badge badge-warning">pending</span>
+                                        {% endif %}
+                                        
+                                    </div>
+                                        
+                                    <div class="mb-3">
+                                        <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Booking Time:<br></span>
+                                        <span class="bg-light-blue">{{ a.book_time }}</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">Check in date:</span>
+                                        <span class="bg-light-blue">{{ a.check_in_date }}</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        {% if a.payment_status == True %}
+                                        <span class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0">paid amount:</span>
+                                        {% for j in a_payments %}
+                                        
+                                        
+                                            {% if a.merchantrequestid == j.MerchantRequestID %}
+                                            <span class="bg-light-blue">Ksh.{{ j.Amount }}</span>
+                                            
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="mb-5">
+                                        <span class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0">Tenant:</span>
+                                        <span class="border-right pr-2 mr-2 bg-light-blue">{{ a.booking_user.first_name }}{{ ' '}}{{ a.booking_user.last_name }}<br></span>
+                                        <span class="border-right pr-2 mr-2">phone:<span class="bg-light-blue">{{ a.booking_user.Phone_number }}</span></span>
+                                        <!-- <span>2547-563-789</span> -->
+                                    </div>
+                                    <a href="#" class="btn-gray border border-primary">Send a Message</a>
+                                </div>
+                            </div>
+                            <div class="buttons-to-right">
+                                {% if a.landlords_response == 0 %}
+                                
+                                  <form action="{% url 'nyumba:landlord_reponse' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ a.id }}" name="applicationId">
+                                <button type="submit" name="choice" value="2" class="btn-gray mr-2 border border-dark">
+                                    <i class="far fa-times-circle mr-2"></i> Reject</button>
+                                <button type="submit" name="choice"  value="1" class="btn-gray border border-dark">
+                                    <i class="far fa-check-circle mr-2"></i> Approve</button>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+        
     </div>
-  
+
 
 </div>
 

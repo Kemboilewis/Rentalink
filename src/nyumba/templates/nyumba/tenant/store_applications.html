@@ -1,0 +1,244 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+      color: blue;
+      padding: 5px;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      color:goldenrod;
+    }
+
+    .property_image{
+        width:100px;
+        height: 100px;
+        background-color: #fff;
+        
+    }
+    .requests{
+      width: 80%;
+      border: dotted 2px green;
+      height: 400px;
+      background-color: gray;
+      border-radius: 24px;
+    }
+    /* list of the available store application */
+    /* body{
+    background:#f2f3f7;
+    margin-top:20px;
+    } */
+/* .m-b-30 {
+    margin-bottom: 30px;
+} */
+p{
+color: #8A98AC;    
+}
+.table-borderless td {
+    border: 0 !important;
+}
+.table td {
+    color: #8A98AC;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 0.6rem;
+}
+.btn-primary-rgba {
+    background-color: rgba(80, 111, 228, 0.1);
+    border: none;
+    color: #506fe4;
+}
+.btn-success-rgba {
+    background-color: rgba(67, 209, 135, 0.1);
+    border: none;
+    color: #43d187;
+}
+.card {
+    border: none;
+    border-radius: 24px;
+    background-color: #6864647e;
+}
+    
+
+    </style>
+{% endblock %}
+{% block content %} 
+<div class="container  mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white ">
+              <div class="row mt-1 bg-white ">
+                <div class="col-auto col-md-12 bg-white">
+                <nav aria-label="breadcrumb " class="second bg-white">
+                    <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                    <li class="breadcrumb-item font-weight-normal ">
+                        <a class="black-text text-capitallize text-secondary" href="#">
+                        <span class="mr-md-3 mr-2">Dashboard</span>
+                        </a>
+                        <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item font-weight-normal">
+                        <a class="black-text text-capitallize text-secondary  " href="#">
+                        <span class="mr-md-3 mr-2">explore stores</span>
+                        </a>
+                        </li>
+                    <li class="breadcrumb-item font-weight-bold">
+                        <a class="black-text text-capitallize active-2" href="#">
+                        <span> store applications</span></a></li>
+                    </ol>
+                </nav>
+                </div>
+            </div>
+            <div class="row m-0 p-0 mt-4 bg-light">
+                <div class="col-md-4">  
+                        <div class="dropdown">
+                          <button class="dropbtn ">store applications<i class="fa fa-caret-down pl-3"></i></button>
+                          <div class="dropdown-content">
+                            <a href="{% url 'nyumba:explore_stores' %}">stores</a>
+                            <!-- <a href="{% url 'nyumba:stores' %}">mystores</a> -->
+                            
+                          </div>
+                        </div>
+                      
+                </div>
+                <div class="col-md-4">
+                    <!-- <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-white" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                      </div> -->
+                      
+                </div>
+                <!-- <div class="col-md-4 text-center ">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-white" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="search store applications" aria-label="" aria-describedby="basic-addon1">
+                      </div> -->
+                    <!-- <a href="{% url 'nyumba:store_application_form' %}"><button type="button" class="btn btn-success">
+                        <i class="fa fa-plus pr-2"></i>Add store application</button>
+                    </a> -->
+                    
+                <!-- </div> -->
+            </div>
+    <!-- <div class="row m-3 p-0 ">
+        <div class="text-center mx-auto mt-5">
+                    
+          <div class="container bg-light"> -->
+            <div class="row m-0 p-0 mt-4 ">
+              <h4 class="text-center text-primary w-100 " style="text-decoration: underline;">Store applications</h4>
+              {% if all_applications %}
+            {% for j in all_applications %}
+              <div class="col-sm-4">
+                <div class="card  w-100 mx-auto bg-light border border-secondary">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-3 text-center">
+                              <img src="{{ j.applied_store.store_image.url }}" class="img-fluid rounded-circle" alt="user" />
+                          </div>
+                          <div class="col-9">
+                              <h4>Unit Number:<span class="text-primary">{{ j.applied_unit.unit_number }}</span></h4>
+                              <p> Unit store:<span class="text-primary">{{ j.applied_store.store_name }} </span></p>
+                              
+                              <div class="table-responsive">
+                                  <table class="table table-borderless mb-0">
+                                      <tbody>
+                                        <tr>
+                                          <th scope="row" class="p-1">Owners response :</th>
+                                          <td class="p-1">
+                                            {% if j.owner_response == 0 %}
+                                            <button type="submit" name="choice" value="1" class="btn text-warning border border-success">
+                                             pending</button>
+                                          
+                                            {% elif j.owner_response == 1 %}
+                                            <div class="btn border border-success text-success">
+                                              Accepted</div>
+                                            {% else %}
+                                            <button  class="btn  border border-danger text-danger">
+                                              Declined</button>
+                                            {% endif %}
+                                          </td>
+                                      </tr>
+                                          <tr>
+                                              <th scope="row" class="p-1">starting date :</th>
+                                              <td class="p-1">{{ j.starting_date }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row" class="p-1">Ending date :</th>
+                                              <td class="p-1">{{ j.ending_date }}</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row" class="p-1">Goods :</th>
+                                            <td class="p-1">{{ j.applied_unit.unit_mzigo }}</td>
+                                          </tr>
+                                          
+                                          
+                                          <tr>
+                                            <!-- <th scope="row" class="p-1">Unit :</th>
+                                            <td class="p-1">A20</td> -->
+                                        </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+            {% endfor %}
+            {% else %}
+            <h3>You have no applications yet</h3>
+            {% endif %}
+             
+            
+            </div>
+
+</div>
+
+
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

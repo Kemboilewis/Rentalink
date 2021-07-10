@@ -1,4 +1,4 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
@@ -61,66 +61,274 @@
       background-color: gray;
       border-radius: 24px;
     }
+   
+
+   /* The Modal (background) */
+.customodal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+/* Modal Content/Box */
+.custom-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+    
     
 
     </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 ">
-    <div class="row pl-4 pr-4">
+<div class="container mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white ">
+  <div class="row mt-1 bg-white ">
+    <div class="col-auto col-md-12 bg-white">
+    <nav aria-label="breadcrumb " class="second bg-white">
+        <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+        <li class="breadcrumb-item font-weight-normal ">
+            <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+            <span class="mr-md-3 mr-2">Dashboard</span>
+            </a>
+            <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+        </li>
+        <li class="breadcrumb-item font-weight-normal">
+            <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:maintenace' %}">
+            <span class="mr-md-3 mr-2">Maintenance</span>
+            </a>
+            </li>
+        <!-- <li class="breadcrumb-item font-weight-bold">
+            <a class="black-text text-capitallize active-2" href="#">
+            <span>units</span></a></li> -->
+        </ol>
+    </nav>
+    </div>
+</div>
+    <di  v class="row m-0 p-0 mt-4">
         <div class="col-md-4">  
                 <div class="dropdown">
-                  <button class="dropbtn ">Maintenace requests<i class="fa fa-caret-down pl-3"></i></button>
-                  <div class="dropdown-content">
+                  <button class="dropbtn ">Maintenace requests</button>
+                  <!-- <div class="dropdown-content">
                     <a href="{% url 'nyumba:maintenace' %}">Maintenace requests</a>
                     <a href="{% url 'nyumba:reminders' %}">Reminders</a>
                     <a href="#">Equipments</a>
-                  </div>
+                  </div> -->
                 </div>
               
         </div>
-        <div class="col-md-4">
-            <div class="input-group">
+        <div class="col-md-4 text-center">
+          <a href="{% url 'nyumba:add_maintenace_request' %}"><button type="button" class="btn btn-success">
+            <i class="fa fa-plus pr-2"></i>Add maintenace requests</button>
+        </a>
+            <!-- <div class="input-group">
                 <div class="input-group-prepend">
                   <button class="btn btn-white" type="button">
                       <i class="fa fa-search"></i>
                   </button>
                 </div>
                 <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-              </div>
+              </div> -->
               
         </div>
-        <div class="col-md-4 ">
-            <a href="{% url 'nyumba:add_maintenace_request' %}"><button type="button" class="btn btn-success">
-                <i class="fa fa-plus pr-2"></i>Add maintenace requests</button>
-            </a>
+        <div class="col-md-4 text-center  " >
+          <div class="row bg-secondary border border-primary text-white w-50 mx-auto text-center p-2" style="border-radius: 20px;">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 text-center">New</div>
+                <div class="col-6 text-danger">{{ new }}</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 text-center">Progressing</div>
+                <div class="col-6 text-primary">{{ progress }}</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 text-center">Completed</div>
+                <div class="col-6 text-success">{{ complete}}</div>
+              </div>
+            </div>
+            
+            
+            
+          </div>
+         
+          
+            
             
         </div>
     </div>
-    <div class="row m-3 p-0">
+    <div class="row m-0 p-0">
         <div class="col-md-4 p-2">
-          <div class="requests">
-            <div class="">new(0)</div>
-          </div>
+          <!-- <div class="requests border border-primary bg-light">
+            <div class=" pt-5 text-center">new({{ new }})</div>
+            <div class="row m-0 p-0 mt-1 text-center">
+            
+              
+
+
+              {% for i in new_r %}
+              
+              
+              {% endfor %}
+            </div>
+          </div> -->
         </div>
-        <div class="col-md-4 p-2">
-          <div class="requests">
-            <div class="">in progress(0)</div>
+        <!-- <div class="col-md-4 p-2">
+          <div class="requests border border-primary bg-light">
+            <div class=" pt-5 text-center">in progress({{ progress }})</div> 
           </div>
-        </div>
-        <div class="col-md-4 p-2" >
-          <div class="requests">
-            <div class="">resolved(0)</div>
+        </div> -->
+        <!-- <div class="col-md-4 p-2" >
+          <div class="requests border border-primary bg-light">
+            <div class="pt-5 text-center">resolved({{ complete }})</div>
           </div>
-        </div>
+        </div> -->
+    </div>
+    <div class="row m-0 p-0 mt-2 ">
+      <h4 class="text-center text-primary w-100 " style="text-decoration: underline;">Maintenance applications</h4>
+    {% for j in all_applications %}
+      <div class="col-sm-4">
+        <div class="card  w-75 mx-auto bg-light border border-primary">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-3 text-center">
+                      <img src="{{ j.pr_image.url }}" class="img-fluid rounded-circle" alt="user" />
+                  </div>
+                  <div class="col-9">
+                      <h4>Problem:<span class="text-primary">{{ j.subject }}</span></h4>
+                      <p> House:<span class="text-primary">{{ j.room.room_name }}</span></p>
+                      <div class="button-list mt-4 mb-3">
+                        <form action="{% url 'nyumba:maintenance_choice' %}" method="POST">
+                          {% csrf_token %}
+                            <input type="hidden" value="{{ j.id }}" name="applicationId">
+                          {% if j.status == 0 %}
+                          
+                            
+                            <button type="submit" name="choice" value="1" class="btn btn-primary-rgba border border-success">
+                                <i class="feather icon-message-square mr-2"></i>Approve</button>
+                            <button type="submit" name="choice" value="3" class="btn btn-success-rgba text-danger border border-danger">
+                                <i class="feather icon-phone mr-2"></i>Decline</button>
+
+                          
+                          {% elif j.status == 1 %}
+                          <button type="submit" name="choice" value="1" class="btn btn-success-rgba border border-success">
+                            <i class="feather icon-message-square mr-2"></i>Progress</button>
+                            <button type="submit" name="choice" value="2" class="btn btn-success-rgba border border-success">
+                              <i class="feather icon-message-square mr-2"></i>Complete</button>
+                          {% else %}
+                          <button type="submit" name="choice" value="2" class="btn btn-primary-rgba border border-danger text-info">
+                            <i class="feather icon-message-square mr-2"></i>Completed succesfully</button>
+                          {% endif %}
+
+                        </form>
+                      </div>
+                      <div class="table-responsive">
+                          <table class="table table-borderless mb-0">
+                              <tbody>
+                                  <tr>
+                                      <th scope="row" class="p-1">Applying Tenant :</th>
+                                      <td class="p-1">{{ j.applying_user.first_name }} {{' '}}{{ j.applying_user.last_name }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" class="p-1">Date applied</th> :</th>
+                                      <td class="p-1">{{ j.date_applied }}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" class="p-1">Problem description:</th>
+                                      <td class="p-1">{{ j.problem }}</td>
+                                  </tr>
+                                  <!-- <tr>
+                                      <th scope="row" class="p-1">store :</th>
+                                      <td class="p-1">{{ j.applied_store.store_name }}</td>
+                                  </tr> -->
+                                  <tr>
+                                    <!-- <th scope="row" class="p-1">Unit :</th>
+                                    <td class="p-1">A20</td> -->
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    {% endfor %}
+     
+    
     </div>
   
 
 </div>
-
-
-
-
-{% endblock %}
 {% block js %}
+                 <script>
+                  // Get the modal
+                var modal = document.getElementById("custom{{ i.id }}");
+                
+                // Get the button that opens the modal
+                var btn = document.getElementById("{{ i.id }}");
+                
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+                
+                // When the user clicks on the button, open the modal
+                btn.onclick = function() {
+                  modal.style.display = "block";
+                }
+                
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
+                  // $(document).ready(function(){
+                  //   $("#myBtn").click(function(){
+                  //     $("#myModal").modal();
+                  //   });
+                  //   $("#myModal").on('show.bs.modal', function () {
+                  //     document.getElementById("body-pd").style.width = "100%";
+                  //   alert('The modal is about to be shown.');
+                  // });
+                  // });
+                  </script>
+ {% endblock %}
+
+
+
 {% endblock %}
+<!--  -->

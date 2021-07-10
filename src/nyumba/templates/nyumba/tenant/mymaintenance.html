@@ -1,0 +1,226 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style>
+  /* body{margin-top:20px; */
+    /* background-color: #e4e6e9;
+    color: #41464d;
+} */
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.btn-a-brc-tp:not(.disabled):not(:disabled).active, .btn-brc-tp, .btn-brc-tp:focus:not(:hover):not(:active):not(.active):not(.dropdown-toggle), .btn-h-brc-tp:hover, .btn.btn-f-brc-tp:focus, .btn.btn-h-brc-tp:hover {
+    border-color: transparent;
+}
+.btn-outline-blue {
+    color: #0d6ce1;
+    border-color: #5a9beb;
+    background-color: transparent;
+}
+.btn {
+    cursor: pointer;
+    position: relative;
+    z-index: auto;
+    border-radius: .175rem;
+    transition: color .15s,background-color .15s,border-color .15s,box-shadow .15s,opacity .15s;
+}
+.border-2 {
+    border-width: 2px!important;
+    border-style: solid!important;
+    border-color: transparent;
+}
+.bgc-white {
+    background-color: #fff!important;
+}
+
+
+.text-green-d1 {
+    color: #277b5d!important;
+}
+.letter-spacing {
+    letter-spacing: .5px!important;
+}
+.font-bolder, .text-600 {
+    font-weight: 600!important;
+}
+.text-170 {
+    font-size: 1.7em!important;
+}
+
+.text-purple-d1 {
+    color: #6d62b5!important;
+}
+
+.text-primary-d1 {
+    color: #276ab4!important;
+}
+.text-secondary-d1 {
+    color: #5f718b!important;
+}
+.text-180 {
+    font-size: 1.8em!important;
+}
+.text-150 {
+    font-size: 1.5em!important;
+}
+.text-danger-m3 {
+    color: #e05858!important;
+}
+.rotate-45 {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.position-l {
+    left: 0;
+}
+.position-b, .position-bc, .position-bl, .position-br, .position-center, .position-l, .position-lc, .position-r, .position-rc, .position-t, .position-tc, .position-tl, .position-tr {
+    position: absolute!important;
+    display: block;
+}
+.mt-n475, .my-n475 {
+    margin-top: -2.5rem!important;
+}
+.ml-35, .mx-35 {
+    margin-left: 1.25rem!important;
+}
+
+.text-dark-l1 {
+    color: #56585e!important;
+}
+.text-90 {
+    font-size: .9em!important;
+}
+.text-left {
+    text-align: left!important;
+}
+
+.mt-25, .my-25 {
+    margin-top: .75rem!important;
+}
+
+.text-110 {
+    font-size: 1.1em!important;
+}
+
+.deleted-text{
+text-decoration:line-through;;    
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5 pt-2">
+  <div class="row">
+    <div class="col-auto col-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:mymaintenance' %}">
+                <span class="mr-md-3 mr-2">maintenances</span>
+                </a>
+                </li>
+            <!-- <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span>units</span></a></li> -->
+            </ol>
+        </nav>
+        </div>
+    </div>
+    <div class="row m-0 p-0 mt-4">
+      <div class="col-md-4">
+        <h4 class="text-primary" style="text-decoration: underline;">maintenace request</h4>  
+              
+            
+      </div>
+      <div class="col-md-4 text-center">
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-white" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+              </div>
+              <input type="text" class="form-control" placeholder=" search request here" aria-label="" aria-describedby="basic-addon1">
+            </div>
+            
+      </div>
+      <div class="col-md-4 text-center ">
+          <a href="{% url 'nyumba:tenantmainForm' %}"><button type="button" class="btn btn-success">
+              <i class="fa fa-plus pr-2"></i>Apply for maintenance</button>
+          </a>
+          
+      </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
+      <!-- Basic Plan -->
+      {% for i in all_m %}
+      <div class="row align-items-center bg-light border border-primary shadow-lg" style="border-radius: 20px;">
+        <div class="col-12 col-md-4">
+          <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+           <small class="text-muted">House:</small> {{ i.room.room_name }}
+          </h4>
+          <!-- <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+            <small class="text-muted">Plot:</small> {{ i.plot.property_name}}
+           </h4> -->
+
+          <div class="text-secondary-d1 text-120">
+            <span class="ml-n15 align-text-bottom">Plot:{{ i.plot.property_name}}</span>
+          </div>
+        </div>
+
+        <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+          <li>
+            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+            <span>
+              <span class="text-110">date applied:{{ i.date_applied  }}</span>
+            
+            </span>
+          </li>
+
+          <li class="mt-25">
+            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+            <span class="text-110">
+              subject:{{ i.subject}}
+          </span>
+          </li>
+
+          
+          
+        </ul>
+
+        <div class="col-12 col-md-4 text-center">
+          progress:
+          {% if i.status == 0 %}
+          <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-50 text-600" style="border-radius: 15px;">pending</a>
+          {% elif i.status == 1  %}
+          <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-50 text-600" style="border-radius: 15px;">progress</a>
+          {% else %}
+          <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-50 text-600" style="border-radius: 15px;">completed</a>
+          {% endif %}
+          
+        </div>
+      </div>
+      {% endfor %}
+      
+
+      
+     
+
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

@@ -1,301 +1,117 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
-<style>
-    /* Style The Dropdown Button */
-    .dropbtn {
-      color: blue;
-      padding: 5px;
-      font-size: 26px;
-      border: none;
-      cursor: pointer;
-    }
-    
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    
-    /* Links inside the dropdown */
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    
-    /* Change color of dropdown links on hover */
-    .dropdown-content a:hover {background-color: #f1f1f1}
-    
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    
-    /* Change the background color of the dropdown button when the dropdown content is shown */
-    .dropdown:hover .dropbtn {
-      color:goldenrod;
-    }
 
-    .property_image{
-        width:100px;
-        height: 100px;
-        background-color: #fff;
-        
-    }
-    .requests{
-      width: 80%;
-      border: dotted 2px green;
-      height: 400px;
-      background-color: gray;
-      border-radius: 24px;
-    }
-
-
-    /* progress bar */
-    
-
-.card {
-    z-index: 0;
-    background-color: #ECEFF1;
-    padding-bottom: 20px;
-    margin-top: 90px;
-    margin-bottom: 90px;
-    border-radius: 10px
-}
-
-.top {
-    padding-top: 20px;
-    padding-left: 13% !important;
-    padding-right: 13% !important;
-}
-
-#progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #455A64;
-    padding-left: 0px;
-    margin-top: 30px
-}
-
-#progressbar li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 23%;
-    float: left;
-    position: relative;
-    font-weight: 400
-}
-
-#progressbar .step0:before {
-    font-family: FontAwesome;
-    content: "\f10c";
-    color: #fff
-}
-
-#progressbar li:before {
-    width: 40px;
-    height: 40px;
-    line-height: 45px;
-    display: block;
-    font-size: 20px;
-    background: #C5CAE9;
-    border-radius: 50%;
-    margin: auto;
-    padding: 0px
-}
-
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 12px;
-    background: #C5CAE9;
-    position: absolute;
-    left: 0;
-    top: 16px;
-    z-index: -1
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: absolute;
-    left: -50%
-}
-
-#progressbar li:nth-child(2):after,
-#progressbar li:nth-child(3):after,
-#progressbar li:nth-child(4):after {
-    left: -50%
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute;
-    left: 50%
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px
-}
-
-#progressbar li.active:before,
-#progressbar li.active:after {
-    background: #651FFF
-}
-
-#progressbar li.active:before {
-    font-family: FontAwesome;
-    content: "\f00c"
-}
-
-.icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px
-}
-
-.icon-content {
-    padding-bottom: 20px
-}
-
-@media screen and (max-width: 992px) {
-    .icon-content {
-        width: 50%
-    }
-}
-    
-
-    </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 " id="progress_0">
-    <div class="row pl-4 pr-4 bg-light">
-        <div class="col-12 text-left text-success bg-light"><i class="fa fa-arrow-left mr-3"></i>back</div>
-        <div class="col-12 text-center mt-4">
-            <h3>Maintenance request</h3>
-            <h6 class="mt-4">Select the request type</h6>
-            <p>Create a request, assign servicepro and track the progress.</p>
+<div class="container mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <div class="row mt-1 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary " href="{% url 'nyumba:maintenace' %}">
+                <span class="mr-md-3 mr-2">Maintenance</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="{% url 'nyumba:add_maintenace_request' %}  ">
+                <span>add maintenance request</span></a></li>
+            </ol>
+        </nav>
         </div>
-        <div class="col-sm-6 mt-3">
-            <div class="card w-75 mx-auto bg-white p-3">
-    
-                <div class="card-body">
-                    <div class="custom-control custom-radio ">
-                        <input type="radio" class="custom-control-input" id="customRadio" name="example1" value="customEx" checked>
-                        <label class="custom-control-label text-success text-bold" for="customRadio">Basic request</label>
+    </div>
+    <form action="{% url 'nyumba:apply_maintenance' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row m-3 p-2 mt-5 bg-light">
+            <div class="col-12 text-left text-success bg-light">
+                <a href="{% url 'nyumba:maintenace' %}"> <i class="fa fa-arrow-left mr-3"></i>Add maintenance request</a>
+            </div>
+            <div class="col-sm-6 m-0 p-5">
+                <div class="row">
+                    <div class="form-group w-100">
+                        <label for="property">Property:</label>
+                       
+                        <select name="cars" class="custom-select w-100 ">
+                            <option selected>select porperty</option>
+                            {% for n in user_property %}
+                            <option value="{{n.id}}">{{ n.property_name }}</option>
+                            {% endfor %}
+                        </select>
+                        
                     </div>
-                    <p class="card-text mt-2">
-                        Add the most basic information about the issue like category, 
-                        description of the request and photos/video. You can always edit it later.
-                    </p>
-
+                </div>
+                <div class="row">
+                    
+                    <div class="col-sm-12 p-2 ">
+                        <label for="unit">choose unit:</label>
+                        <select name="unitId" class="custom-select w-100 ">
+                            <option selected>select unit</option>
+                            {% for k in user_units %}
+                            <option value="{{k.id}}">{{ k.room_name }}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                   
                 </div>
                 
+                
             </div>
-        </div>
-        <div class="col-sm-6 mt-3">
-            <div class="card w-75 mx-auto p-3">
-                <div class="card-body">
-                    <div class="custom-control custom-radio ">
-                        <input type="radio" class="custom-control-input" id="customRadio1" name="example1" value="customEx" >
-                        <label class="custom-control-label text-success text-bold" for="customRadio1">Advanced request</label>
+            <div class="col-sm-6 w-75">
+                <div class="row m-0 p-4">
+                    <div class="col-12 pb-3 " style="border-left: 4px solid blue;">
+                        <h5 class="card-title">General information</h5>
                     </div>
-                    <p class="card-text mt-2">
-                        Add a full information about the issue, add photos/video, select the assignee, link equipments, 
-                        add materials and more. You can always edit it later.
-                    </p>
+                    <div class="col-sm-12 ">
+                        <label for="subject">Problem title:</label>
+                        <input type="text" name="subject" id="subject" class="form-control">
+                    </div>
+                    <div class="col-sm-12 mt-4">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="pro_image" id="pro_image">
+                            <label class="custom-file-label"  for="pro_image">Upload problem image</label>
+                          </div>
+                    </div>
+                   
+            </div>
+            <div class="row m-0 pl-4 pr-4 pb-4">
+                
+                <div class="col-12 mt-1">
+                    <div class="form-group">
+                        <label for="problem">Problem details:</label>
+                        <textarea class="form-control" rows="3"  name="problem" id="problem"></textarea>
+                      </div>
+                </div>
+ 
+            
+             </div>   
+           </div>
+            <div class="col-12 "> 
+                <div class=" row d-flex justify-content-around">
+                    <button class="btn border border-danger text-danger">cancel </button>
+                    <button type="submit" class="btn btn-success">submit</button>
 
                 </div>
             </div>
-        </div>
-        <div class="col-12 text-center mb-5  ">
-            <div class="mx-auto">
-                <button class="btn btn-success " id="get_started">get started</button>
-            </div>
+        
         </div>
         
-    </div>
-    
-  
+        
 
+    </form>
 </div>
-
-
-<div class="container m-3 p-2 mx-auto" id="progress_1" style="display: none;">
-    <div class="card">
-        <div class="row d-flex justify-content-between px-3 top ">
-            <div class="d-flex">
-                <h5>steps <span class="text-primary font-weight-bold"></span></h5>
-            </div>
-            
-        </div> <!-- Add class 'active' to progress -->
-        <div class="row d-flex justify-content-center">
-            <div class="col-12">
-                <ul id="progressbar" class="text-center">
-                    
-                    <li class="active step0">General details</li>
-                    <li class=" step0">property</li>
-                    <li class=" step0">priority</li>
-                    <li class=" step0">finished</li>
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row  mt-4 d-flex justify-content-center">
-            <div class="col-12 text-center"><h4>What is this request about?</h4></div>
-            <div class="col-12 text-center"><p>Start selecting the category to define the issue or use the smart search.</p></div>
-            <div class="col-12">
-                <div class="row m-0 p-0 text-center">
-                    <div class="col-sm-4 col-6">this is 1</div>
-                    <div class="col-sm-4 col-6">this is 2</div>
-                    <div class="col-sm-4 col-6"> this is 3</div>
-                </div>
-                <div class="row m-0 p-0 text-center">
-                    <div class="col-sm-4 col-6">this is 1</div>
-                    <div class="col-sm-4 col-6">this is 2</div>
-                    <div class="col-sm-4 col-6"> this is 3</div>
-                </div>
-            </div>
-            
-
-            
-            
-        </div>
-    </div>
-   
-</div>
-
-
 
 
 {% endblock %}
 {% block js %}
-<script>
-    $(document).ready(function(){
-        $("#get_started").click(function(){
-            $("#progress_0").hide();
-            $("#progress_1").css("display","block");
-        });
-     });
-</script>
+
+
 {% endblock %}

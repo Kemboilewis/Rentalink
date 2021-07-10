@@ -1,0 +1,234 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style>
+    
+.boxs {
+    position: relative;
+    margin-bottom: 30px;
+    color: #4d585f;
+    background-color: white;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    transition: opacity 0.25s ease-out;
+    border-radius: 3px;
+}
+/* .project_widget .pw_img {
+    position: relative;
+    overflow: hidden
+} */
+
+.project_widget .pw_img:before {
+    position: absolute;
+    top: 0;
+    /* left: -75%; */
+    z-index: 2;
+    display: block;
+    content: '';
+    /* width: 50%;
+    height: 100%; */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    transform: skewX(-25deg)
+}
+
+.project_widget .pw_img:hover::before {
+    /* -webkit-animation: shine .75s; */
+    animation: shine .75s
+}
+
+/* @-webkit-keyframes shine {
+    100% {
+        left: 125%
+    }
+} */
+
+@keyframes shine {
+    100% {
+        left: 125%
+    }
+}
+
+.project_widget .pw_img img {
+    border-radius: 3px 3px 0 0
+}
+
+.project_widget .pw_content .pw_header {
+    /* padding: 20px; */
+    border-bottom: 1px solid #e6eaee
+}
+
+.project_widget .pw_content .pw_header h6 {
+    font-size: 16px;
+    margin: 0
+}
+
+.project_widget .pw_content .pw_header small {
+    font-size: 12px
+}
+
+/* .project_widget .pw_content .pw_meta {
+    padding: 20px
+} */
+
+.project_widget .pw_content .pw_meta small,
+.project_widget .pw_content .pw_meta span {
+    display: block
+}
+
+.project_widget .pw_content .pw_meta span {
+    font-weight: 500
+}
+.space_btn{
+    background-color: rgb(27, 204, 51);
+    width: 150px;
+    border-radius: 20px;
+}
+.space_btn:hover{
+    background-color: rgb(35, 41, 136);
+    width:200px;
+    transition: 10ms;
+    color:white;
+}
+.dropbtn {
+      color: blue;
+      padding: 5px;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      color:goldenrod;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container-fluid mt-5 pt-1">
+    <div class="row">
+        <div class="col-auto col-12 bg-white">
+            <nav aria-label="breadcrumb " class="second bg-white">
+                <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                <li class="breadcrumb-item font-weight-normal ">
+                    <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                    <span class="mr-md-3 mr-2">Dashboard</span>
+                    </a>
+                    <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item font-weight-normal">
+                    <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:explore_stores' %}">
+                    <span class="mr-md-3 mr-2">explore stores</span>
+                    </a>
+                    </li>
+                <!-- <li class="breadcrumb-item font-weight-bold">
+                    <a class="black-text text-capitallize active-2" href="#">
+                    <span>units</span></a></li> -->
+                </ol>
+            </nav>
+            </div>
+    </div>
+    <div class="row m-0 p-0 mt-4 bg-light">
+        <div class="col-md-4">  
+                <div class="dropdown">
+                  <button class="dropbtn ">Stores<i class="fa fa-caret-down pl-3"></i></button>
+                  <div class="dropdown-content">
+                    <a href="{% url 'nyumba:mystoreapplications'%}">Store applications</a>
+                    <!-- <a href="{% url 'nyumba:stores' %}">mystores</a> -->
+                    
+                  </div>
+                </div>
+              
+        </div>
+        <div class="col-md-4">
+            <!-- <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-white" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+                </div>
+                <input type="text" class="form-control" placeholder="search store here" aria-label="" aria-describedby="basic-addon1">
+              </div> -->
+              
+        </div>
+        <div class="col-md-4 text-center ">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-white" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+                </div>
+                <input type="text" class="form-control" placeholder="search store here" aria-label="" aria-describedby="basic-addon1">
+              </div>
+            <!-- <a href="#"><button type="button" class="btn btn-success">
+                <i class="fa fa-plus pr-2"></i>Add store application</button>
+            </a> -->
+            
+        </div>
+    </div>
+    <div class="row m-0 p-0 ">
+        <div class="col-12 text-primary m-2 text-center">
+            <h4 class="text-center" style="text-decoration: underline;">Available stores</h4>
+        </div>
+        {% for j in a_stores %}
+        <div class="col-sm-3 w-50">
+            <div class="boxs project_widget bg-light m-2  mx-auto border border-secondary bg-secondary">
+                
+                 <div class="pw_img w-100 bg-secondary">
+                    <img class="img-thumbnail img-fluid " src="{{ j.store_image.url}}" alt="img" style="width: 100%; height:200px; object-fit: cover;" >
+                </div>
+                <div class="pw_content">
+                    <div class="pw_header">
+                        <h6 class="text-primary text-bold">{{ j.store_name }}</h6>
+                        <small class="text-muted">space:<span class="text-success">available</span></small><br>
+                        <small class="text-muted">
+                            <i class="fa fa-map-marker-alt text-muted mr-2"></i>
+                            <span class="text-success">{{ j.store_location }}{{' '}}<span class="text-secondary">{{ j.store_address }}</span></span></small><br>
+                        <small class="text-muted">charges:<span class="text-success">ksh. {{ j.m_cost }} per month</span></small><br>
+                        <a href="{% url 'nyumba:store_app' storeId=j.id %}" style="text-decoration: none;">
+                            <div class="btn text-white mx-auto mt-2 space_btn">book space</div>
+                        </a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+{% endblock %}

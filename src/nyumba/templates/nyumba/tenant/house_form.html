@@ -1,0 +1,313 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style type="text/css">
+   
+        
+    .card {
+        max-width: 1000px;
+        margin: 2vh;
+    }
+    
+    .card-top {
+        padding: 0.7rem 5rem;
+    }
+    
+    .card-top a {
+        float: left;
+        margin-top: 0.7rem;
+    }
+    
+    #logo {
+        font-family: 'Dancing Script';
+        font-weight: bold;
+        font-size: 1.6rem;
+        color:green;
+        text-align: center;
+    }
+    
+    .card-body {
+        padding: 0 2rem 2rem 2rem;
+        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    @media(max-width:768px) {
+        .card-body {
+            padding: 0 1rem 1rem 1rem;
+            background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    
+        .card-top {
+            padding: 0.7rem 1rem;
+        }
+    }
+    
+    .row {
+        margin: 0;
+    }
+    
+    .upper {
+        padding: 1rem 0;
+        justify-content: space-evenly;
+    }
+    
+    #three {
+        border-radius: 1rem;
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        border: 1px solid blue;
+        text-align: center;
+        display: inline-block;
+    }
+    
+    #payment {
+        margin: 0;
+        color: blue;
+    }
+    
+    .icons {
+        margin-left: auto;
+    }
+    
+    form span {
+        color: rgb(179, 179, 179);
+    }
+    
+    /*form {
+        padding: 2vh 0
+    }*/
+    
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+    
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    .header {
+        font-size: 1.5rem;
+    }
+    
+    .left {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+    
+    .left img {
+        width: 2rem;
+    }
+    
+    .left .col-4 {
+        padding-left: 0;
+    }
+    
+    .right .item {
+        padding: 0.3rem 0;
+    }
+    
+    .right {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+    
+    .col-8 {
+        padding: 0 1vh;
+    }
+    
+    .lower {
+        line-height: 2;
+    }
+    
+    
+        
+        </style>
+{% endblock %}
+{% block content %}
+<div class="row m-0 p-0 mt-5 pt-2">
+    <!-- <div class="row mt-1 bg-white "> -->
+        <div class="col-auto col-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:explore_rentals' %}">
+                <span class="mr-md-3 mr-2">explore rentals</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span>{{ house.room_name }} </span></a></li>
+            </ol>
+        </nav>
+        </div>
+    <!-- </div> -->
+    <form action="{% url 'MpesaPayments:bookingAndpayment' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="row m-0 p-0">
+        <input type="hidden" name="roomId" value="{{ house.id }}">
+    <div class="col-12 text-primary m-2 text-center">
+        <h4 style="text-decoration: underline;">Rental booking form for house:<span class="text-success pl-3 border-bottom-0" style="text-decoration: none;">{{ house.room_name }}</span></h4>
+    </div>
+    
+    <div class="col-12 mx-auto" id="houseinfo">
+        <div class="row w-75 mx-auto border border-primary bg-light p-4">
+            <div class="col-12 mb-1"><span><i class="fa fa-check-circle text-primary">1</i> House and plot information</span> </div>
+            <div class="col-sm-6 text-right">
+                <img src="{{ house.room_image.url }}" class="img-fluid img-thumbnail">
+                <div class=" mt-2">Location: 
+                    <span class="text-success">
+                    <i class="fa fa-map-marker-alt"></i>
+                    {{ house.room_plot.location }}
+                    <span class="text-secondary">{{ house.room_plot.street_address}}</span>
+                   </span>
+                </div>
+                
+                <div class=" mt-2">beds:
+                    <span class="text-success mr-3">{{ house.beds }}</span> 
+                    baths:<span class="text-success">{{ house.baths }}</span><br>parking:<span class="text-success">{{ house.parking}}</div>
+                
+            </div>
+            <div class="col-sm-6">
+                <div class="">room name:<span class="text-success">{{ house.room_name }}</span></div>
+                <hr>
+                <div class="">room plot:<span class="text-success">{{ house.room_plot.property_name }}</span></div>
+                <hr>
+                <div class="">Property Owner:<span class="text-success">{{ house.room_plot.plot_owner.first_name }}{{' '}}{{ house.room_plot.plot_owner.last_name }}</span></div>
+                <hr>
+                {% if house.room_plot.property_type == 'single' %}
+                <div class="">property Type: <span class="text-success">Single family House</span></div>
+                {% else %}
+                <div class="">property Type: <span class="text-success">Multiple rental houses</span></div>
+                {% endif %}
+                <hr>
+                <div class="">market rent: <span class="text-success">{{ house.market_rent }}</span></div>
+                <hr>
+                <div class="">minimum deposit: <span class="text-success">{{ house.min_deposit }}</span></div>
+                 <hr>          
+            </div>
+            <div class="col-sm-12 d-flex justify-content-around mt-3">
+                <div class="btn border border-danger text-danger">cancel</div>
+                <div class="btn btn-success text-white" id="info_btn">save and continue</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12 mx-auto pt-3 w-100 " id="more_info" style="display: none;">
+    <div class="row  w-75 mx-auto border border-primary bg-light p-4">
+        <div class="col-12 mb-1"><span><i class="fa fa-check-circle text-primary">2</i> User information</span> </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="form-group w-100">
+                    <label for="s_date">check in date:</label>
+                    <input type="date" name="s_date" class="form-control" id="s_date">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="form-group w-100">
+                    <label for="e_date">check out date:</label>
+                    <input type="date" name="e_date" class="form-control" id="e_date">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group w-100">
+                    <label for="s_time">Estimate your stay time:</label>
+                    <input  name="s_time" class="form-control" rows="3" id="s_time">
+                </div>
+            </div>
+        </div>
+
+            <div class="col-sm-12 d-flex justify-content-around mt-3">
+                <div class="btn border border-danger text-danger">cancel</div>
+                <div class="btn btn-success text-white" id="more_btn">proceed to payment</div>
+            </div>    
+        </div>
+    </div>
+    <div class="col-12 mx-auto pt-3 " id="paymentinfo" style="display: none;"> 
+        <div class="row w-75 mx-auto border border-primary bg-light p-4">
+
+        <div class="row upper"> 
+            <span class="mr-3"><i class="fa fa-check-circle text-primary pr-1">1</i>House information</span> 
+            <span class="mr-3"><i class="fa fa-check-circle text-primary">2</i> User information</span> 
+            <span id="payment" class="mr-3"><span id="three">3</span>payment</span> 
+        </div>
+        <div class="card mx-auto mb-0 pb-0 " style="">
+            <span id="logo">Pay Using Mpesa</span> 
+        </div>
+       <div class="row m-0 p-0">
+        
+            <div class="col-md-7">
+                <div class="left border">
+                    <div class="row"> 
+                        <div class="icons"> 
+                            <!-- <img src="{% static 'Tour/images/mpesa1.png' %}" style="height: 100px; width: 100px;"> -->
+                            <img src="{% static 'nyumba/images/mpesa.png' %}"style="height: 20px; width: 20px;">
+                            <img src="{% static 'nyumba/images/mpesa.png' %}" style="height: 20px; width: 20px;">
+                    </div>
+                </div>
+                     <span>Company's Till Number:</span> 
+                     <input placeholder="12345" disabled> 
+                     <span>Payment Reference :</span> 
+                     <input type="text" placeholder="deposit for house {{ house.room_name }}" value="deposit for house {{ house.room_name }}" disabled>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="right border">
+                    <span class="text-primary">Phone Number:</span> 
+                     <input placeholder="start with 2547" name="phone_number" required>
+                     <span>amount:</span> 
+                     <input placeholder="1" type="text" value="1" name="amount" >
+                    <hr>
+                    <div class=""> Pay Rentalink systems Ksh.1.00 for House {{ house.room_name }}  </div>
+                   
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-12 d-flex justify-content-around mt-3">
+            <div class="btn border border-danger text-danger">cancel</div>
+            <button type="submit" class="btn btn-success text-white" id="p_payment">submit your application</div>
+        </div>
+        </div>
+        </div>
+    </form>
+</div>
+    
+   
+
+
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){
+        $("#info_btn").click(function(){
+            $("#houseinfo").hide();
+            $("#more_info").show();
+        });
+        $("#more_btn").click(function(){
+            $("#houseinfo").hide();
+            $("#more_info").hide();
+            $("#paymentinfo").show();
+        });
+    });
+</script>
+{% endblock %}

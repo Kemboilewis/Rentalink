@@ -7,5 +7,8 @@ urlpatterns= [
     path('admin/', admin.site.urls),
     path('user_account/', include('user_account.urls')),
     path('nyumba/', include('nyumba.urls')),
+    path('MpesaPayments/', include('MpesaPayments.urls')),
 
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

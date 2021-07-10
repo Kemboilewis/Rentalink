@@ -1,14 +1,23 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 
 {% endblock %}
-{% block content %} 
-<div class="container">
-    <form action="#" method="POST">
-        <div class="row">
+{% block content %}  
+<div class="container pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <form action="{% url 'nyumba:addproperty' %}"  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row m-0 p-0">
             <div class="col-sm-12">
-                <h4 class="text-center text-success mt-3">add a property</h4>
+                <span>
+                <div class="p-2 mr-4 align-self-center mt-3 text-primary">
+                    <a href="{% url 'nyumba:properties' %}" style="text-decoration: none;">
+                        <i class="fa fa-arrow-left text-primary mr-3"></i>back
+                    </a>
+                    
+                </div>
+                <h4 class="text-center text-primary mt-3" style="text-decoration: underline;">Add a property form</h4>
+            </span>
             </div>
             <div class="col-md-4 mt-4">
                 <div class="card">
@@ -19,14 +28,14 @@
                         Please note, you will not be able to edit it !!!
                       </p>
                       <div class="form-group">
-                        <label for="email">currency:</label>
-                        <input type="text" class="form-control" id="currency">
+                        <label for="currency">currency:</label>
+                        <input type="text" name="currency" class="form-control" id="currency">
                       </div>
                     </div>
                   </div>
                   <div class=" w-100 mt-5">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" name="property_image" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">upload property photo</label>
                     </div>
                   </div>
@@ -40,44 +49,44 @@
                                 <div class="col-12">General information</div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">Property Name:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="plot_name">Property Name:</label>
+                                        <input type="text" class="form-control" name="plot_name" id="plot_name">
                                     </div>
                                     
                                    
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">Year built:</label>
-                                        <input type="number" class="form-control" id="currency">
+                                        <label for="year_built">Year built:</label>
+                                        <input type="date" class="form-control" name="year_built" id="year_built">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">mls#:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="location">location:</label>
+                                        <input type="text" name="location" class="form-control" id="location">
                                     </div>
                                 </div>
                             </div>
                             <div class="row m-3 p-0">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">street address:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="s_address">street address:</label>
+                                        <input type="text" class="form-control" id="s_address" name="s_address">
                                     </div>
                                     
                                    
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">city:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="city">city:</label>
+                                        <input type="text" name="city" class="form-control" id="city">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">country:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="country">country:</label>
+                                        <input type="text" name="country" class="form-control" id="country">
                                     </div>
                                 </div>
                             </div>
@@ -90,12 +99,12 @@
                                     
                                    
                                 </div>
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="email">zip:</label>
                                         <input type="number" class="form-control" id="currency">
                                     </div>
-                                </div>
+                                </div> -->
                                 
                             </div>
                         </div>
@@ -111,7 +120,7 @@
                                     associated to a specific address. 
                                   </p>
                                   <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx" checked>
+                                    <input type="radio" class="custom-control-input" id="customRadio" name="property_type" value="single" checked>
                                     <label class="custom-control-label" for="customRadio"id="single_button" >single unit type</label>
                                   </div>
                                 </div>
@@ -126,8 +135,8 @@
                                     units per a single address 
                                   </p>
                                   <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="customRadio1" name="example" 
-                                    value="customEx1">
+                                    <input type="radio" class="custom-control-input" id="customRadio1" name="property_type" 
+                                    value="multi_unit">
                                     <label class="custom-control-label" for="customRadio1" id="multi_button">multi unit type</label>
                                   </div>
                                 </div>
@@ -141,42 +150,42 @@
             <div class="col-12">ADDITIONAL INFORMATION</div>
             <div class="col-sm-3 p-2">
                 <div class="form-group">
-                    <label for="email">beds:</label>
-                    <input type="number" class="form-control" id="currency">
+                    <label for="beds">beds:</label>
+                    <input type="text" name="beds" class="form-control" id="beds">
                 </div>
                 
                 
             </div>
             <div class="col-sm-3 p-2">
                 <div class="form-group">
-                    <label for="email">bath:</label>
-                    <input type="number" class="form-control" id="currency">
+                    <label for="baths">bath:</label>
+                    <input type="text" class="form-control" name="baths" id="currency">
                 </div>
             </div>
             <div class="col-sm-3 p-2">
                 <div class="form-group">
-                    <label for="email">size, sqt.ft:</label>
-                    <input type="number" class="form-control" id="currency">
+                    <label for="size">size, sqt.ft:</label>
+                    <input type="text" name="size"  class="form-control" id="currency">
                 </div>
             </div>
             <div class="col-sm-3 p-2">
                 <div class="form-group">
-                    <label for="email">parking:</label>
-                    <input type="number" class="form-control" id="currency">
+                    <label for="parking">parking:</label>
+                    <input type="text" name="parking" class="form-control" id="currency">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="row m-0 p-0" >
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">deposit:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="deposit">deposit:</label>
+                            <input type="number" name="deposit" class="form-control" id="currency">
                         </div>
                     </div>
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">market rent:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="rent">market rent:</label>
+                            <input type="number" name="rent" class="form-control" id="currency">
                         </div>
                     </div>
                     <div class="col-sm-3"></div>
@@ -186,52 +195,69 @@
         </div>
         <div class="row m-4 p-2 mt-5" id="multiunit" style="display: none;">
             <div class="col-12">UNIT INFORMATION</div>
+            <div class="col-12 ">Please add the units in this property after succesfully creating the property by clicking the<span class="text-primary">add unit</span> 
+                button in units page or by clicking add unit button shortcut in general information of this property.
+            </div>
             <div class="col-sm-12 bg-light">
                 <div class="row m-2 p-2">
-                    <div class="col-12">unit 1</div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="no_units">Number of units:</label>
+                            <input type="number" name="no_units" id="no_units" placeholder="total units" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="r_name">Unit name:</label>
+                            <input type="text" class="form-control" placeholder="unit name, must be unique" name="r_name" id="r_name">
+                        </div>
+                    </div>
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">Unit#:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="r_image">room image:</label>
+                            <div class="custom-file">
+                                <input type="file" name="r_image" class="custom-file-input" id="r_image">
+                                <label class="custom-file-label" for="r_image">upload unit image</label>
+                            </div>
                         </div>
                  
                     </div>
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">Unit type:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="r_beds">beds :</label>
+                            <input type="text" name="r_beds" class="form-control" id="r-beds">
                         </div>
                     </div>
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">size, sqt.ft:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="r_baths">baths:</label>
+                            <input type="text" name="r_baths" class="form-control" id="r_baths">
                         </div>
                     </div>
                     <div class="col-sm-3 p-2">
                         <div class="form-group">
-                            <label for="email">Beds:</label>
-                            <input type="number" class="form-control" id="currency">
+                            <label for="r_size">size:</label>
+                            <input type="text" name="r_size" class="form-control" id="r_size">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row m-0 p-0" >
                             <div class="col-sm-3 p-2">
                                 <div class="form-group">
-                                    <label for="email">Baths:</label>
-                                    <input type="number" class="form-control" id="currency">
+                                    <label for="r_parking">Parking:</label>
+                                    <input type="text" name="r_parking" class="form-control" id="r_parking">
                                 </div>
                             </div>
                             <div class="col-sm-3 p-2">
                                 <div class="form-group">
-                                    <label for="email">market rent:</label>
-                                    <input type="number" class="form-control" id="currency">
+                                    <label for="r_rent">market rent:</label>
+                                    <input type="number" name="r_rent" class="form-control" id="r_rent">
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label for="email">Deposit:</label>
-                                    <input type="number" class="form-control" id="currency">
+                                    <label for="r_deposit">Deposit:</label>
+                                    <input type="number" name="r_deposit" class="form-control" id="r_deposit">
                                 </div>
                             </div>
                             <div class="col-sm-3"></div>
@@ -252,8 +278,15 @@
 
         </div>
         <div class="row m-0 p-0">
-            <div class="col-12 pt-3">PROPERTY ATTACHMENTS</div>
+            <div class="col-12 pt-3 mb-5">PROPERTY ATTACHMENTS</div>
+            <div class="col-12 pt-3 mb-5 d-flex justify-content-between">
+                <div class="btn btn-danger mx-auto m-4 cancel" id="cancel2">cancel</div>
+                <button type="submit" class="btn btn-success mx-auto m-4" id="proceed3">submit application</div>
+
+            </div>
         </div>
+        
+
 
     </form>
 </div>

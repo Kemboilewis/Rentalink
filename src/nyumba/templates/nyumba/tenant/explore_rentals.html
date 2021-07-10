@@ -1,0 +1,79 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block content %}
+<div class="row m-0 p-0 mt-5 pt-2">
+    <!-- <div class="row mt-1 bg-white "> -->
+        <div class="col-auto col-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:tenant_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:explore_rentals' %}">
+                <span class="mr-md-3 mr-2">explore rentals</span>
+                </a>
+                </li>
+            <!-- <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span>units</span></a></li> -->
+            </ol>
+        </nav>
+        </div>
+    <!-- </div> -->
+    <div class="col-12 text-primary m-2 text-center">
+        <h4 style="text-decoration: underline;">Available Rentals</h4>
+    </div>
+    {% if vunits %}
+    {% for k in vunits %}
+        <div class="col-sm-4 mt-2 mb-4">
+            <div class="product-grid w-75 mx-auto border border-primary" style="border-radius: 0px 24px 0px 24px;">
+                <div class="product-image" style="border-radius: 0px 24px 0px 24px;">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="{{ k.room_image.url }}" style="height: 250px; width: 100%;">
+                        <img class="pic-2" src="{{ k.room_image.url }}" style="height: 250px; width: 100%;">
+                    </a>
+                     <span class="product-sale-label" style="text-transform: lowercase;">vacant!!</span>
+                    <ul class="social">
+                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                        <!-- <li><a href="#" data-tip="Add to wishlist"><i class="fa fa-heart"></i></a></li> -->
+                    </ul>
+                    <div class="product-rating">
+                        <ul class="rating">
+                            <li class="fas fa-star"></li>
+                            <li class="fas fa-star"></li>
+                            <li class="fas fa-star"></li>
+                            <li class="far fa-star"></li>
+                            <li class="far fa-star"></li>
+                        </ul>
+                        <a class="add-to-cart" href="{% url 'nyumba:houseform' hid=k.id %}" style="text-decoration: none;"> RENT </a>
+                    </div>
+                </div>
+                <div class="product-content" style="border-radius: 0px 24px 0px 24px;">
+                    <h3 class="title"><a href="#"><span class="text-secondary">House:</span>{{ k.room_name }}</a></h3>
+                    <h3 class="title"><a href="#"><span  class="text-secondary">Plot:</span>{{ k.room_plot.property_name }}</a></h3>
+                    <div class="price" style="text-decoration: none;">market rent:{{ k.market_rent }}</div>
+                    <div class="price" style="text-decoration: none;">
+                        <i class="fa fa-map-marker-alt text-success mr-2"></i>{{ k.room_plot.location }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h4>no rental houses  available </h4>
+        {% endif %}
+  
+</div>
+
+
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

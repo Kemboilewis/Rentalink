@@ -16,9 +16,10 @@
         {% block css %}
 		<style>
         .register{
-            background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+            background: -webkit-linear-gradient(left, #7c77cc, #9ed2e0);
             margin-top: 3%;
             padding: 3%;
+            border-radius: 40px 0px 40px 0px;
                 }
         .register-left{
             text-align: center;
@@ -42,10 +43,10 @@
             border-top-left-radius: 10% 50%;
             border-bottom-left-radius: 10% 50%;
         }
-        .register-left img{
+        .register_icon{
             margin-top: 15%;
             margin-bottom: 5%;
-            width: 25%;
+            /* width: 25%; */
             -webkit-animation: mover 2s infinite  alternate;
             animation: mover 1s infinite  alternate;
         }
@@ -79,16 +80,16 @@
             cursor: pointer;
         }
         .register .nav-tabs{
-            margin-top: 3%;
+            margin-top: 1%;
             border: none;
             background: #0062cc;
             border-radius: 1.5rem;
-            width: 28%;
+            width: 38%;
             float: right;
         }
         .register .nav-tabs .nav-link{
             padding: 2%;
-            height: 34px;
+            height: 28px;
             font-weight: 600;
             color: #fff;
             border-top-right-radius: 1.5rem;
@@ -106,47 +107,61 @@
         }
         .register-heading{
             text-align: center;
-            margin-top: 8%;
+            margin-top: 2%;
             margin-bottom: -15%;
             color: #495057;
         }
         </style>      
         {% endblock %}
     </head>
-            <body>
-            <div class="container-fluid register">
+            <body> 
+            <div class="container register">
+               <a href="{% url 'user_account:index' %}"> <div class="w-100 text-white"> <i class="fa fa-arrow-left mr-2"></i>back</div></a>
                 <div class="row">
-                    <div class="col-md-3 register-left">
-                        <img src="{% static 'user_account/images/rentalink1.png' %}" alt=""/>
+                    <div class="col-sm-3 register-left">
+                        <div class="register_icon ">
+                            <i class=" bx bxs-home-smile bx-md text-white " ></i><strong class="text-white">rentalinks</strong>
+                        </div>
+                        
                         <h3>Welcome</h3>
                         <p>You are 30 seconds away from solving your rental problems!</p>
-                        <input type="submit" name="" value="Login"/><br/>
+                         <input type="submit" name="submit" value="Login" /><br/>
                     </div>
-                    <div class="col-md-9 register-right">
-                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <div class="col-sm-9 register-right"> 
+                        <div class="row mx-auto m-0 p-0">
+                        <ul class="nav nav-tabs nav-justified mx-auto " id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tenant</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" 
+                                aria-controls="home" aria-selected="true">Tenant</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Landlord</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" 
+                                href="#profile" role="tab" aria-controls="profile" aria-selected="false">Landlord</a>
                             </li>
                         </ul>
+                        </div>
+                    
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <form action="{% url 'user_account:register' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
                                 <h3 class="register-heading">Register as a Tenant</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                            <input type="text" name="first_name" class="form-control" placeholder="First Name *"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                            <input type="email" name="email" class="form-control" placeholder="your email *"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" value="" />
+                                            <input type="text" name="id_number"  class="form-control" placeholder="your ID number*"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                                            <input type="text" name="username"  class="form-control" placeholder="username*"  />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control"  placeholder="password *" value="" />
                                         </div>
                                         <div class="form-group">
                                             <div class="maxl">
@@ -160,71 +175,103 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class="btn border border-danger">cancel</div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email *" value="" />
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last Name *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                            <input type="text" minlength="10" maxlength="10" name="contact" class="form-control" placeholder="Your Phone *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                                                <option>What is your Birthdate?</option>
-                                                <option>What is Your old Phone Number</option>
-                                                <option>What is your Pet Name?</option>
-                                            </select>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="id_copy" id="customFile">
+                                                <label class="custom-file-label" for="customFile">upload id copy *</label>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="id_copy" id="customFile">
+                                                <label class="custom-file-label" for="customFile">upload profile image *</label>
+                                            </div>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="confirm password *"  />
+                                        </div>
+                                        <input type="hidden" value="True" name="tenant">
+                                        <input type="hidden" value="False" name="landlord">
                                         <input type="submit" class="btnRegister"  value="Register"/>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <form action="{% url 'user_account:register' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
                                 <h3  class="register-heading">Register  as a Landlord</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                            <input type="text" name="first_name" class="form-control" placeholder="First Name *"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                            <input type="email" name="email" class="form-control" placeholder="your email *"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Email *" value="" />
+                                            <input type="text" name="id_number"  class="form-control" placeholder="your ID number*"  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone *" value="" />
+                                            <input type="text" name="username"  class="form-control" placeholder="username*"  />
                                         </div>
-
-
+                                        <div class="form-group">
+                                            <input type="password" class="form-control"  placeholder="password *" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="maxl">
+                                                <label class="radio inline"> 
+                                                    <input type="radio" name="gender" value="male" checked>
+                                                    <span> Male </span> 
+                                                </label>
+                                                <label class="radio inline"> 
+                                                    <input type="radio" name="gender" value="female">
+                                                    <span>Female </span> 
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="btn border border-danger">cancel</div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" value="" />
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last Name *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                                            <input type="text" minlength="10" maxlength="10" name="contact" class="form-control" placeholder="Your Phone *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option class="hidden"  selected disabled>Please select your Security Question</option>
-                                                <option>What is your Birthdate?</option>
-                                                <option>What is Your old Phone Number</option>
-                                                <option>What is your Pet Name?</option>
-                                            </select>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">upload id copy *</label>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="`Answer *" value="" />
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="id_copy" id="customFile">
+                                                <label class="custom-file-label" for="customFile">upload profile image *</label>
+                                            </div>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="confirm password *"  />
+                                        </div>
+                                        <input type="hidden" value="True" name="landlord">
+                                        <input type="hidden" value="False" name="tenant">
                                         <input type="submit" class="btnRegister"  value="Register"/>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
+                    
                     </div>
                 </div>
 

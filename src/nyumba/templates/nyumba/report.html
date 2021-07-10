@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Payments report</title>
+        <style>
+            .body{
+                background-color: green;
+                border: solid grey 4px;
+            }
+        </style>
+	</head>
+	<body>
+        <h4 style="font-size: 16px; color: blue; text-align: center;">Reports for payments</h4>
+        <table style="border: solid grey rgb(20, 20, 20);">
+            <tr style="font-size:12px;">
+                <th>#</th>
+                <th>House Name</th>
+                <th>Tenant Name</th>
+                <th>Payment method</th>
+                <th>Payment date</th>
+                <th>Mpesa receipt </th>
+                <th>Receipt Number</th>
+                <th>Amount</th>
+            </tr>
+            {% for k in report %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ k.Paid_booking.booked_room.room_name}}</td>
+                <td>{{ k.Paying_user.first_name }}{{ ' '}}{{ i.Paying_user.last_name }}</td>
+                <td>Mpesa</td>
+                <td>{{ k.TransactionDate }}</td>
+                <td>{{ k.MpesaReceiptNumber }}</td>
+                <td>{{ k.Paid_booking.Receipt_Number }}</td>
+                <td>{{ k.Amount }}</td>
+                
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ total }}</td>
+            </tr>
+        </table>
+        
+	</body>
+</html>

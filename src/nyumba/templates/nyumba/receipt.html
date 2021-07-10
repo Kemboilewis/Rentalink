@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>your house booking receipt</title>
+        <style>
+            .body{
+                background-color: green;
+                border: solid grey 4px;
+            }
+        </style>
+	</head>
+	<body>
+        <div style="width: 70%;">
+            
+            <div style="color:blue; text-decoration: uppercase; text-align: center; font-size: 25px; margin-top: 20px;">RENTALINK SYSTEMS</div>
+            <div style="color:#0d0d0e; text-align:center; font-size:18px;">
+                Receipt Number:{{ your_receipt.Receipt_Number }}
+            </div>
+            <div style="color:rgb(12, 12, 14); text-align:center; font-size:18px;">
+                Customer Name:{{ your_receipt.booking_user.first_name}}
+            {{' '}} {{ your_receipt.booking_user.last_name }}
+            </div>
+            <hr>
+            
+            <div style="text-align: left; font-size: 20px;">
+                Booked Room:<span style="color:green">{{ your_receipt.booked_room.room_name }}</span>
+            </div>
+            
+            <div style="text-align: left; font-size: 20px;"> 
+                Room Plot:<span style="color:green">{{ your_receipt.booked_plot.property_name}}</span>
+            </div>
+            <hr>
+            
+            <div style="text-align: left; font-size: 20px;">
+                Booking date and Time:<span style="color:green">{{ your_receipt.book_time }}</span>
+            </div>
+            
+            <div style="text-align: left; font-size: 20px;">
+                Check in date:<span style="color: green;">{{ your_receipt.check_in_date }}</span>
+            </div>
+            
+            <div style="text-align: left; font-size: 20px;">
+                Check out date:<span style="color: green;">{{ your_receipt.check_out_date }}</span>
+            </div>
+            <hr>
+            
+                {% for k in a_payments %}
+                    {% if k.MerchantRequestID == your_receipt.merchantrequestid %}
+                    <div style="text-align: left; font-size: 20px;">
+                        Paid amount:<span style="color:green;">{{ k.Amount }}</span>
+                    </div>
+                    <div style="text-align: left; font-size: 20px;">
+                        Mpesa receipt number:<span style="color:green;">{{ k.MpesaReceiptNumber }}</span>
+                    </div>
+                    <div style="text-align:left; font-size:20px;">
+                        Transaction date:<span style="color:green;">{{ k.TransactionDate }}</span>
+                    </div>
+                
+                    {% endif %}
+
+                {% endfor %}
+           
+            
+            
+            
+
+              
+        </div>
+		
+		
+	</body>
+</html>

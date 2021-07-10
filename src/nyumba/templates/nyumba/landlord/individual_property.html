@@ -1,4 +1,4 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
@@ -7,10 +7,11 @@
 .dropbtn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px;
+  padding: 8px 10px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -68,25 +69,52 @@
         display: none;
     }
 }
-
+.property_nav:hover{
+    background-color: rgb(6, 131, 16);
+    cursor: pointer;
+}
  
 
-</style>
+</style> 
 {% endblock %}
 {% block content %} 
-<div class="container mt-4 ml-2 mr-4 pr-3 ">
-    <div class="d-flex pr-5 bg-secondary mr-3">
-        <div class="p-2 mr-4 align-self-center">
-            <i class="fa fa-arrow-left"></i>
+<div class="container pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-light " style="margin-top:80px;">
+    <div class="row mt-5 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+          <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+              <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+                  <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+              </li>
+              <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:properties' %}">
+                  <span class="mr-md-3 mr-2">properties</span>
+                </a>
+                <i class="fa fa-angle-double-right text-uppercase " aria-hidden="true">
+    
+                </i></li>
+              <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                  <span>{{ this_plot.property_name }}</span></a></li>
+            </ol>
+          </nav>
         </div>
-        <div class="p-2 align-self-center">Name Name</div>
+      </div>
+    <div class="d-flex pr-5 m-0 p-0 mr-3">
+        <div class="p-2 mr-4 align-self-center">
+            <i class="fa fa-arrow-left text-primary"></i>
+        </div>
+        <div class="p-2 align-self-center">{{ this_plot.property_name }}</div>
         <div class="dropdown p-2 pr-3 ml-auto align-self-center">
             <button class="dropbtn">actions<i class="fa fa-ellipsis-h  ml-3"></i></button>
             <div class="dropdown-content">
                 <a class="d-flex justify-content-between text-success" href="#">
                     <div class="p-1">edit property</div>
                     <div class="p-1">
-                        <i class="fa fa-cog"></i>
+                        <i class="fa fa-edit"></i>
                     </div>
                 </a>
                 <a class="d-flex justify-content-between text-secondary" href="#">
@@ -106,44 +134,48 @@
         
         
     </div> 
-    <div class="row mt-4 mr-3 pl-1 ml-0 ">
-        <div class="col-sm-3 bg-secondary pl-0 ml-0">
+    <div class="row mt-4 mr-0 pr-0 pl-1 ml-0 ">
+        <div class="col-sm-3  pl-0 ml-0">
             <div class="row p-0 m-0">
-                <div class="card" style="object-fit:cover;">
-                    <img class="card-img-top" src="{% static 'User_account/images/rentalink1.png' %}" alt="Card image cap" 
+                <div class="card" style="">
+                    <img class="card-img-top img-fluid" src="{{ this_plot.property_image.url }}" alt="Card image cap" 
                     >
                     <div class="card-body">
-                      <h4 class="card-title text-center">Nature Springs</h4>
+                      <h4 class="card-title text-center">{{ this_plot.property_name }}</h4>
                       <div class="mx-auto text-center"><i class="fa fa-map-marker-alt text-center"></i></div>
-                      <p class="card-text text-center">Moi University Kesses</p>
+                      <p class="card-text text-center">{{ this_plot.location }}</p>
                     </div>
                   </div>
             </div>
             <div class="mt-3" id="extra_info" >
-                <div class="row p-0 m-0"> 
-                    <div class="col-6 bg-info ">
+                <div class="row p-0 m-0 border bg-white  border-primary"> 
+                    <!-- <div class="col-6 w-75 mx-auto bg-white  " style="border-radius: 20px;">
                         <div class="text-center">0</div>
                         <div class="text-center">equipments</div>
 
-                    </div>
-                    <div class="col-6 bg-white pl-1">
+                    </div> -->
+                    <!-- <div class="col-6 mx-auto bg-white border-left border-primary" style="border-radius: 20px; width: 80%;">
                         <div class="text-center">0</div>
                         <div class="text-center">Reminders</div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="row p-0 m-0">
-                    <div class="occupancy_circle mx-auto mt-3 text-center pt-4">0%</div>
+                <!-- <div class="row p-0 m-0">
+                    <div class="occupancy_circle border border-primary mx-auto mt-3 text-center pt-5">0%</div>
                     <div class="text-center mx-auto col-12">occupancy</div>
-                </div>
+                </div> -->
                 <div class="row p-0 m-0">
-                    <div class="col-6 bg-info ">
-                        <div class="text-center">0</div>
+                    <div class="col-6 bg-primary shadow-lg mx-auto  mt-4" style="border-radius: 20px;">
+                        <div class="text-center">{{ count_tenants }}</div>
                         <div class="text-center">tenants</div>
-
+                        <div class="text-center"><i class="fa fa-users"></i></div>
                     </div>
-                    <div class="col-6 bg-white pl-1">
-                        <div class="text-center">0</div>
-                        <div class="text-center">maintenance</div>
+                    </div>
+                    <div class="row p-0 m-0 ">
+                    
+                    <div class="col-6 bg-primary mt-4  mx-auto pl-1" style="border-radius: 20px;">
+                        <div class="text-center">{{ count_m}}</div>
+                        <div class="text-center">maintenance requests</div>
+                        <div class="text-center"><i class="bx bxs-cog"></i></div>
                     </div>
                      </div>
 
@@ -153,74 +185,103 @@
             
         </div>
         <div class="col-sm-9 ">
-            <div class="row">
+            <div class="row m-0 p-0">
                 <div class="col-12">
-                    <div class="d-flex justify-content-between ">
-                        <a href="{% url 'nyumba:individual_property' %}">
-                            <div class="p-2 bg-info w-100 text-center text-white" id="profile">profile</div></a>
-                        <div class="p-2 bg-warning w-100 text-center" id="financials">financials</div>
-                        <div class="p-2 bg-danger w-100 text-center" id="specs">specs</div>
-                        <div class="p-2 bg-primary w-100 text-center" id="utilities">utilities</div>
+                    <div class="d-flex justify-content-between border border-primary border-bottom-0 bg-secondary text-white">
+                        <div class="p-2 w-100 bg-white text-center property_nav text-primary" id="profile" >
+                            <!-- <a href="#" style="text-decoration: none; color:inherit;  "> -->
+                                <div class=" w-100 text-center" >profile</div>
+                            <!-- </a> -->
+                        </div>
+                        
+                        <div class="p-2 w-100 text-center property_nav border border-white" id="financials">financials</div>
+                        <div class="p-2 w-100 text-center property_nav border border-white" id="specs">Tenants</div>
+                        <!-- <div class="p-2 w-100 text-center property_nav border border-white" id="utilities">utilities</div> -->
                     </div>
                 </div>
-                <div class="col-12" id="profile_div">
-                    <div class="container mt-3">
+                <div class="col-12 " id="profile_div" style="display: block;">
+                    <div class="container bg-white border border-primary border-top-0 shadow">
                         <div class="row">
                             <div class="d-flex w-100 justify-content-around">
                                 <div class="p-2 "><i class="fa fa-home"></i>units</div>
-                                <div class="p-2  pr-5">view all units</div>
+                                <div class="p-2 text-success pr-5"> <a href="{% url 'nyumba:property_units' plotid=this_plot.id %}">view all units</a></div>
                             </div>
                             <div class="col-12">
                                 <div class="unit_circle mx-auto  text-center">
                                     <div class="align-self-center pt-5">
-                                        2  in <br>total
+                                        {{ count_units }} in <br>total
                                     </div> 
                                 </div>
                             </div>
                             <div class="col-12 text-center pt-2">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx">
-                                    <label class="custom-control-label" for="customRadio">occupied</label>
+                                    <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx" >
+                                    <label class="custom-control-label" for="customRadio" > {{ occupied_units}} {{' '}}occupied</label>
                                   </div>
                                   <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
-                                    <label class="custom-control-label" for="customRadio2">vacant</label>
+                                    <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx" checked>
+                                    <label class="custom-control-label" for="customRadio2">{{ vacant_units }}{{' '}}vacant</label>
                                   </div>
                             </div>
                             <div class="col-12 text-center pt-3">
-                                <div class="btn btn-danger mx-auto"><i class="fa fa-plus"></i> Add unit</div>
+                               <a href="{% url 'nyumba:add_Units' %}">
+                                <div class="btn btn-success mx-auto"><i class="fa fa-plus"></i> Add unit</div>
+                               </a> 
                             </div>
 
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-12 mx-auto text-left"><i class="fa fa-home mr-4"></i>General Information</div>
-                            <div class="col-sm-6">
-                                <div class="row">
+                        <div class="row m-0 p-0 mt-4">
+                            <div class="col-12 mx-auto text-left text-primary "><i class="fa fa-home mr-4"></i>General Information</div>
+                            <div class="col-sm-6 mt-3">
+                                <div class="row m-0 p-0 ">
                                     <div class="col-6 text-center">
-                                        <div class="col-12 text-center">Property Name</div>
-                                        <div class="col-12 text-center">Nature Springs</div>
+                                        <div class="col-12 text-left">Property Name</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.property_name }}</div>
                                     </div>
-                                    <div class="col=6">
-                                        <div class="col-12 text-center">Year built</div>
-                                        <div class="col-12 text-center">2015</div>
+                                    <div class="col-6">
+                                        <div class="col-12 text-left">Year built</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.year_built }}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="row">
+                            <div class="col-sm-6 mt-3">
+                                <div class="row m-0 p-0">
                                     <div class="col-6">
-                                        <div class="col-12 text-center">Year built</div>
-                                        <div class="col-12 text-center">2015</div>
+                                        <div class="col-12 text-left">Location:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.location }}</div>
                                     </div>
-                                    <div class="col=6">
-                                        <div class="col-12 text-center">property status</div>
-                                        <div class="col-12 text-center">good</div>
+                                    <div class="col-6">
+                                        <div class="col-12 text-left">Street address:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.street_address }}</div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="row m-0 p-0 mt-3">
+                                    
+                                    <div class="col-3">
+                                        <div class="col-12 text-left">Property type:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.property_type }}</div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="col-12 text-left">property owner:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.plot_owner.username }}</div>
+                                    </div>
+                                
+                                    <div class="col-3">
+                                        <div class="col-12 text-left">Currency:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.currency }}</div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="col-12 text-left">Country:</div>
+                                        <div class="col-12 text-left text-success">{{ this_plot.country }}</div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-12"><i class="fa fa-home mr-4"></i>Property Amenities</div>
+                        <div class="row m-0 p-0  mt-4">
+                            <div class="col-12 text-primary"><i class="fa fa-home mr-4"></i>Property Amenities</div>
                             <div class="col-12">
                                 <ul>
                                     <li>fitness center</li>
@@ -228,8 +289,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-12"><i class="fa fa-file mr-4"></i>Property attachents</div>
+                        <div class="row m-0 p-0 mt-4">
+                            <div class="col-12 text-primary"><i class="fa fa-file mr-4"></i>Property attachents</div>
                             <div class="col-12 text-center">no attachments yet</div>
                         </div>
                         
@@ -239,73 +300,165 @@
                     </div>
                 </div>
                 <div class="col-12" id="financials_div" style="display: none;">
-                    <div class="container">
-                        <div class="row mt-3 p-2">
+                    <div class="container bg-white border border-primary border-top-0 shadow">
+                        <div class="row p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
-                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent transactions</div>
-                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>{{ this_plot.property_name }}{{' '}}
+                                Transactions</div>
+                                <!-- <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div> -->
                             </div>
-                            <div class="col-12 text-center" >This are the most recent transactions</div>
+                            <!-- <div class="col-12 text-center" >This are the most recent transactions</div> -->
+                            <table class="table table-responsive-sm table-hover">
+                                <thead class="thead-light">
+                                  <tr>
+                                      <th>#</th>
+                                    <th>Tenant Name</th>
+                                    <th>Payment method</th>
+                                    <th>Room</th>
+                                    <th>Payment date</th>
+                                    <th>Receipt No:</th>
+                                    <th>Amount</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for k in i_payments %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ k.Paying_user.first_name }}{{' '}}{{k.Paying_user.last_name }}</td>
+                                        <td>Mpesa</td>
+                                        <td>{{ k.Paid_booking.booked_room.room_name }}</td>
+                                        <td>{{ k.TransactionDate }}</td>
+                                        <td>{{ k.Paid_booking.Receipt_Number }}</td>
+                                        <td>{{ k.Amount}}</td>
+                                      </tr>
+                                    {% endfor %}
+                                  
+                                </tbody>
+                              </table>
                             
                         </div>
-                        <div class="row mt-3 p-2">
+                        <!-- <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent purchases</div>
                                 <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
                             </div>
-                            <div class="col-12 text-center" >This are the most recent transactions</div>
+                            <table class="table table-responsive-sm table-hover">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th>Client Name</th>
+                                    <th>Payment method</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john</td>
+                                    <td>Ksh.100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Mary</td>
+                                    <td>Moe</td>
+                                    <td>Doe</td>
+                                    <td>Ksh. 100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>July</td>
+                                    <td>Dooley</td>
+                                    <td>Doe</td>
+                                    <td>Ksh. 500</td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             
-                        </div>
-                        <div class="row mt-3 p-2">
+                        </div> -->
+                        <!-- <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Recent loans</div>
                                 <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
                             </div>
                             <div class="col-12 text-center" >This are the most recent transactions</div>
                             
-                        </div>
+                        </div> -->
                     </div> 
                 </div>
 
                 <div class="col-12" id="specs_div" style="display: none;">
-                    <div class="container">
+                    <div class="container bg-white border border-primary border-top-0 shadow">
                         <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
-                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>keys</div>
-                                <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>assign</div>
+                                <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>{{ this_plot.property_name }}{{' '}}
+                                Tenants</div>
+                                <!-- <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div> -->
                             </div>
-                            <div class="col-12 text-center" >no keys assigned</div>
-                            
+                            <table class="table table-responsive-sm table-hover">
+                                <thead class="thead-light">
+                                  <tr>
+                                        <th>#</th>
+                                        <th>Tenant Name</th>
+                                        <th>House</th>
+                                        <th>Check in Date</th>
+                                        <th>Stay time:</th>
+                                        <th>Payment status</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for j in i_tenants %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ j.room_tenant.first_name }}{{' '}}{{j.room_tenant.last_name }}</td>
+                                        <td>{{ j.room_name }}</td>
+                                        
+                                        <td>{{ j.date_created }}</td>
+                                        <td>4 months</td>
+                                        <td>
+                                            {% if j.payment_status == True %}
+                                            <span class="text-success">paid</span>
+                                            {% else %}
+                                            <span class="text-danger">not paid</span>
+                                            {% endif %}
+                                        </td>
+                                        
+                                      </tr>
+                                    {% endfor %}
+                                  
+                                </tbody>
+                              </table>
                         </div>
-                        <div class="row mt-3 p-2">
+                        <!-- <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>paint</div>
                                 <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
                             </div>
                             <div class="col-12 text-center" >No paint added</div>
                             
-                        </div>
-                        <div class="row mt-3 p-2">
+                        </div> -->
+                        <!-- <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Doors</div>
                                 <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
                             </div>
                             <div class="col-12 text-center" >No door added</div>
                             
-                        </div>
-                        <div class="row mt-3 p-2">
+                        </div> -->
+                        <!-- <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Flooring</div>
                                 <div class="mr-5"><i class="fa fa-plus-circle mr-4 "></i>add</div>
                             </div>
                             <div class="col-12 text-center" >No floors added</div>
                     
-                        </div>
+                        </div> -->
                     </div>
                 </div> 
-
+<!-- 
                 <div class="col-12" id="utilities_div" style="display: none;">
-                    <div class="container">
+                    <div class="container bg-white border border-primary border-top-0 shadow">
                         <div class="row mt-3 p-2">
                             <div class="col-12 d-flex justify-content-between text-success ">
                                 <div class="pl-4"><i class="fa fa-dollar-sign mr-4 "></i>Utility providers</div>
@@ -376,7 +529,7 @@
                     
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>
@@ -399,12 +552,29 @@
                 $("#testing1").hide();
             return false;
         });
+        $("#profile").click(
+            function(){
+                $("#financials_div").hide();
+                $("#specs_div").hide();
+                $("#utilities_div").hide();
+                $("#financials, #specs, #utilities").removeClass("bg-white");
+                $("#specs, #financials, #utilities").removeClass("text-primary");
+                $("#profile").addClass("bg-white");
+                $("#profile").addClass("text-primary");
+                $("#profile_div").css("display","block");
+                return false;
+
+            });
       
         $("#financials").click(
             function(){
                 $("#profile_div").hide();
                 $("#specs_div").hide();
                 $("#utilities_div").hide();
+                $("#profile, #specs, #utilities").removeClass("bg-white");
+                $("#specs, #profile, #utilities").removeClass("text-primary");
+                $("#financials").addClass("bg-white");
+                $("#financials").addClass("text-primary");
                 $("#financials_div").css("display","block");
                 return false;
 
@@ -415,6 +585,11 @@
                 $("#profile_div").hide();
                 $("#financials_div").hide();
                 $("#utilities_div").hide();
+                $("#profile, #financials, #utilities").removeClass("bg-white");
+                //$("#financials").removeClass("bg-white");
+                $("#financials,#profile, #utilities").removeClass("text-primary");
+                $("#specs").addClass("bg-white");
+                $("#specs").addClass("text-primary");
                 $("#specs_div").css("display","block");
                 return false;
 
@@ -424,6 +599,13 @@
                 $("#profile_div").hide();
                 $("#financials_div").hide();
                 $("#specs_div").hide();
+                $("#profile, #financials, #specs ").removeClass("bg-white");
+                //$("#financials").removeClass("bg-white");
+                $("#financials, #profile, #specs").removeClass("text-primary");
+                //$("#specs").removeClass("bg-white");
+                //$("#specs").removeClass("text-success");
+                $("#utilities").addClass("bg-white");
+                $("#utilities").addClass("text-primary");
                 $("#utilities_div").css("display","block");
                 return false;
 

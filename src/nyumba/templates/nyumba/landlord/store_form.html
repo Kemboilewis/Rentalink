@@ -1,33 +1,62 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 
 {% endblock %}
 {% block content %} 
-<div class="container">
-    <form action="#" method="POST">
+<div class="container mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <div class="row mt-1 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary  " href="{% url 'nyumba:stores' %}">
+                <span class="mr-md-3 mr-2">stores</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="{% url 'nyumba:store_form' %}">
+                <span>add store</span></a></li>
+            </ol>
+        </nav>
+        </div>
+    </div>
+    <form action="{% url 'nyumba:addstore' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="text-center text-success mt-3">add a store</h4>
+                <h4 class="text-center text-success mt-3" style="text-decoration: underline;">Add a  store</h4>
             </div>
             <div class="col-md-4 mt-4">
                 <div class="card">
-                    <div class="card-header bg-primary">choose currency</div>
+                    <div class="card-header bg-primary">choose plot</div>
                     <div class="card-body">
-                      <p class="card-text">
-                        You need to select the currency for this property accounting! 
-                        Please note, you will not be able to edit it !!!
-                      </p>
-                      <div class="form-group">
-                        <label for="email">currency:</label>
-                        <input type="text" class="form-control" id="currency">
-                      </div>
+                        <p class="card-text">
+                            You need to choose from the list provided which plot does the
+                             store belong. 
+                          </p>
+                          <div class="form-group">
+                            <label for="plot">Plot:</label>
+                            <select name="plot" class="custom-select">
+                                <option selected>select plot</option>
+                                {% for p in plots %}
+                                <option value="{{ p.id }}">{{ p.property_name }}</option>
+                                {% endfor %}
+                              </select>
+                          </div>
                     </div>
                   </div>
                   <div class=" w-100 mt-5">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">upload store photo</label>
+                        <input type="file" name="store_img" class="custom-file-input" id="store_img">
+                        <label class="custom-file-label" for="store_img">upload store photo</label>
                     </div>
                   </div>
              
@@ -40,48 +69,53 @@
                                 <div class="col-12">store General information</div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">Store Name:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="store_name">Store Name:</label>
+                                        <input type="text" name="store_name" class="form-control" id="store_name">
                                     </div>
                                     
                                    
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">Year built:</label>
-                                        <input type="number" class="form-control" id="currency">
+                                        <label for="no_units">Number of units:</label>
+                                        <input type="number" name="no_units" class="form-control" id="no_units">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="email">mls#:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="store_location">location:</label>
+                                        <input type="text" name="store_location" class="form-control" id="store_location">
                                     </div>
                                 </div>
                             </div>
                             <div class="row m-3 p-0">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">street address:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="address">street address:</label>
+                                        <input type="text" name="address" class="form-control" id="address">
                                     </div>
                                     
                                    
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">city:</label>
-                                        <input type="text" class="form-control" id="currency">
+                                        <label for="state">store condition:</label>
+                                        <input type="text" name="state" class="form-control" id="state">
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="year_built">Year built:</label>
+                                        <input type="date" name="year_built" class="form-control" id="year_built">
+                                    </div>
+                                <!-- <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="email">country:</label>
                                         <input type="text" class="form-control" id="currency">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="row m-3 p-0">
+                            <!-- <div class="row m-3 p-0">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="email">State/region:</label>
@@ -119,7 +153,7 @@
                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -127,16 +161,17 @@
             </div>
         </div>
 
-
-        <div class="row m-0 p-0">
+</div>
+        <div class="row m-0 p-0 mt-4">
             <div class="col-12 "> 
                 <div class=" row d-flex justify-content-around">
                     <button class="btn border border-danger text-danger">cancel </button>
-                    <button class="btn btn-success">create</button>
+                    <button class="btn btn-success">add store</button>
 
                 </div>
             </div>
 
+        </div>
         </div>
        
 

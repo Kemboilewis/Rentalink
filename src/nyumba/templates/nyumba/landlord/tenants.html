@@ -1,9 +1,9 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
-    /* Style The Dropdown Button */
-    .dropbtn {
+  /* Style The Dropdown Button */
+  .dropbtn {
       color: blue;
       padding: 5px;
       font-size: 26px;
@@ -48,90 +48,236 @@
       color:goldenrod;
     }
 
-    .property_image{
-        width:100px;
-        height: 100px;
-        background-color: #fff;
-        
-    }
-    
+  /* body{margin-top:20px;
+background-color: #f7f7fc;
+} */
+
+.timeline {
+    list-style-type: none;
+    position: relative
+}
+
+.timeline:before {
+    background: #dee2e6;
+    left: 9px;
+    width: 2px;
+    height: 100%
+}
+
+.timeline-item:before,
+.timeline:before {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    z-index: 1
+}
+
+.timeline-item:before {
+    background: #fff;
+    border-radius: 50%;
+    border: 3px solid #3b7ddd;
+    left: 0;
+    width: 20px;
+    height: 20px
+}
+.card {
+    margin-bottom: 24px;
+    box-shadow: 0 0 0.875rem 0 rgba(33,37,41,.05);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: initial;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.card-header:first-child {
+    border-radius: .25rem .25rem 0 0;
+}
+.card-header {
+    border-bottom-width: 1px;
+}
+.pb-0 {
+    padding-bottom: 0!important;
+}
+.card-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 0 solid transparent;
+}
 
     </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 ">
-    <div class="row pl-4 pr-4">
-        <div class="col-md-4">  
-                <div class="dropdown">
-                  <button class="dropbtn ">Tenants<i class="fa fa-caret-down pl-3"></i></button>
-                  <div class="dropdown-content">
-                    <a href="{% url 'nyumba:tenants' %}">Tenants</a>
-                    <a href="{% url 'nyumba:rental_applications' %}">Rental applications</a>
-                    <a href="#">proffessionals</a>
-                  </div>
-                </div>
-              
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                  <button class="btn btn-white" type="button">
-                      <i class="fa fa-search"></i>
-                  </button>
-                </div>
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-              </div>
-              
-        </div>
-        <div class="col-md-4 ">
-            <a href="{% url 'nyumba:add_property' %}"><button type="button" class="btn btn-success">
-                <i class="fa fa-plus pr-2"></i> add tenant</button>
+
+<div class="container-fluid mt-4 pt-5 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+  <div class="row mt-1 bg-white ">
+    <div class="col-auto col-md-12 bg-white">
+    <nav aria-label="breadcrumb " class="second bg-white">
+        <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+        <li class="breadcrumb-item font-weight-normal ">
+            <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+            <span class="mr-md-3 mr-2">Dashboard</span>
             </a>
-        </div>
+            <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+        </li>
+        <li class="breadcrumb-item font-weight-normal">
+            <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:tenants' %}">
+            <span class="mr-md-3 mr-2">tenants</span>
+            </a>
+            </li>
+        <!-- <li class="breadcrumb-item font-weight-bold">
+            <a class="black-text text-capitallize active-2" href="#">
+            <span>units</span></a></li> -->
+        </ol>
+    </nav>
     </div>
-    <div class="row bg-secondary pl-3 pr-3 mt-4 mb-4 pt-3 pb-3">
-        <div class="col-md-7">
-            <div class="row">
-                <div class="col-8">
-                    <div class="row">
-                        <div class="col-6 align-self-center">
-                            <div class="property_image float-md-right float-sm-none pl-2"></div>
-                        </div>
-                        <div class="col-6 align-self-center">
-                            <div class="property_info">
-                                <div class="">Name Name</div>
-                            </div>
-                        </div>
-                    </div>
-                    
+</div>
+  <!-- <div class="container-fluid p-0 bg-white"> -->
+    <div class="row m-0 p-0 mt-4">
+      <div class="col-md-4">  
+              <div class="dropdown">
+                <button class="dropbtn ">Tenants<i class="fa fa-caret-down pl-3"></i></button>
+                <div class="dropdown-content">
+                  <a href="{% url 'nyumba:rental_applications' %}">Rental applications</a>
+                  <!-- <a href="{% url 'nyumba:reminders' %}">Reminders</a>
+                  <a href="#">Equipments</a> -->
                 </div>
-                <div class="col-4 align-self-center text-center">
-                    <div class="property_type pt-3">move in</div>
-                   
-  
-                </div>
+              </div>
+            
+      </div>
+      <div class="col-md-4 text-center">
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-white" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+              </div>
+              <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
             </div>
             
-        </div>
-        <div class="col-md-5 align-self-center">
-            <div class="row">
-                <div class="col-8 d-flex justify-content-center text-center">
-                        <div class="p-2 flex-fill "><i class="fa fa-users"></i></div>
-                        <div class="p-2 flex-fill "><i class="fa fa-dollar-sign"></i></div>
-                        <div class="p-2 flex-fill "><i class="fa fa-tools"></i></div>
-                      
-                </div>
-                <div class="col-4 text-right pr-4 text-primary"><a href="{% url 'nyumba:individual_property' %}">profile</a></div>
+      </div>
+      <div class="col-md-4 text-center ">
+          <a href="{% url 'nyumba:add_tenant' %}"><button type="button" class="btn btn-success">
+              <i class="fa fa-plus pr-2"></i>Add tenant</button>
+          </a>
+          
+      </div>
+  </div>
+  <div class="row m-0 p-0 mt-2 bg-white">
+    <div class="col-md-10 mx-auto">
+      <div class="card">
+        <div class="card-header bg-light pb-0">
+          <div class="card-actions float-right">
+            <div class="dropdown">
+              <button class="dropbtn text-small p-0 m-0 text-normal bg-light"><i class="fa fa-ellipsis-h text-primary mr-5"></i></button>
+              <div class="dropdown-content">
+                <a href="#" class="text-primary">Edit</a>
+                <a href="#" class="text-danger">Delete</a>
+                <!-- <a href="#">Equipments</a> -->
+              </div>
             </div>
+          </div>
+          <h5 class="card-title mb-0 text-primary">tenants</h5>
+
         </div>
-        
+        <div class="card-body">
+          <table class="table table-striped table-hover" style="width:100%"> 
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tenant Name</th>
+                <th>House number</th>
+                <th>Plot Name</th>
+                <th>Phone Number</th>
+                <th>Payment</th> 
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in all_tenants %}
+              <!-- <tr class="Tenantbtn" tid="{{ t.id }}"> -->
+                <td>{{ forloop.counter}}</td>
+                <td><img src="{{t.room_tenant.profile_image.url }}" width="32" height="32" 
+                  class="rounded-circle my-n1" alt="img">{{t.room_tenant.first_name }}{{' '}}{{t.room_tenant.last_name }}</td>
+                <td>{{ t.room_name }}</td>
+                <td>{{ t.room_plot.property_name }}</td>
+                <td>{{ t.room_tenant.Phone_number }}</td>
+                {% if t.payment_status == False %}
+                <td><span class="badge bg-warning"> not paid</span></td>
+                {% else %}
+                <td><span class="badge bg-success"> paid </span></td>
+                {% endif %}
+                
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+   
+              </div>
+            </div>
+            </div>
+          </div>
+         
+          
+        </div>
+    </div> -->
 
+
+  </div>
+  
+
+<!-- </div> -->
 </div>
-
-
-
 
 {% endblock %}
 {% block js %}
+<script>
+  $(document).ready(function(){
+
+    //jquery function for reading a single message after a double click from the user
+    $(".Tenantbtntn").click(function(){//the class .mesbtn is clicked
+                    var t_id = $(this).attr("tid");//get the message id
+                    $.ajax({//initiate a ajax request
+                        url:"{% url 'nyumba:tenantinfo' %}",
+                        type:"GET",//method
+                        data:{ tenant_id:t_id},//data to be send
+                        success: function(response){
+                            var tenant = JSON.parse(response["instance"]);//parse the data to js object
+                            //$("#inbox").hide();                     //hide this divs
+                            //$("#user_sent").hide();
+                            //$("#read").css("display","block");      //display the div for the message
+                            document.getElementById("user").innerHTML = tenant[0]['fields']['sender'];//set the contents  to this html elements using innerHTML method
+                            document.getElementById("date").innerHTML = tenant[0]['fields']['date_sent'];
+                            document.getElementById("subject").innerHTML = tenant[0]['fields']['subject'];
+                            document.getElementById("text").innerHTML = tenant[0]['fields']['text'];
+                            var chatid = guide[0]['pk'];//get the message id incase of a reply
+                            console.log(chatid);
+                            var chatsender = guide[0]['fields']['sender'];
+                            var chatsubject = guide[0]['fields']['subject'];
+                            $("#chatid").val( chatid);
+                            $("#msg_id").val( chatid);
+                            $("#h_id").val( chatid);
+                            $("#chatsender").val( chatsender);
+                            $("#chatsubject").val( chatsubject);
+    
+                        }
+                    });
+                });
+  
+});
+</script>
+
 {% endblock %}

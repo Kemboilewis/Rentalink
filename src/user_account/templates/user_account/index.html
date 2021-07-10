@@ -15,27 +15,106 @@
         <title>rentalink_systems</title>
         {% block css %}
         <style>
-
-
+.mycontainer{
+    width: 100%;
+    /* margin-left: 0.5%; */
+}
+ .main-content{
+	width: 100%;
+	border-radius: 20px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+	margin: 5em auto;
+	display: flex;
+}
+.company__info{
+	background-color:#1E90FF;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+}
+.fa-android{
+	font-size:3em;
+}
+@media screen and (max-width: 640px) {
+	.main-content{width: 90%;}
+	.company__info{
+		display: none;
+	}
+	.login_form{
+		border-top-left-radius:20px;
+		border-bottom-left-radius:20px;
+	}
+}
+@media screen and (min-width: 642px) and (max-width:800px){
+	.main-content{width: 70%;}
+}
+.row > h2{
+	color:#1E90FF;
+}
+.login_form{
+	background-color: #fff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+form{
+	padding: 0 2em;
+}
+.form__input{
+	width: 100%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+.login_btn{
+	transition: all .5s ease;
+	width: 70%;
+	border-radius: 30px;
+	color:#008080;
+	font-weight: 600;
+	background-color: #fff;
+	border: 1px solid #008080;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+}
+.login_btn:hover, .login_btn:focus{
+	background-color: #008080;
+	color:#fff;
+} 
         
-        </style>
+        </style> 
         
         {% endblock %}
     </head>
     
     <body>
-        <div class="container-fluid">
-            <div class="mycontainer ">
+        <div class="container-fluid m-0 p-0 mx-auto">
+            <div class="mycontainer m-0 p-0 ">
                 <!--<div class="container-fluid px-0">-->
-                    <nav class="navbar navbar-expand-md bg-white  sticky-top"> 
+                    <nav class="navbar navbar-expand-md bg-primary  sticky-top"> 
                         <a class="navbar-brand " href="#">
-                            <img src="{% static 'user_account/images/rentalink1.png' %}" width="50px" ><strong class="text-primary">rentalinks</strong>
+                            <!-- <img src="{% static 'user_account/images/rentalink1.png' %}" width="50px" ><strong class="text-primary">rentalinks</strong> -->
+                            <i class=" bx bxs-home-smile bx-md text-white" ></i><strong class="text-white">rentalinks</strong>
                         </a> 
                         <button class="navbar-toggler mr-3 border border-primary" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
                             <i class="fa fa-bars  text-primary"></i> 
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav m-xl-auto">
+                            <ul class="navbar-nav m-xl-auto bg-primary">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Tenant services
@@ -218,282 +297,171 @@
                                     </div>
                                 </li>
                                 <li class="nav-item login mr-5">
-                                    <a class="nav-link button border border-primary " href="{% url 'user_account:login_template' %}">login</a>
+                                    <button type="button" class="nav-link button border border-white" data-toggle="modal" 
+                                    data-target="#login">
+                                        login
+                                      </button>
+                                    <!-- <a class="nav-link button border border-primary " 
+                                    href="{% url 'user_account:login_template' %}">login</a> -->
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link button bg-primary  text-center" href="{% url 'user_account:register_template' %}">signup</a>
+                                    <a class="nav-link button  text-center" 
+                                    href="{% url 'user_account:register_template' %}">signup</a>
                                 </li>
                             </ul>
                             
                         </div>
                     </nav>
                     <!--This is the row below navigation-->
-                    <div class="row p-0 m-0 " id="section1" style="height: 400px;background-image: url({% static 'User_account/images/section1.jpg' %});
+                    <div class="row p-0 m-0 " id="section1" 
+                    style="height: 400px;background-image: url({% static 'User_account/images/section1.jpg' %});
                     background-size: cover;background-repeat: no-repeat;opacity: 1;"> 
                     <div class="image_text mx-auto text-center mb-5">
+                        
+                            
+                            <div class="text-center">
+                                {% for m in messages %}
+                                <div class="text-{{m.tags}} pt-3 text-center">
+                                    <strong>{{ m }}</strong>
+                                </div>
+                                    
+                                {% endfor %}
+                            </div>
+                           
+                        
                         <div class="welcome_text ">rentalinks, best solution for tenants and landlords</div>
                         <div class="description_text btn mt-2"><a href="{% url 'user_account:register_template' %}">get started </a></div>
                     </div>     
                     </div>
                     <!--this is the row that contains the features-->
                     <div class="row mt-5 mb-5 ">
-                        <div class="col-12 text-center"><h1 class="pt-5 pb-1 text-primary">Simple & Effective Features</h1>
+                        <div class="col-12 text-center"><h1 class="pt-5 pb-1 text-secondary">Simple & Effective Features</h1>
                         </div>
+                        <div class="col-md-10 mx-auto" id="accordion ">
 
-  
-
-
-
-
-
-                        <div class="row ">
-                            <div id="accordion" class=" col-md-10 mx-auto" >
-                                <div class="card">
-                                  <div class="card-header  " id="headingOne">
-                                    <h5 class="mb-0 mx-auto">
-                                      <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#collapseOne" 
-                                      aria-expanded="true" aria-controls="collapseOne">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-dollar-sign p-2 text-success"></i>Online payment
-                                      </button>
-                                    </h5>
-                                  </div>
-                              
-                                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
+                            <div class="card">
+                              <div class="card-header stretched-link">
+                                <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#collapseOne" 
+                                >
+                                  <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
+                                  <i class="fa fa-dollar-sign p-2 text-success"></i>Online payment
+                                </button>
+                                <!-- <a class="card-link " data-toggle="collapse" href="#collapseOne">
+                                  Collapsible Group Item #1
+                                </a> -->
+                              </div>
+                              <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
                                         </div>
-                                      
+                                        <div class="col-sm-8">
+                                         <p class="text-secondary pt-3">
+                                             Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
+                                             services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
+                                             for other services. 
+                                             
+                                            </p>
+                                        </div>
                                     </div>
-                                  </div>
+                                  
                                 </div>
-                                <div class="card">
-                                  <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                      <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseTwo"
-                                       aria-expanded="false" aria-controls="collapseTwo">
+                              </div>
+                            </div>
+                          
+                            <div class="card">
+                              <div class="card-header">
+                                <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseTwo"
+                                       >
                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
                                         <i class="fa fa-building p-2 text-success"></i>
                                         Automatic listing
                                       </button>
-                                    </h5>
-                                  </div>
-                                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                  <div class="card-header" id="headingThree">
-                                    <h5 class="mb-0">
-                                      <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseThree" 
-                                      aria-expanded="false" aria-controls="collapseThree">
-                                      <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                      <i class="fa fa-id-card p-2 text-success"></i>
-                                        Online rental applications
-                                      </button>
-                                    </h5>
-                                  </div>
-                                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingFour">
-                                      <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseFour" 
-                                        aria-expanded="false" aria-controls="collapseFour">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-search p-2 text-success"></i>
-                                          Tenant and Landlord screening
-                                        </button>
-                                      </h5>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                      <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="card">
-                                    <div class="card-header" id="headingFive">
-                                      <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseFive" 
-                                        aria-expanded="false" aria-controls="collapseFive">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-store p-2 text-success"></i>
-                                          Online store application and management
-                                        </button>
-                                      </h5>
-                                    </div>
-                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                      <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="card">
-                                    <div class="card-header" id="headingsix">
-                                      <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapsesix" 
-                                        aria-expanded="false" aria-controls="collapsesix">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-gavel p-2 text-success"></i>
-     
-                                        Online Maintenance requests and equipment tracking
-                                        </button>
-                                      </h5>
-                                    </div>
-                                    <div id="collapsesix" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                      <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="card">
-                                    <div class="card-header" id="headingseven">
-                                      <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseseven" 
-                                        aria-expanded="false" aria-controls="collapseseven">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-comments p-2 text-success"></i>
-                                          Direct online communication
-                                        </button>
-                                      </h5>
-                                    </div>
-                                    <div id="collapseseven" class="collapse" aria-labelledby="headingseven" data-parent="#accordion">
-                                      <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="card">
-                                    <div class="card-header" id="headingeight">
-                                      <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseight" 
-                                        aria-expanded="false" aria-controls="collapseight">
-                                        <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
-                                        <i class="fa fa-file-pdf p-2 text-success"></i>
-                                          Accounting, reports generation and printable receipts
-                                        </button>
-                                      </h5>
-                                    </div>
-                                    <div id="collapseight" class="collapse" aria-labelledby="headingeight" data-parent="#accordion">
-                                      <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
-                                            </div>
-                                            <div class="col-sm-8">
-                                             <p class="text-secondary pt-3">
-                                                 Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
-                                                 services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
-                                                 for other services. 
-                                                 
-                                                </p>
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
                               </div>
+                              <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
+                                        </div>
+                                        <div class="col-sm-8">
+                                         <p class="text-secondary pt-3">
+                                             Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
+                                             services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
+                                             for other services. 
+                                             
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          
+                            <div class="card">
+                              <div class="card-header">
+                                <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseThree" 
+                                aria-expanded="false" aria-controls="collapseThree">
+                                <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
+                                <i class="fa fa-id-card p-2 text-success"></i>
+                                  Online rental applications
+                                </button>
+                                <!-- <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                  Collapsible Group Item #3
+                                </a> -->
+                              </div>
+                              <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
+                                        </div>
+                                        <div class="col-sm-8">
+                                         <p class="text-secondary pt-3">
+                                             Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
+                                             services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
+                                             for other services. 
+                                             
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
 
+                            <div class="card">
+                                <div class="card-header">
+                                    <button class="btn btn-link collapsed w-100 text-left" data-toggle="collapse" data-target="#collapseFour" 
+                                    aria-expanded="false" aria-controls="collapseseven">
+                                    <i class="fa fa-check circle mr-5 ml-5 pr-5 text-success"></i>
+                                    <i class="fa fa-comments p-2 text-success"></i>
+                                      Direct online communication
+                                    </button>
+                                  <!-- <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                    Collapsible Group Item #3
+                                  </a> -->
+                                </div>
+                                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                  <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-sm-4">
+                                              <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="200px" class="float-right ">
+                                          </div>
+                                          <div class="col-sm-8">
+                                           <p class="text-secondary pt-3">
+                                               Payment made easier with Rentalinks systems. You can pay for your rent, storage services and any other
+                                               services with just your Mpesa. The landlords can collect payment for their rent and any accept other payment
+                                               for other services. 
+                                               
+                                              </p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                          
+                          </div>
 
-
-
-
-
-
-                    
-
-                        
-                    </div>
                     </div>
                     <div class="row mt-5 p-0 m-0">
 
@@ -501,60 +469,63 @@
 
                         
                           
-                          <div class="col-lg-12  pt-5 pb-5 bg-primary text-light">
-                              <h2 class="text-center mb-4 " style="font-weight: 900;">why landlords and tenants love rentalinks</h2>
+                          <div class="col-md-11 mx-auto border border-secondary  pt-5 pb-5 bg-light text-secondary">
+                              <h2 class="text-center mb-4 " style="font-weight: 900;">why landlords and tenants use rentalinks</h2>
                             <div id="client-testimonial-carousel" class="carousel slide" data-ride="carousel" style="height:300px;">
                               <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active text-center p-4">
-                                  <blockquote class="blockquote text-center ">
-                                    <p class="mb-0"><i class="fa fa-quote-left"></i> Everybody is a genius. But if you judge a fish by its ability to climb a tree, it will live its whole life believing that it is stupid.
+                                  <blockquote class="blockquote text-center text-primary">
+                                    <p class="mb-0 text-primary"><i class="fa fa-quote-left text-primary"></i> It is a fast, efficient and reliable means of 
+                                        managing your houses or properties, Its is very convenient.
                                     </p>
-                                    <footer class="blockquote-footer">Albert Einstein <cite title="Source Title">genius</cite></footer>
+                                    <footer class="blockquote-footer">Landlord One  <cite title="Source Title" class="text-info">landlord</cite></footer>
                                     <!-- Client review stars -->
                                     <!-- "fas fa-star" for a full star, "far fa-star" for an empty star, "far fa-star-half-alt" for a half star. -->
-                                    <p class="client-review-stars">
+                                    <p class="client-review-stars text-secondary">
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star-half-alt"></i>
                                       <i class="far fa-star"></i>
                                     </p>
-                                    <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="100px" class="rounded-circle">
+                                    <img src="{% static 'user_account/images/avatar7.png' %}" alt="image" width="100px" class="rounded-circle">
                                   </blockquote>
                                   
                                 </div>
                                 <div class="carousel-item text-center p-4">
-                                  <blockquote class="blockquote text-center">
-                                    <p class="mb-0"><i class="fa fa-quote-left"></i> Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.
+                                  <blockquote class="blockquote text-center text-primary">
+                                    <p class="mb-0 text-primary"><i class="fa fa-quote-left text-primary"></i> It is a fast, efficient and reliable means of 
+                                        managing your houses or properties, Its is very convenient.
                                     </p>
-                                    <footer class="blockquote-footer">Albert Einstein <cite title="Source Title">genius</cite></footer>
+                                    <footer class="blockquote-footer">Ahmed kimani <cite title="Source Title" class="text-info">tenant</cite></footer>
                                     <!-- Client review stars -->
                                     <!-- "fas fa-star" for a full star, "far fa-star" for an empty star, "far fa-star-half-alt" for a half star. -->
-                                    <p class="client-review-stars">
+                                    <p class="client-review-stars text-secondary">
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                     </p>
-                                    <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="100px" class="rounded-circle">
+                                    <img src="{% static 'user_account/images/avatar7.png' %}" alt="image" width="100px" class="rounded-circle">
                                   </blockquote>
                                 </div>
                                 <div class="carousel-item text-center p-4">
-                                  <blockquote class="blockquote text-center">
-                                    <p class="mb-0"><i class="fa fa-quote-left"></i> A person who never made a mistake never tried anything new.
+                                  <blockquote class="blockquote text-center text-primary">
+                                    <p class="mb-0 text-primary"><i class="fa fa-quote-left text-primary"></i> It is a fast, efficient and reliable means of 
+                                        managing your houses or properties, Its is very convenient.
                                     </p>
-                                    <footer class="blockquote-footer">Albert Einstein <cite title="Source Title">genius</cite></footer>
+                                    <footer class="blockquote-footer">Julius Peter <cite title="Source Title " class="text-info">landlord</cite></footer>
                                     <!-- Client review stars -->
                                     <!-- "fas fa-star" for a full star, "far fa-star" for an empty star, "far fa-star-half-alt" for a half star. -->
-                                    <p class="client-review-stars">
+                                    <p class="client-review-stars text-secondary">
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                       <i class="fas fa-star"></i>
                                     </p>
-                                    <img src="{% static 'user_account/images/mpesa.png' %}" alt="image" width="100px" class="rounded-circle">
+                                    <img src="{% static 'user_account/images/avatar7.png' %}" alt="image" width="100px" class="rounded-circle">
                                   </blockquote>
                                 </div>
                               </div>
@@ -572,10 +543,10 @@
 
                     </div>
                     <div class="row mt-5 mb-5" >
-                        <div class="col-12 text-center">
-                            <h1 class="pl-4 pt-5">Designed For All Property Types</h1>
-                            <p class=" text-secondary">Rentalink systems has the versatility to accommodate each of your properties, <br>
-                                from student units to commercial space. Regardless of your portfolio, we’ve got you covered.</p>
+                        <div class="col-12 text-left">
+                            <h1 class="pl-4 pt-5 text-secondary" style="text-decoration: underline;">Designed For All Property Types</h1>
+                            <!-- <p class=" text-secondary">Rentalink systems has the versatility to accommodate each of your properties, <br>
+                                from student units to commercial space. Regardless of your portfolio, we’ve got you covered.</p> -->
                         </div>
                         <div class="col-md-4">
                             <div class="card mx-auto border-0 pt-3" style=" width: 80%;">
@@ -627,15 +598,15 @@
                             <h1 class="pl-4 pt-5 text-black">Explore Rentals Around Moi University</h1>
                         </div>
                         <div class="col-md-3">
-                            <div class="card" style=" width: 100%; height: 200px;">
-                                <img class="img-fluid" src="{% static 'user_account/images/student_housing.svg' %}" alt="Card image">
+                            <div class="card" style=" width: 100%; height: 200px; object-fit: cover;">
+                                <img class="img-fluid" src="{% static 'user_account/images/plot2.jfif' %}" alt="Card image" style="object-fit: cover;">
                                 
                               </div>
                             
                         </div>
                         <div class="col-md-3">
-                            <div class="card" style="width: 100%; height: 200px;">
-                                <img class="img-fluid" src="{% static 'user_account/images/plot3.jpg' %}" alt="Card image">
+                            <div class="card" style="width: 100%; height: 200px; object-fit: cover;">
+                                <img class="img-fluid" src="{% static 'user_account/images/plot1.jpg' %}" alt="Card image">
             
                               </div>
                             
@@ -660,7 +631,69 @@
                     <div class=" mt-5">
 
 
-                        <!--Important link source from https://bootsnipp.com/snippets/ooa9M-->
+              
+  
+                <!-- login  The Modal -->
+                <div class="modal fade" id="login">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content main-content text-center">
+                
+                        <!-- Modal body -->
+                        <div class="modal-body p-0">
+                            <!-- Main Content -->
+                    <div class="container-fluid">
+                        
+                        
+                        <div class="row ">
+                            <div class="col-md-4 bg-primary text-center company__info">
+
+                                <span class="company__logo">
+                                    <h2><i class=" bx bxs-home-smile bx-md text-white" ></i>
+                                    </h2></span>
+                                <h4 class="company_title"><strong class="text-white">Rentalinks</strong></h4>
+                            </div>
+                            <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h2>Log In</h2>
+                                    </div>
+                                    <div class="row">
+                                        <form control="" class="form-group" action="{% url 'user_account:login' %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+                                            </div>
+                                            <div class="row">
+                                                <!-- <span class="fa fa-lock"></span> -->
+                                                <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+                                            </div>
+                                            <div class="row">
+                                                <input type="checkbox" name="remember_me" id="remember_me" class="">
+                                                <label for="remember_me">Remember Me!</label>
+                                            </div>
+                                            <div class="row">
+                                                <input type="submit" value="Submit" class="login_btn">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="row">
+                                        <p class="text-secondary">Don't have an account? <a href="{% url 'user_account:register_template'%}" class="text-primary">Register Here</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        </div>
+
+                        
+                
+                    </div>
+                    </div>
+                </div>
+
+
+
 
 <footer id="dk-footer" class="dk-footer mt-5">
         <div class="container">
@@ -668,7 +701,8 @@
                 <div class="col-md-12 col-lg-4">
                     <div class="dk-footer-box-info">
                         <a href="index.html" class="footer-logo">
-                            <img src="{% static 'user_account/images/rentalink1.png' %}"  alt="footer_logo" width="50px" class="img-fluid">
+                            <i class=" bx bxs-home-smile bx-md text-white" ></i><strong class="text-white">rentalinks</strong>
+                            <!-- <img src="{% static 'user_account/images/rentalink1.png' %}"  alt="footer_logo" width="50px" class="img-fluid"> -->
                         </a>
                         <p class="footer-info-text">
                            Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.
@@ -707,7 +741,8 @@
                     </div>
                     <!-- End Footer info -->
                     <div class="footer-awarad">
-                        <img src="{% static 'user_account/images/rentalink1.png' %}" alt="" width="70px">
+                        <i class=" bx bxs-home-smile bx-md text-white" ></i><strong class="text-white">rentalinks</strong>
+                        <!-- <img src="{% static 'user_account/images/rentalink1.png' %}" alt="" width="70px"> -->
                         <p>Best Rental Management Software 2021</p>
                     </div>
                 </div>

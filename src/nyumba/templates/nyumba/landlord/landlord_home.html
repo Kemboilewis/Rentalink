@@ -1,14 +1,92 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
+{% block css %}
+<style>
+	
+
+ /* .first {
+     background-color: white !important
+ }
+
+ a {
+     text-decoration: none !important;
+     color: #aaa !important
+ }
+
+ a:focus,
+ a:active {
+     outline: none !important;
+     box-shadow: none !important
+ }
+
+ .fa-caret-right,
+ .fa-angle-double-right {
+     font-size: 20px !important
+ }
+
+ .fa-caret-right {
+     vertical-align: middle
+ }
+
+ img {
+     vertical-align: bottom;
+     opacity: 0.3
+ }
+
+ .four ol {
+     background-color: rgb(51, 0, 80) !important
+ }
+
+ @media (max-width: 767px) {
+     .breadcrumb {
+         font-size: 10px
+     }
+
+     .breadcrumb-item+.breadcrumb-item {
+         padding-left: 0
+     }
+
+     .icons {
+         font-size: 9px !important
+     }
+
+     .breadcrumb {
+         letter-spacing: 1px !important
+     }
+
+     .breadcrumb>* div {
+         max-width: 60px
+     }
+ } */
+ /* .quick_btn:hover{
+	 background-color: rgb(69, 252, 93);
+	 
+
+ } */
+</style>
+{% endblock %}
 {% block content %}
 
 
-<div class="content_section">
-	<div class="container mt-2">
+	<div class="container pl-0 ml-0 pr-0 mr-0 mx-auto mt-5 pt-3" >
+		<div class="row mt-3 bg-white ">
+			<div class="col-auto col-md-12 bg-white">
+				<nav aria-label="breadcrumb " class="second bg-white">
+					<ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+						<li class="breadcrumb-item font-weight-bold ">
+							<a class="black-text text-uppercase active-2 " href="{% url 'nyumba:landlord_home' %}">
+								<span class="mr-md-3 mr-2">Dashboard</span>
+							</a>
+							
+						</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
 		
-		  <div class="row mt-3 p-3" >
+		  <div class="row mt-0 ml-0 pl-0 " >
 			<div class="col-md-4 col-sm-6">
-			  <div class="card card-block"style="height: 320px;">
+			  <div class=" card dashboard_card card-block mx-auto bg-light h-100" style="width: 90%; ">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -24,31 +102,49 @@
 				</div>
 				<div class="card-body">
 					<div class="row pt-2">
-						<div class="col-4 text-center ">
-							<i class="fa fa-home fa-2x text-primary border"></i>
-							<div class="text-secondary small">ADD NEW PROPERTY</div>
+						<div class="col-4 text-center  ">
+							<a href="{% url 'nyumba:add_property' %}" class="quick_btn" style="text-decoration: none;">
+								<i class="fa fa-home fa-2x text-primary border"></i>
+							    <div class="text-secondary small ">ADD NEW PROPERTY</div>
+							</a>
+							
 							
 						</div>
 						<div class="col-4 text-center ">
-							<i class="fa fa-user-plus fa-2x text-primary border"></i>
+							<a href="{% url 'nyumba:add_tenant' %}">
+								<i class="fa fa-user-plus fa-2x text-primary border"></i>
 							<div class="text-secondary small ">ADD NEW TENANT</div>
+
+							</a>
+							
 							
 						</div>
 						<div class="col-4 text-center ">
-							<i class="fa fa-file-alt fa-2x text-primary border"></i>
+							<a href="{% url 'nyumba:rental_applications' %}" style="text-decoration: none;">
+								<i class="fa fa-file-alt fa-2x text-primary border"></i>
 							<div class="text-secondary small">ADD NEW RENTAL APPLICATION</div>
+							</a>
+							
 							
 						</div>
 					</div>
 					<div class="row mt-5 pb-2">
+						
 						<div class="col-4 text-center ">
-							<i class="fa fa-store fa-2x text-primary border"></i>
-							<div class="text-secondary small">MANAGE STORE</div>
+							<a href="{% url 'nyumba:stores' %}" style="text-decoration: none;">
+								<i class="fa fa-store fa-2x text-primary border"></i>
+								<div class="text-secondary small">MANAGE STORE</div>
+							</a>
+							
 							
 						</div>
 						<div class="col-4 text-center ">
-							<i class="fa fa-tools fa-2x text-primary border"></i>
-							<div class="text-secondary small ">MAINTENANCE REQUESTS </div>
+							<a href="{% url 'nyumba:maintenace' %}" style="text-decoration: none;">
+								<i class="fa fa-tools fa-2x text-primary border"></i>
+							    <div class="text-secondary small ">MAINTENANCE REQUESTS </div>
+
+							</a>
+							
 							
 						</div>
 						<div class="col-4 text-center ">
@@ -64,7 +160,7 @@
 			</div>
 			<div class="col-md-4 col-sm-6">
 				
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card dashboard_card card-block mx-auto bg-light h-100" style="width: 90%;">
 				  <div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -109,12 +205,12 @@
 			 </div>
 			</div>
 			<div class="col-md-4 col-sm-6" >
-			  <div class="card card-block" style="height: 320px; background-image: url({% static 'User_account/images/index.svg' %});
+			  <div class="card dashboard_card card-block mx-auto h-100"  style="width: 90%;  background-image: url({% static 'User_account/images/index.svg' %});
 			  background-size: cover;background-repeat: no-repeat;opacity: 1;">
 				  <div class="card-body pt-5" style="background-color: rgba(211, 211, 211,0.2);">
-					  <h4 class="text-primary">manage your properties at the comfort of your house with 
+					  <!-- <h4 class="text-primary">manage your properties at the comfort of your house with 
 						  <span class="btn btn-danger">rentalink systems</span>
-					  </h4>
+					  </h4> -->
 					<!--<img src="{% static 'User_account/images/index.svg' %}" width="100%" class="mx-auto d-block"  alt="Photo of sunset">-->
 				  </div>
 			   
@@ -126,9 +222,9 @@
 
 
 
-		  <div class="row mt-3 p-3" >
+		  <div class="row mt-5 ml-0 pl-0" >
 			<div class="col-md-4 col-sm-6">
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card dashboard_card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -165,7 +261,7 @@
 			</div>
 			<div class="col-md-4 col-sm-6">
 				
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card dashboard_card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				  <div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -191,7 +287,7 @@
 			 </div>
 			</div>
 			<div class="col-md-4 col-sm-6" >
-			  <div class="card card-block" style="height: 320px;">
+			  <div class="card dashboard_card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -246,9 +342,9 @@
 
 
 
-		  <div class="row mt-3 p-3" >
+		  <div class="row mt-5 ml-0 pl-0 " >
 			<div class="col-md-4 col-sm-6">
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -302,7 +398,7 @@
 			</div>
 			<div class="col-md-4 col-sm-6">
 				
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				  <div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -342,7 +438,7 @@
 			 </div>
 			</div>
 			<div class="col-md-4 col-sm-6" >
-			  <div class="card card-block" style="height: 320px;">
+			  <div class="card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -370,9 +466,9 @@
 
 
 
-		  <div class="row mt-3 p-3" >
+		  <div class="row mt-5 pl-0 ml-0 " >
 			<div class="col-md-4 col-sm-6">
-			  <div class="card card-block"style="height: 320px;">
+			  <div class="card card-block mx-auto bg-light h-100 " style="width: 90%;">
 				<div class="card-header">
 					<div class="d-flex ">
 						<div class="p-2 mr-auto ">
@@ -396,7 +492,7 @@
 			</div>
 			<div class="col-md-4 col-sm-6">
 				
-				<div class="card card-block"style="height: 320px;">
+				<div class="card card-block mx-auto bg-light h-100 " style="width: 90%;"">
 					<div class="card-header">
 						<div class="d-flex ">
 							<div class="p-2 mr-auto ">
@@ -419,7 +515,7 @@
 			  </div>
 			</div>
 			<div class="col-md-4 col-sm-6" >
-				<div class="card card-block"style="height: 320px;">
+				<div class="card card-block mx-auto bg-light h-100 " style="width: 90%;">
 					<div class="card-header">
 						<div class="d-flex ">
 							<div class="p-2 mr-auto ">
@@ -457,6 +553,6 @@
 
 
 
-</div>
+
 {% endblock %}
 

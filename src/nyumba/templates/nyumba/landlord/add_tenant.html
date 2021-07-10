@@ -1,0 +1,150 @@
+{% extends 'nyumba/landlord/base.html' %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+{% block content %} 
+<div class="container mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <div class="row mt-1 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary " href="{% url 'nyumba:tenants' %}">
+                <span class="mr-md-3 mr-2">tenants</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="{% url 'nyumba:add_tenant' %}">
+                <span>add tenant</span></a></li>
+            </ol>
+        </nav>
+        </div>
+    </div>
+    <form action="{% url 'nyumba:register_tenant' %}" method="POST">
+        {% csrf_token %}
+        <div class="row m-3 p-2 mt-5 bg-light">
+            <div class="col-12 text-left text-success bg-light">
+                <a href="{% url 'nyumba:tenants' %}"> <i class="fa fa-arrow-left mr-3"></i>Add tenant</a>
+            </div>
+            <div class="col-sm-6 m-0 p-5">
+                <div class="row">
+                    
+                    <div class="col-12">
+                        <label for="plotid"> select property:</label>
+                        <select name="plotid" class="custom-select w-100 " id="plots">
+                            <option selected>choose Plot</option>
+                            {% for k in plots %}
+                            <option value="{{ k.id }}">{{ k.property_name }}</option>
+                            {% endfor %}
+                            
+                            
+                            
+                        </select>
+  
+                    </div>
+                    <div class="col-12 p-2 mt-3 ">
+                        <label for="email"> select Unit*:</label>
+                        <div class="d-flex  flex-wrap bg-white shadow-lg border border-primary">
+                            {% for i in units %}
+                            <div class="p-2">
+                                <div class="custom-control custom-radio border border-success  m-1" style="border-radius: 5px;"> 
+                                    <input type="radio" class="custom-control-input" id="{{ i.id }}" name="unitid" value="{{ i.id }}">
+                                    <label class="custom-control-label pr-2 text-secondary" for="{{ i.id }}">{{ i.room_name }}</label>
+                                </div>
+                            </div>
+                            
+                            {% endfor %}
+                          </div>
+                      
+                    </div>
+                    <div class="col-12 mt-3">
+                        <label for="tenants"> select Tenant:</label>
+                        <select name="tenants" class="custom-select w-100 " id="tenants">
+                            <option selected>choose tenant*</option>
+                            {% for j in list_tenants %}
+                            <option value="{{ j.id }}">{{ j.first_name }}{{ ' '}} {{ j.last_name }}</option>
+                            {% endfor %}
+                            
+                            
+                            
+                        </select>
+  
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="col-sm-6 w-75">
+                <div class="row m-0 p-4">
+                    <div class="col-12 pb-3 " style="border-left: 4px solid blue;">
+                        <h5 class="card-title">General information</h5>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="c_time">check in time:</label>
+                            <input type="date" name="c_time" id="c_time" class="form-control">
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="o_time">check out time:</label>
+                            <input type="date" name="o_time" id="o_time" class="form-control">
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="s_time">Paid period:</label>
+                            <input type="text" name="s_time" id="s_time" class="form-control">
+                        </div>
+                        
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="payment">payment:</label>
+                            <select name="payment" id="payment" class="custom-select ">
+                                <option selected>Payment*</option>
+                                <option value="True">paid</option>
+                                <option value="False">not paid</option>
+                                
+                            </select>
+
+                        </div>
+                        
+                    </div>
+                    
+            </div>
+           
+           </div>
+            <div class="col-12 "> 
+                <div class=" row d-flex justify-content-around">
+                    <button class="btn border border-danger text-danger">cancel </button>
+                    <button class="btn btn-success">submit</button>
+
+                </div>
+            </div>
+        
+        </div>
+        
+        
+
+    </form>
+</div>
+
+
+{% endblock %}
+{% block js %}
+
+
+{% endblock %}

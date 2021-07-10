@@ -1,0 +1,199 @@
+{% extends 'nyumba/tenant/menu.html' %}
+{% load static %}
+{% block css %}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+      color: blue;
+      padding: 5px;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      color:goldenrod;
+    }
+
+    .property_image{
+        width:100px;
+        height: 100px;
+        background-color: #fff;
+        
+    }
+
+    /* new */
+    /* body{
+    background:#f5f5f5;
+    margin-top:20px; */
+}
+.card {
+    border: none;
+    -webkit-box-shadow: 1px 0 20px rgba(96,93,175,.05);
+    box-shadow: 1px 0 20px rgba(96,93,175,.05);
+    margin-bottom: 30px;
+}
+.table th {
+    font-weight: 500;
+    color: #827fc0;
+}
+.table thead {
+    background-color: #f3f2f7;
+}
+.table>tbody>tr>td, .table>tfoot>tr>td, .table>thead>tr>td {
+    padding: 14px 12px;
+    vertical-align: middle;
+}
+.table tr td {
+    color: #8887a9;
+}
+.thumb-sm {
+    height: 32px;
+    width: 32px;
+}
+.badge-soft-warning {
+    background-color: rgba(248,201,85,.2);
+    color: #f8c955;
+}
+
+.badge {
+    font-weight: 500;
+}
+.badge-soft-primary {
+    background-color: rgba(96,93,175,.2);
+    color: #605daf;
+}
+    
+
+    </style>
+{% endblock %}
+{% block content %} 
+<div class="container mt-4 pt-2 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white" >
+        <div class="row mt-1 bg-white ">
+            <div class="col-auto col-md-12 bg-white">
+            <nav aria-label="breadcrumb " class="second bg-white">
+                <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                <li class="breadcrumb-item font-weight-normal ">
+                    <a class="black-text text-capitallize text-secondary" href="#">
+                    <span class="mr-md-3 mr-2">Dashboard</span>
+                    </a>
+                    <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item font-weight-normal">
+                    <a class="black-text text-capitallize active-2 " href="#">
+                    <span class="mr-md-3 mr-2">Transactions</span>
+                    </a>
+                    </li>
+                <!-- <li class="breadcrumb-item font-weight-bold">
+                    <a class="black-text text-capitallize active-2" href="#">
+                    <span>units</span></a></li> -->
+                </ol>
+            </nav>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-12 text-center">
+                <h4 class="text-primary" style="text-decoration:underline;">Transactions</h4>
+            </div>
+            <div class="col-12 ">
+                <div class="mr-auto border border-primary text-center p-2 ml-3" style="width: 250px; border-radius: 20px;">
+                    Total money Paid<br>
+                {{ total }}
+                </div>
+                
+            </div>
+            
+          
+            <div class="row m-0 p-0">
+                <div class="col-xl-12 mt-5 mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="header-title pb-3 mt-0">Payments</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="align-self-center">
+                                            <th>#</th>
+                                            <th>House Name</th>
+                                            <th>Landlord Name</th>
+                                            <th>Payment method</th>
+                                            <th>Paid Date</th>
+                                            <th>Receipt Number</th>
+                                            <th>Amount.</th>
+                                            <th>Phone Number.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for j in all_t %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{j.Paid_booking.booked_room.room_name }}</td>
+                                            <td>{{j.Paid_booking.booked_plot.plot_owner.first_name }}
+                                                {{' '}}{{j.Paid_booking.booked_plot.plot_owner.last_name }}</td>
+                                            <td>Mpesa</td>
+                                            <td>{{ j.TransactionDate }}</td>
+                                            <td>{{ j.MpesaReceiptNumber }}</td>
+                                            <td>{{ j.Amount }}</td>
+                                            <td>0{{ j.PhoneNumber|slice:"3:11" }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--end table-responsive-->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        
+        
+        
+        
+    
+
+</div>
+
+
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

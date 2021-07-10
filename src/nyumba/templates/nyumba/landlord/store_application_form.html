@@ -1,65 +1,78 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 
 {% endblock %}
 {% block content %} 
-<div class="container">
-    <form action="#" method="POST">
+<div class="container  mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <div class="row mt-5 bg-white ">
+        <div class="col-auto col-md-12 bg-white">
+        <nav aria-label="breadcrumb " class="second bg-white">
+            <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+            <li class="breadcrumb-item font-weight-normal ">
+                <a class="black-text text-capitallize text-secondary" href="#">
+                <span class="mr-md-3 mr-2">Dashboard</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+            </li>
+            <li class="breadcrumb-item font-weight-normal">
+                <a class="black-text text-capitallize text-secondary  " href="#">
+                <span class="mr-md-3 mr-2">stores</span>
+                </a>
+                <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                </li>
+            <li class="breadcrumb-item font-weight-bold">
+                <a class="black-text text-capitallize active-2" href="#">
+                <span> store application form</span></a></li>
+            </ol>
+        </nav>
+        </div>
+    </div>
+    <form action="{% url 'nyumba:add_store_application' %}" method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
         <div class="row m-3 p-2 bg-light">
             <div class="col-12 text-left text-success bg-light">
-                <a href="{% url 'nyumba:reminders' %}"> <i class="fa fa-arrow-left mr-3"></i>Add store application </a>
+                <a href="{% url 'nyumba:store_applications' %}"> <i class="fa fa-arrow-left mr-3"></i>Add store application </a>
             </div>
-            <div class="col-sm-6 m-0 p-5">
+            <div class="col-sm-6 m-0 p-5"> 
                 <div class="row">
                     <div class="form-group w-100">
-                        <label for="email">Store:</label>
-                        <input type="text" class="form-control" id="email">
+                        <label for="plots">Store:</label>
+                        <select name="plotid" class="custom-select-lg w-100 " id="plots">
+                            <option selected>choose store</option>
+                            {% for k in all_stores %}
+                            <option value="{{ k.id }}">{{ k.store_name }}</option>
+                            {% endfor %}
+                            
+                            
+                            
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 pb-3 " style="border-left: 4px solid blue;">
-                        <h5 class="card-title">Request category</h5>
-                        <p class="card-text">Maintenance requests for service work fall into the categories below. Only the main category is 
-                            required, but you can select a sub-category, issue and sub-issue to narrow down the request.</p>
+                        <h5 class="card-title">More details</h5>
+                        <p class="card-text">This are mandatory fields.</p>
                     </div>
-                    <div class="col-sm-6 p-2 ">
-                        <select name="cars" class="custom-select-lg w-100 ">
-                            <option selected>Category</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6 p-2">
-                        <select name="cars" class="custom-select-lg w-100">
-                            <option selected>sub-category</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                    <div class="col-12 p-2 ">
+                        <label for="email"> select storage Unit:</label>
+                        <div class="d-flex  flex-wrap bg-white shadow-lg border border-primary">
+                            {% for i in all_units %}
+                            <div class="p-2">
+                                <div class="custom-control custom-radio border border-success  m-1" style="border-radius: 5px;"> 
+                                    <input type="radio" class="custom-control-input" id="{{ i.id }}" name="unitid" value="{{ i.id }}">
+                                    <label class="custom-control-label pr-2 text-secondary" for="{{ i.id }}">{{ i.unit_number }}</label>
+                                </div>
+                            </div>
+                            
+                            {% endfor %}
+                          </div>
+                      
                     </div>
                     
-                </div>
-                <div class="row mt-2">
-                    <div class="col-sm-6 p-2 ">
-                        <select name="cars" class="custom-select-lg w-100">
-                            <option selected>Issue</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6 p-2">
-                        <select name="cars" class="custom-select-lg w-100">
-                            <option selected>Sub-issue</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
                     
                 </div>
+           
                 
             </div>
             <div class="col-sm-6 w-75">
@@ -67,58 +80,40 @@
                     <div class="col-12 pb-3 " style="border-left: 4px solid blue;">
                         <h5 class="card-title">General information</h5>
                     </div>
-                    <div class="col-sm-6 ">
-                        <select name="cars" class="custom-select ">
-                            <option selected>Priority*</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                    <div class="col-sm-12 ">
+                        <div class="form-group w-100">
+                            <label for="s_date">starting date:</label>
+                            <input type="date" name="s_date" class="form-control" >
+                        </div>
                     </div>
-                    <div class="col-sm-6 ">
-                        <select name="cars" class="custom-select ">
-                            <option selected>Next service*</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
+                    
                     
             </div>
             <div class="row m-0 pl-4 pr-4 pb-4">
-                <div class="col-sm-6 p-2 ">
-                    <select name="cars" class="custom-select ">
-                        <option selected>Schedule* </option>
-                        <option value="volvo">Volvo</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                <div class="col-sm-12 p-2 ">
+                    <div class="form-group w-100">
+                        <label for="e_date">Ending date:</label>
+                        <input type="date" name="e_date" class="form-control" >
+                    </div
                 </div>
-                <div class="col-sm-6 p-2">
-                    <select name="cars" class="custom-select ">
-                        <option selected>Days before*</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
+               
                 <div class="col-12 mt-3">
                     <div class="form-group">
-                        <label for="comment">Details:</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <label for="amount">Amount:</label>
+                        <input class="form-control" type="number" id="amount">
                       </div>
                 </div>
  
             
              </div>   
            </div>
-            <div class="col-12 "> 
-                <div class=" row d-flex justify-content-around">
-                    <button class="btn border border-danger text-danger">cancel </button>
-                    <button class="btn btn-success">create</button>
+           <div class="col-12 "> 
+            <div class=" row d-flex justify-content-around">
+                <button class="btn border border-danger text-danger">cancel </button>
+                <button class="btn btn-success">submit</button>
 
-                </div>
             </div>
+        </div>
         
         </div>
         

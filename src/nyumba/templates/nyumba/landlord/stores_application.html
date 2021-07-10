@@ -1,4 +1,4 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
@@ -61,46 +61,172 @@
       background-color: gray;
       border-radius: 24px;
     }
+    /* list of the available store application */
+    /* body{
+    background:#f2f3f7;
+    margin-top:20px;
+    } */
+/* .m-b-30 {
+    margin-bottom: 30px;
+} */
+p{
+color: #8A98AC;    
+}
+.table-borderless td {
+    border: 0 !important;
+}
+.table td {
+    color: #8A98AC;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 0.6rem;
+}
+.btn-primary-rgba {
+    background-color: rgba(80, 111, 228, 0.1);
+    border: none;
+    color: #506fe4;
+}
+.btn-success-rgba {
+    background-color: rgba(67, 209, 135, 0.1);
+    border: none;
+    color: #43d187;
+}
+.card {
+    border: none;
+    border-radius: 24px;
+    background-color: #6864647e;
+}
     
 
     </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 ">
-    <div class="row pl-4 pr-4">
-        <div class="col-md-4">  
-                <div class="dropdown">
-                  <button class="dropbtn ">store applications<i class="fa fa-caret-down pl-3"></i></button>
-                  <div class="dropdown-content">
-                    <a href="{% url 'nyumba:store_applications' %}">store application</a>
-                    <a href="{% url 'nyumba:stores' %}">mystores</a>
+<div class="container  mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white ">
+              <div class="row mt-1 bg-white ">
+                <div class="col-auto col-md-12 bg-white">
+                <nav aria-label="breadcrumb " class="second bg-white">
+                    <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+                    <li class="breadcrumb-item font-weight-normal ">
+                        <a class="black-text text-capitallize text-secondary" href="#">
+                        <span class="mr-md-3 mr-2">Dashboard</span>
+                        </a>
+                        <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item font-weight-normal">
+                        <a class="black-text text-capitallize text-secondary  " href="#">
+                        <span class="mr-md-3 mr-2">stores</span>
+                        </a>
+                        </li>
+                    <li class="breadcrumb-item font-weight-bold">
+                        <a class="black-text text-capitallize active-2" href="#">
+                        <span> store applications</span></a></li>
+                    </ol>
+                </nav>
+                </div>
+            </div>
+            <div class="row m-0 p-0 mt-4 bg-light">
+                <div class="col-md-4">  
+                        <div class="dropdown">
+                          <button class="dropbtn ">store applications<i class="fa fa-caret-down pl-3"></i></button>
+                          <div class="dropdown-content">
+                            <a href="{% url 'nyumba:stores' %}">stores</a>
+                            <!-- <a href="{% url 'nyumba:stores' %}">mystores</a> -->
+                            
+                          </div>
+                        </div>
+                      
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-white" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                      </div>
+                      
+                </div>
+                <div class="col-md-4 text-center ">
+                    <a href="{% url 'nyumba:store_application_form' %}"><button type="button" class="btn btn-success">
+                        <i class="fa fa-plus pr-2"></i>Add store application</button>
+                    </a>
                     
+                </div>
+            </div>
+    <!-- <div class="row m-3 p-0 ">
+        <div class="text-center mx-auto mt-5">
+                    
+          <div class="container bg-light"> -->
+            <div class="row m-0 p-0 mt-4 ">
+              <h4 class="text-center text-primary w-100 " style="text-decoration: underline;">Store applications</h4>
+            {% for j in all_applications %}
+              <div class="col-sm-4">
+                <div class="card  w-75 mx-auto bg-light border border-primary">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-3 text-center">
+                              <img src="{{ j.applying_user.profile_image.url }}" class="img-fluid rounded-circle" alt="user" />
+                          </div>
+                          <div class="col-9">
+                              <h4>Unit Number:<span class="text-primary">{{ j.applied_unit.unit_number }}</span></h4>
+                              <p> Applying User:<span class="text-primary">{{ j.applying_user.first_name }} {{' '}}{{ j.applying_user.last_name }}</span></p>
+                              <div class="button-list mt-4 mb-3">
+                                  {% if j.owner_response == 0 %}
+                                  <form action="{% url 'nyumba:storeApp_reply' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ j.id }}" name="applicationId">
+                                    <button type="submit" name="choice" value="1" class="btn btn-primary-rgba border border-success">
+                                        <i class="feather icon-message-square mr-2"></i>Accept</button>
+                                    <button type="submit" name="choice" value="2" class="btn btn-success-rgba text-danger border border-danger">
+                                        <i class="feather icon-phone mr-2"></i>Decline</button>
+
+                                  </form>
+                                  {% elif j.owner_response == 1 %}
+                                  <button type="submit" name="choice" value="1" class="btn btn-success-rgba border border-success">
+                                    <i class="feather icon-message-square mr-2"></i>Accepted</button>
+                                  {% else %}
+                                  <button type="submit" name="choice" value="1" class="btn btn-primary-rgba border border-danger text-info">
+                                    <i class="feather icon-message-square mr-2"></i>Declined</button>
+                                  {% endif %}
+
+                                  
+                              </div>
+                              <div class="table-responsive">
+                                  <table class="table table-borderless mb-0">
+                                      <tbody>
+                                          <tr>
+                                              <th scope="row" class="p-1">starting date :</th>
+                                              <td class="p-1">{{ j.starting_date }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row" class="p-1">Ending date :</th>
+                                              <td class="p-1">{{ j.ending_date }}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row" class="p-1">Amount paid :</th>
+                                              <td class="p-1">2000</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row" class="p-1">store :</th>
+                                              <td class="p-1">{{ j.applied_store.store_name }}</td>
+                                          </tr>
+                                          <tr>
+                                            <!-- <th scope="row" class="p-1">Unit :</th>
+                                            <td class="p-1">A20</td> -->
+                                        </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
-              
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                  <button class="btn btn-white" type="button">
-                      <i class="fa fa-search"></i>
-                  </button>
-                </div>
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
               </div>
-              
-        </div>
-        <div class="col-md-4 ">
-            <a href="{% url 'nyumba:store_application_form' %}"><button type="button" class="btn btn-success">
-                <i class="fa fa-plus pr-2"></i>Add store application</button>
-            </a>
+              </div>
+            {% endfor %}
+             
             
-        </div>
-    </div>
-    <div class="row m-3 p-0 ">
-        <div class="text-center mx-auto mt-5">no store applications  yet</div>
-    </div>
-  
+            </div>
 
 </div>
 

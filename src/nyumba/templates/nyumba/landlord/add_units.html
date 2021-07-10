@@ -1,0 +1,151 @@
+{% extends 'nyumba/landlord/base.html' %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+{% block content %}  
+<div class="container pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white">
+    <form action="{% url 'nyumba:addroom' %}"  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row m-0 p-0">
+            <div class="col-sm-12">
+                <span>
+                <div class="p-2 mr-4 align-self-center mt-3 text-primary">
+                    <a href="{% url 'nyumba:properties' %}" style="text-decoration: none;">
+                        <i class="fa fa-arrow-left text-primary mr-3"></i>back
+                    </a>
+                    
+                </div>
+                <h4 class="text-center text-primary mt-3" style="text-decoration: underline;">Add a unit form</h4>
+            </span>
+            </div>
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header bg-primary">choose unit plot</div>
+                    <div class="card-body">
+                      <p class="card-text">
+                        You need to choose from the list provided which plot does the unit belong 
+                        and if its absent you can create under create property 
+                      </p>
+                      <div class="form-group">
+                        <label for="plot">Plot:</label>
+                        <select name="plot" class="custom-select">
+                            <option selected>select plot</option>
+                            {% for p in plots %}
+                            <option value="{{ p.id }}">{{ p.property_name }}</option>
+                            {% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" w-100 mt-5">
+                    <div class="custom-file">
+                        <input type="file" name="unit_img" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">upload unit photo</label>
+                    </div>
+                  </div>
+             
+            </div>
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 mt-3 m-2">
+                            <div class="row m-3 p-0">
+                                <div class="col-12">General information</div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="unit_name">Unit Name:</label>
+                                        <input type="text" class="form-control" name="unit_name" id="unit_name">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="beds">No of bedrooms:</label>
+                                        <input type="text" class="form-control" name="beds" id="beds">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="baths">baths:</label>
+                                        <input type="text" name="baths" class="form-control" id="baths">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-3 p-0">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="parking">parking:</label>
+                                        <input type="text" class="form-control" id="parking" name="parking">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="rent">market rent:</label>
+                                        <input type="number" name="rent" class="form-control" id="rent">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="deposit">deposit:</label>
+                                        <input type="text" name="deposit" class="form-control" id="min_deposit">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-3 p-0">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="size">size:</label>
+                                        <input type="text" name="size" class="form-control" id="size">
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">zip:</label>
+                                        <input type="number" class="form-control" id="currency">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row m-0 p-0">
+            <!-- <div class="col-12 pt-3 mb-5">PROPERTY ATTACHMENTS</div> -->
+            <div class="col-12 pt-3 mb-5 d-flex justify-content-between">
+                <div class="btn btn-danger mx-auto m-4 cancel" id="cancel2">cancel</div>
+                <button type="submit" class="btn btn-success mx-auto m-4" id="proceed3">submit application</div>
+
+            </div>
+        </div>
+        
+
+
+    </form>
+</div>
+
+
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){
+    $("#multi_button").click(function(){
+      $("#singleunit").hide();
+      $("#multiunit").css("display","block");
+    });
+    $("#single_button").click(function(){
+      $("#multiunit").hide();
+      $("#singleunit").show();
+    });
+  });
+</script>
+
+{% endblock %}

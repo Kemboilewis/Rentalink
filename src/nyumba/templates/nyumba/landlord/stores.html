@@ -1,4 +1,4 @@
-{% extends 'nyumba/landlord/landlord_base.html' %}
+{% extends 'nyumba/landlord/base.html' %}
 {% load static %}
 {% block css %}
 <style>
@@ -59,13 +59,35 @@
     </style>
 {% endblock %}
 {% block content %} 
-<div class="container mt-5 ml-3 ">
-    <div class="row pl-4 pr-4">
-        <div class="col-md-4">  
+<div class="container mt-4 pl-0 ml-0 pr-0 mr-0 mb-5 mx-auto bg-white ">
+  <div class="row mt-1 bg-white ">
+    <div class="col-auto col-md-12 bg-white">
+    <nav aria-label="breadcrumb " class="second bg-white">
+        <ol class="breadcrumb indigo lighten-6 first shadow-lg bg-white px-md-4">
+        <li class="breadcrumb-item font-weight-normal ">
+            <a class="black-text text-capitallize text-secondary" href="{% url 'nyumba:landlord_home' %}">
+            <span class="mr-md-3 mr-2">Dashboard</span>
+            </a>
+            <i class="fa fa-angle-double-right icons" aria-hidden="true"></i>
+        </li>
+        <li class="breadcrumb-item font-weight-normal">
+            <a class="black-text text-capitallize active-2 " href="{% url 'nyumba:stores' %}">
+            <span class="mr-md-3 mr-2">stores</span>
+            </a>
+            </li>
+        <!-- <li class="breadcrumb-item font-weight-bold">
+            <a class="black-text text-capitallize active-2" href="#">
+            <span>units</span></a></li> -->
+        </ol>
+    </nav>
+    </div>
+</div>
+    <div class="row m-0 p-0 mt-4">
+        <div class="col-md-4 ">  
                 <div class="dropdown">
-                  <button class="dropbtn ">all stores<i class="fa fa-caret-down pl-3"></i></button>
+                  <button class="dropbtn ">stores<i class="fa fa-caret-down pl-3"></i></button>
                   <div class="dropdown-content">
-                    <a href="{% url 'nyumba:stores' %}">all stores</a>
+                    <a href="{% url 'nyumba:store_applications' %}"> store applications</a>
                     
                   </div>
                 </div>
@@ -81,35 +103,43 @@
                 <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
               </div>
               
-        </div>
-        <div class="col-md-4 ">
+        </div> 
+        <div class="col-md-4  text-center">
             <a href="{% url 'nyumba:store_form' %}"><button type="button" class="btn btn-success">
-                <i class="fa fa-plus pr-2"></i>Add store</button>
+                <i class="fa fa-plus pr-2"></i>Add store</button> 
             </a>
         </div>
     </div>
-    <div class="row bg-secondary pl-3 pr-3 mt-4 mb-4 pt-3 pb-3">
+    {% for s in mystores %}
+    <div class="row bg-light m-0 p-0 mt-4 border border-primary">
         <div class="col-md-7">
             <div class="row">
                 <div class="col-8">
                     <div class="row">
                         <div class="col-6 align-self-center">
-                            <div class="property_image float-md-right float-sm-none pl-2"></div>
+                            <div class="property_image float-md-right float-sm-none pl-2">
+                              <img class=" img-fluid img-thumbnail" src="{{ s.store_image.url }}" alt="Card image cap" 
+                              >
+                            </div>
                         </div>
                         <div class="col-6 align-self-center">
                             <div class="property_info">
-                                <div class="">Store Name</div>
-                                <div class="">Property Name</div>
-                                <div class="">location</div>
-                                <div class="">address</div>
+                                <div class="">Store Name:<br><span class="text-primary">{{ s.store_name }}</span></div>
+                                {% if s.store_plot %}
+                                <div class="">Property Name:<br><span class="text-primary">{{ s.store_plot.property_name }}</span></div>
+                                {% else %}
+                                
+                                {% endif %}
+                                <div class="">Location:<br><span class="text-primary">{{ s.store_location }}</span></div>
+                                <div class="">Street address:<br><span class="text-primary">{{ s.store_address }}</span></div>
                             </div>
                         </div>
                     </div>
                     
                 </div>
                 <div class="col-4 align-self-center text-center">
-                    <div class="property_type pt-3">stored Mizigo</div>
-                    <div class="property_vacancy">available space</div>
+                    <div class="property_type pt-3">Store state:<br><span class="text-primary">{{ s.store_state }}</span></div>
+                    <div class="property_vacancy"> Year built:<br><span class="text-primary">{{s.year_built }}</span> </div>
   
                 </div>
             </div>
@@ -123,11 +153,12 @@
                         <div class="p-2 flex-fill "><i class="fa fa-tools"></i></div>
                       
                 </div>
-                <div class="col-4 text-right pr-4 text-primary"><a href="{% url 'nyumba:individual_store' %}">More information</a></div>
+                <div class="col-4 text-right pr-4 text-primary"><a href="{% url 'nyumba:individual_store' storeId=s.id %}">More information</a></div>
             </div>
         </div>
         
     </div>
+    {% endfor %}
 
 </div>
 
