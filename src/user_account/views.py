@@ -65,30 +65,3 @@ def register(request):
 	else:
 		return redirect('user_account:tenant_register_template')
 
-
-# def register_landlord(request):
-# 	if request.method == 'POST':
-
-# 		first_name = request.POST['first_name']
-# 		last_name = request.POST['last_name']
-# 		id_number = request.POST['id_number']
-# 		contact = request.POST['contact']
-# 		id_copy = request.POST.get('id_copy', False)
-# 		profile_image = request.POST.get('profile_image', False)
-# 		email = request.POST['email']
-# 		username = request.POST['user_name']
-# 		password = request.POST['password']
-		
-# 		#crete user
-# 		user = myUser(username=username,password=password,first_name=first_name, last_name=last_name, 
-# 		id_number=id_number, Phone_number=contact,profile_image=profile_image,email=email,is_landlord=True)
-# 		try:
-# 			user.save()
-# 			#login(request,user)
-# 			return redirect('user_account:index')
-			
-# 		except:
-# 			django_messages.error(request, 'unable to create your account')
-# 			return redirect('user_account:landlord_register_template')
-# 	else:
-# 		return redirect('user_account:landlord_register_template')
